@@ -1,14 +1,12 @@
 local util = include("modules/util")
 local serverdefs = include( "modules/serverdefs" )
 local simdefs = include( "sim/simdefs" )
---local cutil = include("client/client_util")
 
 local voicedAgents = {} -- to be populated with agentdefs that get debug voice
 
 local function init( modApi )
 	modApi.requirements = {"Sim Constructor"}	
-	modApi:addGenerationOption("alpha_voice", STRINGS.alpha_voice.OPTIONS.MOD , STRINGS.alpha_voice.OPTIONS.MOD_TIP, {noUpdate = true})  
-	
+	modApi:addGenerationOption("alpha_voice", STRINGS.alpha_voice.OPTIONS.MOD , STRINGS.alpha_voice.OPTIONS.MOD_TIP, {noUpdate = true})
 end
 
 local function load(modApi, options, params)
