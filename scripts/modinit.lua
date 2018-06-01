@@ -17,40 +17,47 @@ end
 
 local function load(modApi, options, params)
 	local scriptPath = modApi:getScriptPath()
-	include( scriptPath .. "/eventlistener" )
 	modApi:addAbilityDef( "alpha_voice", scriptPath .."/alpha_voice" )
 end
 
 local function initStrings(modApi)
 end
 
-local function lateLoad(modApi, options, params, allOptions)
-	local agents = include( "sim/unitdefs/agentdefs" )
-	for k,v in pairs(agents) do
-		--debug give everybody the voice ability
-		if v.abilities and nil == util.indexOf(v.abilities, "alpha_voice") then
-			-- log:write("Adding voice to ".. k)
-			table.insert(voicedAgents, k)
-			table.insert(v.abilities, "alpha_voice")
-		end
+local function addAbilityToDef(id,def)
+	if v.abilities and voicedAgents[id] == nil then
+		voicedAgents[id] == def
+		table.insert(v.abilities, "alpha_voice")
 	end
 end
 
 local function unload()
 	--take away debug voices
-	if #voicedAgents > 0 then
-		local agents = include( "sim/unitdefs/agentdefs" )
-		for _,k in pairs(voicedAgents) do
-			if agents[k] then
-				for i, v in pairs(agents[k].abilities) do
-					if v == "alpha_voice" then
-						-- log:write("Removing voice from ".. k)
-						table.remove(agents[k].abilities, i)
-						break
-					end
-				end
+	for id, def in pairs(voicedAgents) do
+		for i, v in ipairs(def.abilities) do
+			if v == "alpha_voice" then
+				table.remove(agents[k].abilities, i)
+				break
 			end
 		end
+	end
+	voicedAgents = {}
+end
+
+local function lateLoad(modApi, options, params, allOptions)
+	if options["alpha_voice"].enabled then
+		local agents = include( "sim/unitdefs/agentdefs" )
+		for k,v in pairs(agents) do
+			--debug give everybody the voice ability
+			addAbilityToDef(k,v)
+		end
+
+		local guards = include( "sim/unitdefs/guarddefs" )
+		for k,v in pairs(guards) do
+			--debug give everybody the voice ability
+			addAbilityToDef(k,v)
+		end
+	else
+		unload()
 	end
 end
 
