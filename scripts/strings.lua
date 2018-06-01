@@ -256,6 +256,158 @@ local DLC_STRINGS =
 	--	[_M.EVENT_PIN] = 				{1,{"*Such dirty work","A necessary unplesantry*"}},			
 	},
 
+	
+	-- Sharp, copypasted Decker's lines
+	[_cyborg_1] = {
+	--	speechData = 				{0.2,{"You as ready as I am?","Like old times","Running silent"}},  
+		[_M.EVENT_ATTACK_GUN] = 		{1,{"Here we go","Taking aim"}},  	
+		[_M.EVENT_ATTACK_GUN_KO] = 		{1,{"Night night","Bed time","Lights out","Sweet dreams"}},  								
+		[_M.EVENT_ATTACK_MELEE] = 		{1,{"Dig fast!"}},					
+	--	[_M.EVENT_HIT_GUN] = 			nil,								
+	--	[_M.EVENT_HIT_GUN_KO] = 		{1,{"Night night","Bed time","Lights out","Sweet dreams"}},				
+	--	[_M.EVENT_HIT_MELEE] = 			{1,{"chump"}},						
+	--	[_M.EVENT_KILL_GUN] = 			nil,
+	--	[_M.EVENT_KILL_MELEE] = 		nil,
+	--	[_M.EVENT_MISS_GUN] = 			{1,{"Slippery sucker"}},			
+	--	[_M.EVENT_IS_HIT] = 			nil,								
+	--	[_M.EVENT_HP_DOWN] = 			nil,
+		[_M.EVENT_DEATH] = 			{1,{"you.. have.. to.."}},			
+		[_M.EVENT_REVIVED] = 			{1,{"My hero"}},					
+		[_M.EVENT_HIJACK] = 			{1,{"Uploading virus"}},			
+		[_M.EVENT_LOOT] = 			{1,{"Jackpot"}},					
+		[_M.EVENT_INTERRUPTED] = 		{1,{"Hold up"}},				
+		[_M.EVENT_PEEK] = 			nil,								
+		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered"}},				
+	--	[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
+	},
+	
+	-- Prism
+	[_M.disguise_1] = {
+	--	speechData = 				{0.2,{"You as ready as I am?","Like old times","Running silent"}},  
+		[_M.EVENT_ATTACK_GUN] = 		{1,{"Here we go","Taking aim"}},  	
+		[_M.EVENT_ATTACK_GUN_KO] = 		{1,{"Night night","Bed time","Lights out","Sweet dreams"}},  								
+		[_M.EVENT_ATTACK_MELEE] = 		{1,{"Dig fast!"}},					
+	--	[_M.EVENT_HIT_GUN] = 			nil,								
+	--	[_M.EVENT_HIT_GUN_KO] = 		{1,{"Night night","Bed time","Lights out","Sweet dreams"}},				
+	--	[_M.EVENT_HIT_MELEE] = 			{1,{"chump"}},						
+	--	[_M.EVENT_KILL_GUN] = 			nil,
+	--	[_M.EVENT_KILL_MELEE] = 		nil,
+	--	[_M.EVENT_MISS_GUN] = 			{1,{"Slippery sucker"}},			
+	--	[_M.EVENT_IS_HIT] = 			nil,								
+	--	[_M.EVENT_HP_DOWN] = 			nil,
+		[_M.EVENT_DEATH] = 			{1,{"you.. have.. to.."}},			
+		[_M.EVENT_REVIVED] = 			{1,{"My hero"}},					
+		[_M.EVENT_HIJACK] = 			{1,{"Uploading virus"}},			
+		[_M.EVENT_LOOT] = 			{1,{"Jackpot"}},					
+		[_M.EVENT_INTERRUPTED] = 		{1,{"Hold up"}},				
+		[_M.EVENT_PEEK] = 			nil,								
+		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered"}},				
+	--	[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
+	},
+	
+	
+	-- Olivia
+	[_M.olivia] = {
+	--	speechData = 				{0.2,{"You as ready as I am?","Like old times","Running silent"}},  
+		[_M.EVENT_ATTACK_GUN] = 		{1,{"Here we go","Taking aim"}},  	
+		[_M.EVENT_ATTACK_GUN_KO] = 		{1,{"Night night","Bed time","Lights out","Sweet dreams"}},  								
+		[_M.EVENT_ATTACK_MELEE] = 		{1,{"Dig fast!"}},					
+	--	[_M.EVENT_HIT_GUN] = 			nil,								
+	--	[_M.EVENT_HIT_GUN_KO] = 		{1,{"Night night","Bed time","Lights out","Sweet dreams"}},				
+	--	[_M.EVENT_HIT_MELEE] = 			{1,{"chump"}},						
+	--	[_M.EVENT_KILL_GUN] = 			nil,
+	--	[_M.EVENT_KILL_MELEE] = 		nil,
+	--	[_M.EVENT_MISS_GUN] = 			{1,{"Slippery sucker"}},			
+	--	[_M.EVENT_IS_HIT] = 			nil,								
+	--	[_M.EVENT_HP_DOWN] = 			nil,
+		[_M.EVENT_DEATH] = 			{1,{"you.. have.. to.."}},			
+		[_M.EVENT_REVIVED] = 			{1,{"My hero"}},					
+		[_M.EVENT_HIJACK] = 			{1,{"Uploading virus"}},			
+		[_M.EVENT_LOOT] = 			{1,{"Jackpot"}},					
+		[_M.EVENT_INTERRUPTED] = 		{1,{"Hold up"}},				
+		[_M.EVENT_PEEK] = 			nil,								
+		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered"}},				
+	--	[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
+	},
+	
+	
+	-- Derek
+	[_M.derek] = {
+	--	speechData = 				{0.2,{"You as ready as I am?","Like old times","Running silent"}},  
+		[_M.EVENT_ATTACK_GUN] = 		{1,{"Here we go","Taking aim"}},  	
+		[_M.EVENT_ATTACK_GUN_KO] = 		{1,{"Night night","Bed time","Lights out","Sweet dreams"}},  								
+		[_M.EVENT_ATTACK_MELEE] = 		{1,{"Dig fast!"}},					
+	--	[_M.EVENT_HIT_GUN] = 			nil,								
+	--	[_M.EVENT_HIT_GUN_KO] = 		{1,{"Night night","Bed time","Lights out","Sweet dreams"}},				
+	--	[_M.EVENT_HIT_MELEE] = 			{1,{"chump"}},						
+	--	[_M.EVENT_KILL_GUN] = 			nil,
+	--	[_M.EVENT_KILL_MELEE] = 		nil,
+	--	[_M.EVENT_MISS_GUN] = 			{1,{"Slippery sucker"}},			
+	--	[_M.EVENT_IS_HIT] = 			nil,								
+	--	[_M.EVENT_HP_DOWN] = 			nil,
+		[_M.EVENT_DEATH] = 			{1,{"you.. have.. to.."}},			
+		[_M.EVENT_REVIVED] = 			{1,{"My hero"}},					
+		[_M.EVENT_HIJACK] = 			{1,{"Uploading virus"}},			
+		[_M.EVENT_LOOT] = 			{1,{"Jackpot"}},					
+		[_M.EVENT_INTERRUPTED] = 		{1,{"Hold up"}},				
+		[_M.EVENT_PEEK] = 			nil,								
+		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered"}},				
+	--	[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
+	},
+	
+	
+	-- Draco
+	[_M.draco] = {
+	--	speechData = 				{0.2,{"You as ready as I am?","Like old times","Running silent"}},  
+		[_M.EVENT_ATTACK_GUN] = 		{1,{"Here we go","Taking aim"}},  	
+		[_M.EVENT_ATTACK_GUN_KO] = 		{1,{"Night night","Bed time","Lights out","Sweet dreams"}},  								
+		[_M.EVENT_ATTACK_MELEE] = 		{1,{"Dig fast!"}},					
+	--	[_M.EVENT_HIT_GUN] = 			nil,								
+	--	[_M.EVENT_HIT_GUN_KO] = 		{1,{"Night night","Bed time","Lights out","Sweet dreams"}},				
+	--	[_M.EVENT_HIT_MELEE] = 			{1,{"chump"}},						
+	--	[_M.EVENT_KILL_GUN] = 			nil,
+	--	[_M.EVENT_KILL_MELEE] = 		nil,
+	--	[_M.EVENT_MISS_GUN] = 			{1,{"Slippery sucker"}},			
+	--	[_M.EVENT_IS_HIT] = 			nil,								
+	--	[_M.EVENT_HP_DOWN] = 			nil,
+		[_M.EVENT_DEATH] = 			{1,{"you.. have.. to.."}},			
+		[_M.EVENT_REVIVED] = 			{1,{"My hero"}},					
+		[_M.EVENT_HIJACK] = 			{1,{"Uploading virus"}},			
+		[_M.EVENT_LOOT] = 			{1,{"Jackpot"}},					
+		[_M.EVENT_INTERRUPTED] = 		{1,{"Hold up"}},				
+		[_M.EVENT_PEEK] = 			nil,								
+		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered"}},				
+	--	[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
+	},
+	
+	
+	
+	-- Rush
+	[_M.rush] = {
+	--	speechData = 				{0.2,{"You as ready as I am?","Like old times","Running silent"}},  
+		[_M.EVENT_ATTACK_GUN] = 		{1,{"Here we go","Taking aim"}},  	
+		[_M.EVENT_ATTACK_GUN_KO] = 		{1,{"Night night","Bed time","Lights out","Sweet dreams"}},  								
+		[_M.EVENT_ATTACK_MELEE] = 		{1,{"Dig fast!"}},					
+	--	[_M.EVENT_HIT_GUN] = 			nil,								
+	--	[_M.EVENT_HIT_GUN_KO] = 		{1,{"Night night","Bed time","Lights out","Sweet dreams"}},				
+	--	[_M.EVENT_HIT_MELEE] = 			{1,{"chump"}},						
+	--	[_M.EVENT_KILL_GUN] = 			nil,
+	--	[_M.EVENT_KILL_MELEE] = 		nil,
+	--	[_M.EVENT_MISS_GUN] = 			{1,{"Slippery sucker"}},			
+	--	[_M.EVENT_IS_HIT] = 			nil,								
+	--	[_M.EVENT_HP_DOWN] = 			nil,
+		[_M.EVENT_DEATH] = 			{1,{"you.. have.. to.."}},			
+		[_M.EVENT_REVIVED] = 			{1,{"My hero"}},					
+		[_M.EVENT_HIJACK] = 			{1,{"Uploading virus"}},			
+		[_M.EVENT_LOOT] = 			{1,{"Jackpot"}},					
+		[_M.EVENT_INTERRUPTED] = 		{1,{"Hold up"}},				
+		[_M.EVENT_PEEK] = 			nil,								
+		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered"}},				
+	--	[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
+	},
+	
+	
+	
 }
 
 return DLC_STRINGS
