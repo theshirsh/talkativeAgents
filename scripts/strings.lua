@@ -258,7 +258,7 @@ local DLC_STRINGS =
 
 	
 	-- Sharp, copypasted Decker's lines
-	[_cyborg_1] = {
+	[_M.cyborg_1] = {
 	--	speechData = 				{0.2,{"You as ready as I am?","Like old times","Running silent"}},  
 		[_M.EVENT_ATTACK_GUN] = 		{1,{"Here we go","Taking aim"}},  	
 		[_M.EVENT_ATTACK_GUN_KO] = 		{1,{"Night night","Bed time","Lights out","Sweet dreams"}},  								
