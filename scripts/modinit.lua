@@ -5,6 +5,10 @@ local simdefs = include( "sim/simdefs" )
 local voicedAgents = {} -- to be populated with agentdefs that get debug voice
 
 local function init( modApi )
+	local scriptPath = modApi:getScriptPath()
+	
+	include( scriptPath .. "/eventlistener" )
+	
 	modApi.requirements = {"Sim Constructor"}	
 	modApi:addGenerationOption("alpha_voice", STRINGS.alpha_voice.OPTIONS.MOD , STRINGS.alpha_voice.OPTIONS.MOD_TIP, {noUpdate = true})
 end
@@ -24,8 +28,8 @@ end
 
 local function addAbilityToDef(id,def)
 	if def.abilities and voicedAgents[id] == nil then
-		voicedAgents[id] == def
-		table.insert(v.abilities, "alpha_voice")
+		voicedAgents[id] = def
+		table.insert(def.abilities, "alpha_voice")
 	end
 end
 
@@ -34,7 +38,7 @@ local function unload()
 	for id, def in pairs(voicedAgents) do
 		for i, v in ipairs(def.abilities) do
 			if v == "alpha_voice" then
-				table.remove(agents[k].abilities, i)
+				table.remove(def.abilities, i)
 				break
 			end
 		end
