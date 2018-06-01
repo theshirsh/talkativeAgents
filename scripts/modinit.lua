@@ -14,7 +14,7 @@ local function load(modApi, options, params)
 	modApi:addAbilityDef( "alpha_voice", scriptPath .."/alpha_voice" )
 end
 
-local function initStrings(modApi
+local function initStrings(modApi)
 	local scriptPath = modApi:getScriptPath()
 	local dataPath = modApi:getDataPath()
 	
