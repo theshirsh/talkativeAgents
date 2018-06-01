@@ -3,9 +3,11 @@
 --
 local _M =
 {
+--	name of speech event		-- Corresponding simdef EV or TRG
+
 --	EVENT_SELECTED = 1,
-	EVENT_ATTACK_GUN = 8,		--2
-	EVENT_ATTACK_MELEE = 30,
+	EVENT_ATTACK_GUN = 8,		-- EV_UNIT_START_SHOOTING 
+	EVENT_ATTACK_MELEE = 30,	-- EV_UNIT_MELEE
 --	EVENT_HIT_GUN = 4,
 --	EVENT_HIT_MELEE = 5,
 --	EVENT_KILL_GUN = 6,
@@ -13,19 +15,19 @@ local _M =
 --	EVENT_MISS_GUN = 8,
 --	EVENT_IS_HIT = 9,
 --	EVENT_HP_DOWN = 10,
-	EVENT_DEATH = 57,			-- hit instead of death, should not trigger on Last Words
-	EVENT_REVIVED = 102,
-	EVENT_HIJACK = 19,
-	EVENT_INTERRUPTED = 4,
-	EVENT_PEEK = 18,
-	EVENT_OVERWATCH = 27,
+	EVENT_DEATH = 57,		-- EV_UNIT_HIT instead of death, should not trigger on Last Words
+	EVENT_REVIVED = 102,		-- EV_UNIT_HEAL
+	EVENT_HIJACK = 19,		-- EV_UNIT_USECOMP also EV_UNIT_WIRELESS_SCAN for Internationale 
+	EVENT_INTERRUPTED = 4,		-- EV_UNIT_INTERRUPTED
+	EVENT_PEEK = 18,		-- EV_UNIT_PEEK
+	EVENT_OVERWATCH = 27,		-- EV_UNIT_OVERWATCH
 --	EVENT_OVERWATCH_TARGET = 18,
-	EVENT_PIN = 111,
-	EVENT_ATTACK_GUN_KO = 1008,	
+	EVENT_PIN = 111,		-- EV_UNIT_START_PIN -- unused in game
+	EVENT_ATTACK_GUN_KO = 1008,	-- added 'custom' 
 --	EVENT_HIT_GUN_KO = 21,
-	EVENT_LOOT = 66,           		-- there's trigger used
+	EVENT_LOOT = 66,           	-- TRG_SAFE_LOOTED -- there's trigger used
 
-	-- NPC events
+	-- NPC events			-- Guard's speeches part unused here
 --	ARRESTING = 100,
 --	ENGAGED = 101,
 --	ENGAGED_REVIVED = 102,
@@ -52,9 +54,9 @@ local _M =
 	disguise_1 = 8,
 	
 	monster = 99,			-- to do: if agentID = ... etc into alpha_voice.lua, to send both version to same destination
-	monst3r_pc = 100,	-- starting
+	monst3r_pc = 100,		-- starting
 	central = 107,
-	central_pc = 108,	-- starting
+	central_pc = 108,		-- starting
 
 	olivia = 1000,
 	derek = 1001,
@@ -98,7 +100,7 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 		{1,{"Hold up"}},				
 		[_M.EVENT_PEEK] = 			nil,								
 		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered"}},				
-		[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
+	--	[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
 	},
 
 	[_M.engineer_1] = {
@@ -122,7 +124,7 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 			nil,  	
 		[_M.EVENT_PEEK] = 				nil,  	
 		[_M.EVENT_OVERWATCH] = 				nil,  	
-		[_M.EVENT_PIN] = 				nil,  		
+	--	[_M.EVENT_PIN] = 				nil,  		
 	},
 
 
@@ -147,7 +149,7 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 			{1,{"Target ahead","Target sighted"}},			
 		[_M.EVENT_PEEK] = 				nil,							
 		[_M.EVENT_OVERWATCH] = 				{1,{"Setting up","doing what I do"}},				
-		[_M.EVENT_PIN] = 				{0.3,{"Shouldn't I just..shoot him?","Taking prisoners isn't really my bag"}},		
+	--	[_M.EVENT_PIN] = 				{0.3,{"Shouldn't I just..shoot him?","Taking prisoners isn't really my bag"}},		
 	},
 	
 	[_M.stealth_2] = {
@@ -171,7 +173,7 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 			{1,{"Uh oh"}},					
 		[_M.EVENT_PEEK] = 				nil,								
 		[_M.EVENT_OVERWATCH] = 				{1,{"Holding here"}},				
-		[_M.EVENT_PIN] = 				{0.3,{"Just stay there, buddy","It will go better for you if you don't move"}},	
+	--	[_M.EVENT_PIN] = 				{0.3,{"Just stay there, buddy","It will go better for you if you don't move"}},	
 	},
 
 	[_M.engineer_2] = {
@@ -195,7 +197,7 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 			{1,{"I've spotted something"}},					
 		[_M.EVENT_PEEK] = 				nil,					
 		[_M.EVENT_OVERWATCH] = 				{1,{"Ok, focused in"}},			
-		[_M.EVENT_PIN] = 				{0.3,{"I shouldn't sit here long"}},		
+	--	[_M.EVENT_PIN] = 				{0.3,{"I shouldn't sit here long"}},		
 	},
 
 	[_M.sharpshooter_2] = {
@@ -219,7 +221,7 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 			{1,{"Wait!"}},					
 		[_M.EVENT_PEEK] = 				nil,								
 		[_M.EVENT_OVERWATCH] = 				{1,{"Covering this zone"}},				
-		[_M.EVENT_PIN] = 				{0.3,{"I vill break you"}},			
+	--	[_M.EVENT_PIN] = 				{0.3,{"I vill break you"}},			
 	},
  	
 ------------
@@ -245,7 +247,7 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 			{1,{"*I have complications*"}},				
 		[_M.EVENT_PEEK] = 				nil,							
 		[_M.EVENT_OVERWATCH] = 				{1,{"*This way is watched*"}},				
-		[_M.EVENT_PIN] = 				{1,{"*Such dirty work","A necessary unplesantry*"}},			
+	--	[_M.EVENT_PIN] = 				{1,{"*Such dirty work","A necessary unplesantry*"}},			
 	},
 
 }
