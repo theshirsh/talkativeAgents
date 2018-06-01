@@ -94,14 +94,14 @@ local DLC_STRINGS =
 	--	[_M.EVENT_MISS_GUN] = 			{1,{"Slippery sucker"}},			
 	--	[_M.EVENT_IS_HIT] = 			nil,								
 	--	[_M.EVENT_HP_DOWN] = 			nil,
-		[_M.EVENT_DEATH] = 			{1,{"you.. have.. to.."}},			
+		[_M.EVENT_DEATH] = 			{1,{"You... have... to..."}},			
 		[_M.EVENT_REVIVED] = 			{1,{"My hero"}},					
 		[_M.EVENT_HIJACK] = 			{1,{"Uploading virus"}},			
 		[_M.EVENT_LOOT] = 			{1,{"Jackpot"}},					
 		[_M.EVENT_INTERRUPTED] = 		{1,{"Hold up"}},				
 		[_M.EVENT_PEEK] = 			nil,								
 		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered"}},				
-		[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
+		[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},
 	},
 
 	-- Xu
@@ -134,7 +134,7 @@ local DLC_STRINGS =
 	[_M.sharpshooter_1] = {
 		
 	--	[_M.EVENT_SELECTED] = 				{0.2,{"Almost time for a G and T dont you think?","What do you need, beautiful?"}},  
-		[_M.EVENT_ATTACK_GUN] = 			{1,{"Lined up","In sights","gentle squeeze.."}},  	
+		[_M.EVENT_ATTACK_GUN] = 			{1,{"Lined up","In sights","Gentle squeeze..."}},  	
 		[_M.EVENT_ATTACK_GUN_KO] = 			nil,  								
 		[_M.EVENT_ATTACK_MELEE] = 			{0.1,{"Boring conversation anyway"}},		
 	--	[_M.EVENT_HIT_GUN] = 				nil,
@@ -145,14 +145,14 @@ local DLC_STRINGS =
 	--	[_M.EVENT_MISS_GUN] = 				{0.5,{"Guess that was a warning shot?","I.. uh.. missed."}},			
 	--	[_M.EVENT_IS_HIT] = 				nil,								
 	--	[_M.EVENT_HP_DOWN] = 				nil,
-		[_M.EVENT_DEATH] = 				{1,{"I'm coming.. Rita.."}},			
+		[_M.EVENT_DEATH] = 				{1,{"I'm coming... Rita..."}},			
 		[_M.EVENT_REVIVED] = 				{1,{"Just in time"}},					
 		[_M.EVENT_HIJACK] = 				nil,
 		[_M.EVENT_LOOT] = 				{1,{"All boys need toys"}},				
 		[_M.EVENT_INTERRUPTED] = 			{1,{"Target ahead","Target sighted"}},			
-		[_M.EVENT_PEEK] = 				nil,							
+		[_M.EVENT_PEEK] = 				nil,
 		[_M.EVENT_OVERWATCH] = 				{1,{"Setting up","doing what I do"}},				
-		[_M.EVENT_PIN] = 				{0.3,{"Shouldn't I just..shoot him?","Taking prisoners isn't really my bag"}},		
+		[_M.EVENT_PIN] = 				{0.3,{"Shouldn't I just..shoot him?","Taking prisoners isn't really my bag"}},
 	},
 	
 	-- Banks
@@ -170,9 +170,9 @@ local DLC_STRINGS =
 	--	[_M.EVENT_MISS_GUN] = 				{1,{"Ok, ok, I'm learning","Dammit! Harder than it looks"}},		
 	--	[_M.EVENT_IS_HIT] = 				nil,								
 	--	[_M.EVENT_HP_DOWN] = 				nil,
-		[_M.EVENT_DEATH] = 				{1,{"I guess.. I tried.. one too many."}},				
+		[_M.EVENT_DEATH] = 				{1,{"I guess... I tried... one too many."}},				
 		[_M.EVENT_REVIVED] = 				{1,{"I owe you for that one."}},					
-		[_M.EVENT_HIJACK] = 				{1,{"Just gotta bypass the.. Done!","Easy peasy","I wrote this code in Haiku","CPU, I own you","This console reaks of coffee","Knock knock little machine"}},		
+		[_M.EVENT_HIJACK] = 				{1,{"Just gotta bypass the... Done!","Easy peasy","I wrote this code in Haiku","CPU, I own you","This console reaks of coffee","Knock knock little machine"}},		
 		[_M.EVENT_LOOT] = 				{1,{"Who wants stuff?","Come to mamma"}},					
 		[_M.EVENT_INTERRUPTED] = 			{1,{"Uh oh"}},					
 		[_M.EVENT_PEEK] = 				nil,								
@@ -184,7 +184,7 @@ local DLC_STRINGS =
 	[_M.engineer_2] = {
 	
 	--	[_M.EVENT_SELECTED] = 				{0.2,{"You're coming in clear","On the team"}},  
-		[_M.EVENT_ATTACK_GUN] = 			{0.3,{"Clearing things up","Lets open they way"}},  
+		[_M.EVENT_ATTACK_GUN] = 			{0.3,{"Clearing things up","Lets open the way"}},  
 		[_M.EVENT_ATTACK_GUN_KO] = 			{1,{"Delivering toxin"}}, 		
 		[_M.EVENT_ATTACK_MELEE] = 			nil,				
 	--	[_M.EVENT_HIT_GUN] = 				nil,							
@@ -195,7 +195,7 @@ local DLC_STRINGS =
 	--	[_M.EVENT_MISS_GUN] = 				{1,{"Target is obscured!","Need a better angle"}},	
 	--	[_M.EVENT_IS_HIT] = 				nil,							
 	--	[_M.EVENT_HP_DOWN] = 				nil,
-		[_M.EVENT_DEATH] = 				{1,{"I can't feel my.. "}},			
+		[_M.EVENT_DEATH] = 				{1,{"I can't feel my... "}},			
 		[_M.EVENT_REVIVED] = 				{1,{"That really cleared things up."}},			
 		[_M.EVENT_HIJACK] = 				{1,{"Installing virus"}},		
 		[_M.EVENT_LOOT] = 				{1,{"Busted open","Secrets revealed"}},				
@@ -246,7 +246,7 @@ local DLC_STRINGS =
 	--	[_M.EVENT_MISS_GUN] = 				{1,{"*Servo 3 is twitchy*"}},			
 	--	[_M.EVENT_IS_HIT] = 				nil,							
 	--	[_M.EVENT_HP_DOWN] = 				nil,
-		[_M.EVENT_DEATH] = 				{1,{"*Power ... empty..*"}},			
+		[_M.EVENT_DEATH] = 				{1,{"*Power... empty...*"}},			
 		[_M.EVENT_REVIVED] = 				{1,{"*Let's not do that again*"}},				
 		[_M.EVENT_HIJACK] = 				{1,{"*Uploading virus*"}},			
 		[_M.EVENT_LOOT] = 				{1,{"*I want to deconstruct this*"}},				
@@ -278,7 +278,7 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 		{1,{"Hold up"}},				
 		[_M.EVENT_PEEK] = 			nil,								
 		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered"}},				
-	--	[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
+		[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
 	},
 	
 	-- Prism
@@ -302,7 +302,7 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 		{1,{"Hold up"}},				
 		[_M.EVENT_PEEK] = 			nil,								
 		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered"}},				
-	--	[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
+		[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
 	},
 	
 	
@@ -327,7 +327,7 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 		{1,{"Hold up"}},				
 		[_M.EVENT_PEEK] = 			nil,								
 		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered"}},				
-	--	[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
+		[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
 	},
 	
 	
@@ -352,7 +352,7 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 		{1,{"Hold up"}},				
 		[_M.EVENT_PEEK] = 			nil,								
 		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered"}},				
-	--	[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
+		[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
 	},
 	
 	
@@ -377,7 +377,7 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 		{1,{"Hold up"}},				
 		[_M.EVENT_PEEK] = 			nil,								
 		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered"}},				
-	--	[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
+		[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
 	},
 	
 	
@@ -403,7 +403,7 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 		{1,{"Hold up"}},				
 		[_M.EVENT_PEEK] = 			nil,								
 		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered"}},				
-	--	[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
+		[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
 	},
 	
 	
