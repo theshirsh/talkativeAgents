@@ -44,14 +44,14 @@ local _M =
 -- 	agentDef = agentID		-- just for convenience: agentID is a number, agentDef name is easier to use for filling strings
 --	stealth_1 = 0, -- tutorial	
 
-	stealth_1 = 1,
-	engineer_1 = 2,
-	sharpshooter_1 = 3,
-	stealth_2 = 4,
-	engineer_2 = 5,
-	sharpshooter_2 = 6,
-	cyborg_1 = 7,
-	disguise_1 = 8,
+	stealth_1 = 1,	-- Decker
+	engineer_1 = 2,	-- Xu
+	sharpshooter_1 = 3,	--Shalem
+	stealth_2 = 4,	-- Banks
+	engineer_2 = 5,	-- Internationale
+	sharpshooter_2 = 6,	-- Nika
+	cyborg_1 = 7,	-- Sharp
+	disguise_1 = 8,	-- Prism
 	
 	monster = 99,			-- to do: if agentID = ... etc into alpha_voice.lua, to send both version to same destination
 	monst3r_pc = 100,		-- starting
@@ -80,6 +80,7 @@ local DLC_STRINGS =
 						
 	},
 
+	-- Decker
 	[_M.stealth_1] = {
 	--	speechData = 				{0.2,{"You as ready as I am?","Like old times","Running silent"}},  
 		[_M.EVENT_ATTACK_GUN] = 		{1,{"Here we go","Taking aim"}},  	
@@ -103,6 +104,7 @@ local DLC_STRINGS =
 	--	[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
 	},
 
+	-- Xu
 	[_M.engineer_1] = {
 	
 	--	[_M.EVENT_SELECTED] = 				nil,  	
@@ -128,6 +130,7 @@ local DLC_STRINGS =
 	},
 
 
+	-- Shalem
 	[_M.sharpshooter_1] = {
 		
 	--	[_M.EVENT_SELECTED] = 				{0.2,{"Almost time for a G and T dont you think?","What do you need, beautiful?"}},  
@@ -152,6 +155,7 @@ local DLC_STRINGS =
 	--	[_M.EVENT_PIN] = 				{0.3,{"Shouldn't I just..shoot him?","Taking prisoners isn't really my bag"}},		
 	},
 	
+	-- Banks
 	[_M.stealth_2] = {
 		
 	--	[_M.EVENT_SELECTED] = 				{0.2,{"And I thought VillaBank was a hard job.","Keep moving"}},
@@ -176,6 +180,7 @@ local DLC_STRINGS =
 	--	[_M.EVENT_PIN] = 				{0.3,{"Just stay there, buddy","It will go better for you if you don't move"}},	
 	},
 
+	-- Internationale
 	[_M.engineer_2] = {
 	
 	--	[_M.EVENT_SELECTED] = 				{0.2,{"You're coming in clear","On the team"}},  
@@ -200,6 +205,7 @@ local DLC_STRINGS =
 	--	[_M.EVENT_PIN] = 				{0.3,{"I shouldn't sit here long"}},		
 	},
 
+	-- Nika
 	[_M.sharpshooter_2] = {
 		
 	--	[_M.EVENT_SELECTED] = 				{0.2,{"Vil get it done.","zey vont get avay vit dis"}},  
