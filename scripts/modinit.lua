@@ -6,10 +6,6 @@ local simdefs = include( "sim/simdefs" )
 local voicedAgents = {} -- to be populated with agentdefs that get debug voice
 
 local function init( modApi )
-	local scriptPath = modApi:getScriptPath()
-	local dataPath = modApi:getDataPath()
-	local DLC_STRINGS = include( scriptPath .. "/strings" )
- 	modApi:addStrings( dataPath, "alpha_voice", DLC_STRINGS )
 	modApi.requirements = {"Sim Constructor"}	
 	modApi:addGenerationOption("alpha_voice", STRINGS.alpha_voice.OPTIONS.MOD , STRINGS.alpha_voice.OPTIONS.MOD_TIP, {noUpdate = true})  
 	
@@ -20,11 +16,16 @@ local function load(modApi, options, params)
 	modApi:addAbilityDef( "alpha_voice", scriptPath .."/alpha_voice" )
 end
 
-local function initStrings(modApi)
+local function initStrings(modApi
+	local scriptPath = modApi:getScriptPath()
+	local dataPath = modApi:getDataPath()
+	
+	local DLC_STRINGS = include( scriptPath .. "/strings" )
+ 	modApi:addStrings( dataPath, "alpha_voice", DLC_STRINGS )
 end
 
 local function addAbilityToDef(id,def)
-	if v.abilities and voicedAgents[id] == nil then
+	if def.abilities and voicedAgents[id] == nil then
 		voicedAgents[id] == def
 		table.insert(v.abilities, "alpha_voice")
 	end
