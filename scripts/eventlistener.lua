@@ -54,7 +54,6 @@ function simengine:pushEventTrigger( evType, evData, before )
 	assert( evType )
 
 	if self._evtriggers[ evType ] then
-		 log:write("processing EventTrigger ".. evType)
 		local processList = util.tdupe( self._evtriggers[ evType ] )
         table.sort( processList, function( t1, t2 ) return (t1.priority or 0) < (t2.priority or 0) end )
 		

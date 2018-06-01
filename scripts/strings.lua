@@ -22,7 +22,7 @@ local _M =
 	EVENT_PEEK = 18,		-- EV_UNIT_PEEK
 	EVENT_OVERWATCH = 27,		-- EV_UNIT_OVERWATCH
 --	EVENT_OVERWATCH_TARGET = 18,
-	EVENT_PIN = 111,		-- EV_UNIT_START_PIN -- unused in game
+	EVENT_PIN = 111,		-- EV_UNIT_START_PIN -- unused in game --Not anymore :)
 	EVENT_ATTACK_GUN_KO = 1008,	-- added 'custom' 
 --	EVENT_HIT_GUN_KO = 21,
 	EVENT_LOOT = 66,           	-- TRG_SAFE_LOOTED -- there's trigger used
@@ -101,7 +101,7 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 		{1,{"Hold up"}},				
 		[_M.EVENT_PEEK] = 			nil,								
 		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered"}},				
-	--	[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
+		[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},
 	},
 
 	-- Xu
@@ -126,7 +126,7 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 			nil,  	
 		[_M.EVENT_PEEK] = 				nil,  	
 		[_M.EVENT_OVERWATCH] = 				nil,  	
-	--	[_M.EVENT_PIN] = 				nil,  		
+		[_M.EVENT_PIN] = 				nil,  		
 	},
 
 
@@ -150,9 +150,9 @@ local DLC_STRINGS =
 		[_M.EVENT_HIJACK] = 				nil,
 		[_M.EVENT_LOOT] = 				{1,{"All boys need toys"}},				
 		[_M.EVENT_INTERRUPTED] = 			{1,{"Target ahead","Target sighted"}},			
-		[_M.EVENT_PEEK] = 				nil,							
-		[_M.EVENT_OVERWATCH] = 				{1,{"Setting up","Doing what I do"}},				
-	--	[_M.EVENT_PIN] = 				{0.3,{"Shouldn't I just..shoot him?","Taking prisoners isn't really my bag"}},		
+		[_M.EVENT_PEEK] = 				nil,
+		[_M.EVENT_OVERWATCH] = 				{1,{"Setting up","doing what I do"}},				
+		[_M.EVENT_PIN] = 				{0.3,{"Shouldn't I just..shoot him?","Taking prisoners isn't really my bag"}},
 	},
 	
 	-- Banks
@@ -177,7 +177,7 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 			{1,{"Uh oh"}},					
 		[_M.EVENT_PEEK] = 				nil,								
 		[_M.EVENT_OVERWATCH] = 				{1,{"Holding here"}},				
-	--	[_M.EVENT_PIN] = 				{0.3,{"Just stay there, buddy","It will go better for you if you don't move"}},	
+		[_M.EVENT_PIN] = 				{0.3,{"Just stay there, buddy","It will go better for you if you don't move"}},	
 	},
 
 	-- Internationale
@@ -202,7 +202,7 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 			{1,{"I've spotted something"}},					
 		[_M.EVENT_PEEK] = 				nil,					
 		[_M.EVENT_OVERWATCH] = 				{1,{"Ok, focused in"}},			
-	--	[_M.EVENT_PIN] = 				{0.3,{"I shouldn't sit here long"}},		
+		[_M.EVENT_PIN] = 				{0.3,{"I shouldn't sit here long"}},		
 	},
 
 	-- Nika
@@ -227,7 +227,7 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 			{1,{"Wait!"}},					
 		[_M.EVENT_PEEK] = 				nil,								
 		[_M.EVENT_OVERWATCH] = 				{1,{"Covering this zone"}},				
-	--	[_M.EVENT_PIN] = 				{0.3,{"I vill break you"}},			
+		[_M.EVENT_PIN] = 				{0.3,{"I vill break you"}},			
 	},
  	
 ------------
@@ -253,7 +253,7 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 			{1,{"*I have complications*"}},				
 		[_M.EVENT_PEEK] = 				nil,							
 		[_M.EVENT_OVERWATCH] = 				{1,{"*This way is watched*"}},				
-	--	[_M.EVENT_PIN] = 				{1,{"*Such dirty work","A necessary unplesantry*"}},			
+		[_M.EVENT_PIN] = 				{1,{"*Such dirty work","A necessary unplesantry*"}},			
 	},
 
 	
@@ -278,7 +278,7 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 		{1,{"Hold up"}},				
 		[_M.EVENT_PEEK] = 			nil,								
 		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered"}},				
-	--	[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
+		[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
 	},
 	
 	-- Prism
@@ -302,7 +302,7 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 		{1,{"Hold up"}},				
 		[_M.EVENT_PEEK] = 			nil,								
 		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered"}},				
-	--	[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
+		[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
 	},
 	
 	
@@ -327,7 +327,7 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 		{1,{"Hold up"}},				
 		[_M.EVENT_PEEK] = 			nil,								
 		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered"}},				
-	--	[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
+		[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
 	},
 	
 	
@@ -352,7 +352,7 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 		{1,{"Hold up"}},				
 		[_M.EVENT_PEEK] = 			nil,								
 		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered"}},				
-	--	[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
+		[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
 	},
 	
 	
@@ -377,7 +377,7 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 		{1,{"Hold up"}},				
 		[_M.EVENT_PEEK] = 			nil,								
 		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered"}},				
-	--	[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
+		[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
 	},
 	
 	
@@ -403,7 +403,7 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 		{1,{"Hold up"}},				
 		[_M.EVENT_PEEK] = 			nil,								
 		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered"}},				
-	--	[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
+		[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},		-- not used in game
 	},
 	
 	

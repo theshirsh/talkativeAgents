@@ -41,7 +41,8 @@ local alpha_voice =
 		sim:addEventTrigger( simdefs.EV_UNIT_PEEK, self )
 		sim:addEventTrigger( simdefs.EV_UNIT_OVERWATCH, self )
 		sim:addEventTrigger( simdefs.EV_UNIT_OVERWATCH_MELEE, self )
-	--	sim:addEventTrigger( simdefs.EV_UNIT_START_PIN, self )		-- unused in game
+		sim:addEventTrigger( simdefs.EV_UNIT_STOP_WALKING, self )
+		sim:addEventTrigger( simdefs.EV_UNIT_START_PIN, self )		-- unused in game --Not anymore :)
 	--	sim:addEventTrigger( simdefs.EV_LOOT_ACQUIRED, self )		-- for installing augments
 
 	end,
@@ -61,7 +62,8 @@ local alpha_voice =
 		sim:removeEventTrigger( simdefs.EV_UNIT_PEEK, self )
 		sim:removeEventTrigger( simdefs.EV_UNIT_OVERWATCH, self )
 		sim:removeEventTrigger( simdefs.EV_UNIT_OVERWATCH_MELEE, self )
-	--	sim:removeEventTrigger( simdefs.EV_UNIT_START_PIN, self )	-- unused in game
+		sim:removeEventTrigger( simdefs.EV_UNIT_STOP_WALKING, self )
+		sim:removeEventTrigger( simdefs.EV_UNIT_START_PIN, self )	-- unused in game --Not anymore :)
 	--	sim:removeEventTrigger( simdefs.EV_LOOT_ACQUIRED, self )	-- for installing augments
 
 	        self.abilityOwner = nil
@@ -79,11 +81,9 @@ local alpha_voice =
 					local agent = agentDef.agentID	
 					if STRINGS.alpha_voice[ agent] ~= nil then		
 						local speechData = STRINGS.alpha_voice[ agent][evType ]				
-						if speechData ~= nil then
-							log:write("Event phase 1")					
+						if speechData ~= nil then				
 							local p = speechData[1]
 							if sim:nextRand() <= p then
-								log:write("Event phase 2")
 						   		local choice = speechData[2]
 								local speech = choice[math.floor(sim:nextRand()*#choice)+1]
 								--local agentDef = self.abilityOwner:getUnitData()
@@ -109,6 +109,11 @@ local alpha_voice =
 	onEventTrigger = function( self, sim, evType, evData, before )	
 		local script = sim:getLevelScript()
 		local agentDef = self.abilityOwner:getUnitData()
+		
+		if evType == simdefs.EV_UNIT_STOP_WALKING and (evData.unit == self.abilityOwner or evData.unitID == self.abilityOwner:getID()) and simquery.isUnitPinning( sim, evData.unit ) and not before then
+			sim:dispatchEvent( simdefs.EV_UNIT_START_PIN, evData )
+		end
+		
 		if (evData.unit == self.abilityOwner or evData.unitID == self.abilityOwner:getID()) and not evData.cancel and before then 	
 			if not self.abilityOwner:isKO() then
 				if evType == simdefs.EV_UNIT_START_SHOOTING  then
@@ -123,11 +128,9 @@ local alpha_voice =
 					local agent = agentDef.agentID	
 					if STRINGS.alpha_voice[ agent] ~= nil then		
 						local speechData = STRINGS.alpha_voice[ agent][evType ]				
-						if speechData ~= nil then
-							log:write("Event phase 1")					
+						if speechData ~= nil then			
 							local p = speechData[1]
 							if sim:nextRand() <= p then
-								log:write("Event phase 2")
 						   		local choice = speechData[2]
 								local speech = choice[math.floor(sim:nextRand()*#choice)+1]
 								--local agentDef = self.abilityOwner:getUnitData()
