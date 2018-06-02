@@ -229,34 +229,7 @@ local DLC_STRINGS =
 		[_M.EVENT_OVERWATCH] = 				{1,{"Covering this zone","Will get it done","Standing guard","Ready to intercept"}},				
 		[_M.EVENT_PIN] = 				{0.3,{"I will break you","Stay down.","I have him","He will not move, trust me"}},			
 	},
- 	
-------------
-
-	mod_01_pedler = {
-		
-	--	[_M.EVENT_SELECTED] = 				{0.2,{"*Shall we proceed?*","*Do not waste my Time*"}}, 
-		[_M.EVENT_ATTACK_GUN] = 			{1,{"*Such dirty work*","*A necessary unpleasantry*"}},  
-		[_M.EVENT_ATTACK_GUN_KO] = 			nil,  								
-		[_M.EVENT_ATTACK_MELEE] = 			{0.5,{"*Enough with you!*","*Servo 3 is twitchy*"}},		
-	--	[_M.EVENT_HIT_GUN] = 				nil,
-	--	[_M.EVENT_HIT_GUN_KO] = 			nil,
-	--	[_M.EVENT_HIT_MELEE] = 				nil,
-	--	[_M.EVENT_KILL_GUN] = 				nil,
-	--	[_M.EVENT_KILL_MELEE] = 			nil,
-	--	[_M.EVENT_MISS_GUN] = 				{1,{"*Servo 3 is twitchy*"}},			
-	--	[_M.EVENT_IS_HIT] = 				nil,							
-	--	[_M.EVENT_HP_DOWN] = 				nil,
-		[_M.EVENT_DEATH] = 				{1,{"*Power... empty...*"}},			
-		[_M.EVENT_REVIVED] = 				{1,{"*Let's not do that again*"}},				
-		[_M.EVENT_HIJACK] = 				{1,{"*Uploading virus*"}},			
-		[_M.EVENT_LOOT] = 				{1,{"*I want to deconstruct this*"}},				
-		[_M.EVENT_INTERRUPTED] = 			{1,{"*I have complications*"}},				
-		[_M.EVENT_PEEK] = 				nil,							
-		[_M.EVENT_OVERWATCH] = 				{1,{"*This way is watched*"}},				
-		[_M.EVENT_PIN] = 				{1,{"*Such dirty work","A necessary unpleasantry*"}},			
-	},
-
-	
+ 		
 	-- Sharp
 	[_M.cyborg_1] = {
 	--	speechData = 				nil
@@ -456,7 +429,83 @@ local DLC_STRINGS =
 		[_M.EVENT_PEEK] = 			nil,								
 		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered"}},				
 		[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},
+	},
+
+------------
+
+	mod_01_pedler = {
+		
+	--	[_M.EVENT_SELECTED] = 				{0.2,{"*Shall we proceed?*","*Do not waste my Time*"}}, 
+		[_M.EVENT_ATTACK_GUN] = 			{1,{"*Such dirty work*","*A necessary unpleasantry*"}},  
+		[_M.EVENT_ATTACK_GUN_KO] = 			nil,  								
+		[_M.EVENT_ATTACK_MELEE] = 			{0.5,{"*Enough with you!*","*Servo 3 is twitchy*"}},		
+	--	[_M.EVENT_HIT_GUN] = 				nil,
+	--	[_M.EVENT_HIT_GUN_KO] = 			nil,
+	--	[_M.EVENT_HIT_MELEE] = 				nil,
+	--	[_M.EVENT_KILL_GUN] = 				nil,
+	--	[_M.EVENT_KILL_MELEE] = 			nil,
+	--	[_M.EVENT_MISS_GUN] = 				{1,{"*Servo 3 is twitchy*"}},			
+	--	[_M.EVENT_IS_HIT] = 				nil,							
+	--	[_M.EVENT_HP_DOWN] = 				nil,
+		[_M.EVENT_DEATH] = 				{1,{"*Power... empty...*"}},			
+		[_M.EVENT_REVIVED] = 				{1,{"*Let's not do that again*"}},				
+		[_M.EVENT_HIJACK] = 				{1,{"*Uploading virus*"}},			
+		[_M.EVENT_LOOT] = 				{1,{"*I want to deconstruct this*"}},				
+		[_M.EVENT_INTERRUPTED] = 			{1,{"*I have complications*"}},				
+		[_M.EVENT_PEEK] = 				nil,							
+		[_M.EVENT_OVERWATCH] = 				{1,{"*This way is watched*"}},				
+		[_M.EVENT_PIN] = 				{1,{"*Such dirty work","A necessary unpleasantry*"}},			
+	},
+
+	mod_02_mist = {
+			
+		[_M.EVENT_ATTACK_GUN] = 			nil,  	
+		[_M.EVENT_ATTACK_GUN_KO] = 			nil,  								
+		[_M.EVENT_ATTACK_MELEE] = 			nil,  
+	
+		[_M.EVENT_DEATH] = 				nil,  			
+		[_M.EVENT_REVIVED] = 				nil,  					
+		[_M.EVENT_HIJACK] = 				nil,  			
+		[_M.EVENT_LOOT] = 				nil,  				
+		[_M.EVENT_INTERRUPTED] = 			nil,  				
+		[_M.EVENT_PEEK] = 				nil,							
+		[_M.EVENT_OVERWATCH] = 				nil,  				
+		[_M.EVENT_PIN] = 				nil,  				
+	},
+
+	mod_03_ghuff = {
+		
+		[_M.EVENT_ATTACK_GUN] = 			nil,  	
+		[_M.EVENT_ATTACK_GUN_KO] = 			nil,  								
+		[_M.EVENT_ATTACK_MELEE] = 			nil,  
+	
+		[_M.EVENT_DEATH] = 				nil,  			
+		[_M.EVENT_REVIVED] = 				nil,  					
+		[_M.EVENT_HIJACK] = 				nil,  			
+		[_M.EVENT_LOOT] = 				nil,  				
+		[_M.EVENT_INTERRUPTED] = 			nil,  				
+		[_M.EVENT_PEEK] = 				nil,							
+		[_M.EVENT_OVERWATCH] = 				nil,  				
+		[_M.EVENT_PIN] = 				nil,  			
+	},
+
+	mod_04_n_umi = {
+		
+		[_M.EVENT_ATTACK_GUN] = 			nil,  	
+		[_M.EVENT_ATTACK_GUN_KO] = 			nil,  								
+		[_M.EVENT_ATTACK_MELEE] = 			nil,  
+	
+		[_M.EVENT_DEATH] = 				nil,  			
+		[_M.EVENT_REVIVED] = 				nil,  					
+		[_M.EVENT_HIJACK] = 				nil,  			
+		[_M.EVENT_LOOT] = 				nil,  				
+		[_M.EVENT_INTERRUPTED] = 			nil,  				
+		[_M.EVENT_PEEK] = 				nil,							
+		[_M.EVENT_OVERWATCH] = 				nil,  				
+		[_M.EVENT_PIN] = 				nil,  				
 	},	
+
+------------
 	
 }
 
