@@ -26,6 +26,7 @@ local _M =
 	EVENT_ATTACK_GUN_KO = 1008,	-- added 'custom' 
 --	EVENT_HIT_GUN_KO = 21,
 	EVENT_LOOT = 66,           	-- TRG_SAFE_LOOTED -- there's trigger used
+	EV_UNIT_INSTALL_AUGMENT = 62,	
 
 	-- NPC events			-- Guard's speeches part unused here
 --	ARRESTING = 100,
@@ -85,7 +86,7 @@ local DLC_STRINGS =
 	--	speechData = 				{0.2,{"You as ready as I am?","Like old times","Running silent"}},  
 		[_M.EVENT_ATTACK_GUN] = 		{1,{"Here we go","Taking aim"}},  	
 		[_M.EVENT_ATTACK_GUN_KO] = 		{1,{"Night night","Bed time","Lights out","Sweet dreams","He's about to catch some z's"}},  								
-		[_M.EVENT_ATTACK_MELEE] = 		{1,{"Dig fast!","Like a sack of potatoes","Not much of a fight"}},					
+		[_M.EVENT_ATTACK_MELEE] = 		{1,{"Dig fast!","Like a sack of potatoes","Not much of a fight","Might put some ice on that, pal"}},					
 	--	[_M.EVENT_HIT_GUN] = 			nil,								
 	--	[_M.EVENT_HIT_GUN_KO] = 		{1,{"Night night","Bed time","Lights out","Sweet dreams"}},				
 	--	[_M.EVENT_HIT_MELEE] = 			{1,{"chump"}},						
@@ -99,9 +100,10 @@ local DLC_STRINGS =
 		[_M.EVENT_HIJACK] = 			{1,{"Uploading virus","Hmpf. Not as secure as they used to be"}},			
 		[_M.EVENT_LOOT] = 			{1,{"Jackpot"}},					
 		[_M.EVENT_INTERRUPTED] = 		{1,{"Hold up"}},				
-		[_M.EVENT_PEEK] = 			nil,								
+		[_M.EVENT_PEEK] = 			{1,{"Just a quick look","Scouting the way"}},								
 		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered","Like old times","I was born ready"}},				
 		[_M.EVENT_PIN] = 			{1,{"This one's pinned","Do yourself a favor and stay down, pal"}},
+		[_M.EV_UNIT_INSTALL_AUGMENT] =		{1,{"Still human.","Flood myself with metal","The future will drown us all","Another one? Starting to lose count"}},
 	},
 
 	-- Xu
@@ -124,9 +126,10 @@ local DLC_STRINGS =
 		[_M.EVENT_HIJACK] = 				{1,{"Let's see what you're made of","I wish I could take my time with this","There's a certain elegance to their systems","Hmpf. Not much of a challenge...","They really make this too easy"}}, 	
 		[_M.EVENT_LOOT] = 				{1,{"What do we have here?","Let's see what's inside","How curious...","Now that's interesting"}},
 		[_M.EVENT_INTERRUPTED] = 			{1,{"Just a moment","Could be a problem"}},  	
-		[_M.EVENT_PEEK] = 				nil,  	
+		[_M.EVENT_PEEK] = 				{1,{"Information is key","Let's not charge in blind","Scouting area","Surveying the room"}},  	
 		[_M.EVENT_OVERWATCH] = 				{1,{"Weapon primed","Monitoring the area","Leave this to me","Rest assured, I will handle it"}},
-		[_M.EVENT_PIN] = 				{1,{"Enemy subdued","This one won't be going anywhere","Target pinned"}},  		
+		[_M.EVENT_PIN] = 				{1,{"Enemy subdued","This one won't be going anywhere","Target pinned"}},  
+		[_M.EV_UNIT_INSTALL_AUGMENT] =			{1,{"I cannot wait to use this","This seems promising","I've always wanted to try that","Still more human than some people I could name","Efficiency improved"}}
 	},
 
 
@@ -134,9 +137,9 @@ local DLC_STRINGS =
 	[_M.sharpshooter_1] = {
 		
 	--	[_M.EVENT_SELECTED] = 				{0.2,{"Almost time for a G and T dont you think?","What do you need, beautiful?"}},  
-		[_M.EVENT_ATTACK_GUN] = 			{1,{"Lined up","In sights","Gentle squeeze..."}},  	
-		[_M.EVENT_ATTACK_GUN_KO] = 			{1,{"That won't keep him down forever","Not as permanent as I'd like","Hmpf."}}, 								
-		[_M.EVENT_ATTACK_MELEE] = 			{0.1,{"Boring conversation anyway"}},		
+		[_M.EVENT_ATTACK_GUN] = 			{1,{"Lined up","In sights","Gentle squeeze...","End of the line","Keeping it clean"}},  	
+		[_M.EVENT_ATTACK_GUN_KO] = 			{1,{"He's out. For now","That won't keep him down forever","Not as permanent as I'd like","Hmpf."}}, 								
+		[_M.EVENT_ATTACK_MELEE] = 			{1,{"Boring conversation anyway","That's one less","I think he sprained something"}},		
 	--	[_M.EVENT_HIT_GUN] = 				nil,
 	--	[_M.EVENT_HIT_GUN_KO] = 			nil,
 	--	[_M.EVENT_HIT_MELEE] = 				nil,
@@ -147,12 +150,13 @@ local DLC_STRINGS =
 	--	[_M.EVENT_HP_DOWN] = 				nil,
 		[_M.EVENT_DEATH] = 				{1,{"I'm coming... Rita...","About... time..."}},			
 		[_M.EVENT_REVIVED] = 				{1,{"Just in time","Hmpf. It was only a scratch"}},					
-		[_M.EVENT_HIJACK] = 				nil,
+		[_M.EVENT_HIJACK] = 				{1,{"Uploading virus","You're wasting me on this?","A monkey could do this","The device is ours now"}},
 		[_M.EVENT_LOOT] = 				{1,{"All boys need toys","Not bad","I get a cut of this, right?"}},				
 		[_M.EVENT_INTERRUPTED] = 			{1,{"Target ahead","Target sighted"}},			
-		[_M.EVENT_PEEK] = 				nil,
+		[_M.EVENT_PEEK] = 				{1,{"No surprises","Searching for hostiles","Scouting ahead"}},
 		[_M.EVENT_OVERWATCH] = 				{1,{"Setting up","Doing what I do","Let them come"}},				
-		[_M.EVENT_PIN] = 				{0.3,{"Shouldn't I just... shoot him?","Taking prisoners isn't really my bag"}},
+		[_M.EVENT_PIN] = 				{1,{"Shouldn't I just... shoot him?","Taking prisoners isn't really my bag"}},
+		[_M.EV_UNIT_INSTALL_AUGMENT] =			{1,{"So long as it's useful.","This better work","This better not slow me down"}},
 	},
 	
 	-- Banks
@@ -170,21 +174,22 @@ local DLC_STRINGS =
 	--	[_M.EVENT_MISS_GUN] = 				{1,{"Ok, ok, I'm learning","Dammit! Harder than it looks"}},		
 	--	[_M.EVENT_IS_HIT] = 				nil,								
 	--	[_M.EVENT_HP_DOWN] = 				nil,
-		[_M.EVENT_DEATH] = 				{1,{"I guess... I tried... one too many."}},				
+		[_M.EVENT_DEATH] = 				{1,{"I guess... I tried... one too many.","Doesn't... hurt... at all..."}},				
 		[_M.EVENT_REVIVED] = 				{1,{"I owe you for that one.","Not a dream, then..."}},					
 		[_M.EVENT_HIJACK] = 				{1,{"Just gotta bypass the... Done!","Easy peasy","I wrote this code in Haiku","CPU, I own you","This console reeks of coffee","Knock knock little machine"}},		
 		[_M.EVENT_LOOT] = 				{1,{"Who wants stuff?","Come to mamma","Do I really have to share this?"}},					
-		[_M.EVENT_INTERRUPTED] = 			{1,{"Uh oh"}},					
-		[_M.EVENT_PEEK] = 				nil,								
+		[_M.EVENT_INTERRUPTED] = 			{1,{"Uh oh","Hold your horses","Wait a second"}},					
+		[_M.EVENT_PEEK] = 				{1,{"I see them, but they don't see me","Swift and silent","I know what lies in wait","I see the way ahead"}},								
 		[_M.EVENT_OVERWATCH] = 				{1,{"Holding here","Watching the way"}},				
-		[_M.EVENT_PIN] = 				{0.3,{"Just stay there, buddy","It will go better for you if you don't move","I could sing you a lullaby while we're here"}},	
+		[_M.EVENT_PIN] = 				{1,{"Just stay there, buddy","It will go better for you if you don't move","I could sing you a lullaby while we're here"}},
+		[_M.EV_UNIT_INSTALL_AUGMENT] =			{1,{"Will this fix me?","Another one","I can hear it inside me","This will keep me company","we're all just automatons in the end"}},						
 	},
 
 	-- Internationale
 	[_M.engineer_2] = {
 	
 	--	[_M.EVENT_SELECTED] = 				{0.2,{"You're coming in clear","On the team"}},  
-		[_M.EVENT_ATTACK_GUN] = 			{0.3,{"I do not like this.","This is the only way","Count to three, pull the trigger...","Deep breath..."}},  
+		[_M.EVENT_ATTACK_GUN] = 			{1,{"I do not like this.","This is the only way","Count to three, pull the trigger...","Deep breath..."}},  
 		[_M.EVENT_ATTACK_GUN_KO] = 			{1,{"Delivering toxin","Clearing things up","Let's open the way"}}, 		
 		[_M.EVENT_ATTACK_MELEE] = 			nil,				
 	--	[_M.EVENT_HIT_GUN] = 				nil,							
@@ -200,17 +205,18 @@ local DLC_STRINGS =
 		[_M.EVENT_HIJACK] = 				{1,{"Installing virus","Let's see what their security is like","No obstacles encountered","Accessing their system"}},		
 		[_M.EVENT_LOOT] = 				{1,{"Busted open","Secrets revealed","Time to redistribute","New assets acquired"}},				
 		[_M.EVENT_INTERRUPTED] = 			{1,{"I've spotted something","There's something here"}},					
-		[_M.EVENT_PEEK] = 				nil,					
+		[_M.EVENT_PEEK] = 				{1,{"Scouting ahead","I know what's coming","Area sighted","I have eyes on this"}},					
 		[_M.EVENT_OVERWATCH] = 				{1,{"Ok, focused in","I will take care of it"}},			
-		[_M.EVENT_PIN] = 				{0.3,{"I shouldn't sit here long","I suppose this is more merciful"}},		
+		[_M.EVENT_PIN] = 				{1,{"I shouldn't sit here long","I suppose this is more merciful"}},
+		[_M.EV_UNIT_INSTALL_AUGMENT] =			{1,{"Whatever it takes to get the job done","More than the sum of my parts","I can use this","I hope this doesn't make me start drinking"}},								
 	},
 
 	-- Nika
 	[_M.sharpshooter_2] = {
 		
 	--	[_M.EVENT_SELECTED] = 				{0.2,{"Vil get it done.","zey vont get avay vit dis"}},  
-		[_M.EVENT_ATTACK_GUN] = 			{0.3,{"With lethal force","Terminating","Taking action"}},  	
-		[_M.EVENT_ATTACK_GUN_KO] = 			{0.3,{"Tranquing","Knocking out the target","..."}},  
+		[_M.EVENT_ATTACK_GUN] = 			{1,{"With lethal force","Terminating","Taking action"}},  	
+		[_M.EVENT_ATTACK_GUN_KO] = 			{1,{"Tranquing","Knocking out the target","..."}},  
 		[_M.EVENT_ATTACK_MELEE] = 			nil,					
 	--	[_M.EVENT_HIT_GUN] = 				nil,								
 	--	[_M.EVENT_HIT_GUN_KO] = 			{1,{"Delivering toxin"}},				
@@ -227,7 +233,8 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 			{1,{"Wait!"}},					
 		[_M.EVENT_PEEK] = 				nil,								
 		[_M.EVENT_OVERWATCH] = 				{1,{"Covering this zone","Will get it done","Standing guard","Ready to intercept"}},				
-		[_M.EVENT_PIN] = 				{0.3,{"I will break you","Stay down.","I have him","He will not move, trust me"}},			
+		[_M.EVENT_PIN] = 				{1,{"I will break you","Stay down.","I have him","He will not move, trust me"}},
+		[_M.EV_UNIT_INSTALL_AUGMENT] =			{1,{"Hmm.","Good.","...","Stronger now."}},								
 	},
  		
 	-- Sharp
@@ -249,9 +256,10 @@ local DLC_STRINGS =
 		[_M.EVENT_HIJACK] = 			{1,{"Uploading virus","Interfacing with a vastly superior being","Finally, some better company"}},			
 		[_M.EVENT_LOOT] = 			{1,{"I have the goods","Accessing data"}},					
 		[_M.EVENT_INTERRUPTED] = 		{1,{"Stop","This changes things","Adapting"}},				
-		[_M.EVENT_PEEK] = 			nil,								
+		[_M.EVENT_PEEK] = 			nil,							
 		[_M.EVENT_OVERWATCH] = 			{1,{"Armed and ready","They won't know what hit them","Prepared for perfection","Watch and learn","Time to make this look good"}},				
-		[_M.EVENT_PIN] = 			{1,{"Ugh, I think it's still alive","Stop twitching!","Why am I wasting my time here?","This is humiliating","Do I really have to be touching him? Can't I just... no?"}},		
+		[_M.EVENT_PIN] = 			{1,{"Ugh, I think it's still alive","Stop twitching!","Why am I wasting my time here?","This is humiliating","Do I really have to be touching him? Can't I just... no?"}},
+		[_M.EV_UNIT_INSTALL_AUGMENT] =		{1,{"At last!","One step closer to perfection","Yes!","I am even more optimized","I think that one had a scratch on it","Acceptable.","Only the finest","This better not be some cheap knock-off","Who could bear to look upon such beauty?","Look at me. Do NOT touch."}},											
 
 	},
 	
@@ -269,14 +277,15 @@ local DLC_STRINGS =
 	--	[_M.EVENT_MISS_GUN] = 			nil			
 	--	[_M.EVENT_IS_HIT] = 			nil,								
 	--	[_M.EVENT_HP_DOWN] = 			nil,
-		[_M.EVENT_DEATH] = 			{1,{"No! I won't...","Can't... be..."}},			
+		[_M.EVENT_DEATH] = 			{1,{"No! I won't...","Can't... be...","Nice shot, asshole..."}},			
 		[_M.EVENT_REVIVED] = 			{1,{"They'll pay for that","Back in the floodlights","Think this could stop me? Watch.","Thanks, I guess"}},					
 		[_M.EVENT_HIJACK] = 			{1,{"Uploading program","Siphoning the PWR","This device is ours now"}},			
 		[_M.EVENT_LOOT] = 			{1,{"Good thing we stopped by","X marks the spot","My favorite moment","I'm sure they won't miss this","Not a bad haul"}},					
 		[_M.EVENT_INTERRUPTED] = 		{1,{"Hold it","What was that?"}},				
-		[_M.EVENT_PEEK] = 			nil,								
+		[_M.EVENT_PEEK] = 			{1,{"Path scouted","I see all","Nothing shall slip me by"}},								
 		[_M.EVENT_OVERWATCH] = 			{1,{"Sweet","They won't get past me","I'll show them","Time to dazzle"}},				
-		[_M.EVENT_PIN] = 			{1,{"If you're smart, you won't wake up","I've got him under control","Got it. Enemy pinned","What now?","Already bored"}},		-- not used in game
+		[_M.EVENT_PIN] = 			{1,{"If you're smart, you won't wake up","I've got him under control","Got it. Enemy pinned","What now?","Already bored"}},
+		[_M.EV_UNIT_INSTALL_AUGMENT] =		{1,{"I should get some nice mileage out of this","Just what I've been looking for","Damn, that stings","Sweet, an upgrade"}},														
 	},
 	
 	
@@ -285,7 +294,7 @@ local DLC_STRINGS =
 	--	speechData = 				nil 
 		[_M.EVENT_ATTACK_GUN] = 		{1,{"Eliminating the target","Clean and precise","Enemy neutralized","That's one less for us to deal with"}},  	
 		[_M.EVENT_ATTACK_GUN_KO] = 		{1,{"He's down. Let's not waste time","That ought to do it","Enemy neutralized","Clean and precise"}},  								
-		[_M.EVENT_ATTACK_MELEE] = 		{1,{"He's dealt with.","Aggressor neutralized"}},				
+		[_M.EVENT_ATTACK_MELEE] = 		{1,{"He's dealt with.","Aggressor neutralized","Time to get rough, then","That ought to teach you","Threat removed, I would say"}},				
 	--	[_M.EVENT_HIT_GUN] = 			nil,								
 	--	[_M.EVENT_HIT_GUN_KO] = 		nil			
 	--	[_M.EVENT_HIT_MELEE] = 			nil						
@@ -298,39 +307,41 @@ local DLC_STRINGS =
 		[_M.EVENT_REVIVED] = 			{1,{"I'm... still alive? I suppose they've never had the best aim...","Only a minor setback","You have my thanks, agent","I've weathered worse than that"}},					
 		[_M.EVENT_HIJACK] = 			{1,{"Uploading the worm","Subverting enemy tech","Another asset gained","Virus installed"}},			
 		[_M.EVENT_LOOT] = 			{1,{"Well this should prove useful"}},					
-		[_M.EVENT_INTERRUPTED] = 		{1,{"Oh, bother"}},				
+		[_M.EVENT_INTERRUPTED] = 		{1,{"Oh, bother","Hmm, what's that?"}},				
 		[_M.EVENT_PEEK] = 			nil,								
-		[_M.EVENT_OVERWATCH] = 			{1,{"I'll keep a watchful eye","Readying my sights"}},				
-		[_M.EVENT_PIN] = 			{1,{"I've got him pinned down","Under control"}},		-- not used in game
+		[_M.EVENT_OVERWATCH] = 			{1,{"I'll keep a watchful eye","Readying my sights","I'll show these boys a thing or two"}},				
+		[_M.EVENT_PIN] = 			{1,{"I've got him pinned down","Under control"}},
+		[_M.EV_UNIT_INSTALL_AUGMENT] =		{1,{"I suppose that's useful enough","An augment is only as good as its host","I'll make do with this"}},														
 	},
 	
 	
-	-- Derek - STILL HAS DECKER PLACEHOLDER LINES
+	-- Derek 
 	[_M.derek] = {
-	--	speechData = 				{0.2,{"You as ready as I am?","Like old times","Running silent"}},  
-		[_M.EVENT_ATTACK_GUN] = 		{1,{"Here we go","Taking aim"}},  	
-		[_M.EVENT_ATTACK_GUN_KO] = 		{1,{"Night night","Bed time","Lights out","Sweet dreams"}},  								
-		[_M.EVENT_ATTACK_MELEE] = 		{1,{"Dig fast!"}},					
+	--	speechData = 				nil,
+		[_M.EVENT_ATTACK_GUN] = 		{1,{"Time to get messy","Try not to splatter too much","Taking aim","Ugh, I suppose this is unavoidable..."}},	
+		[_M.EVENT_ATTACK_GUN_KO] = 		{1,{"Take a nap, my friend","Why don't you have a lie-down?","Well that takes care of that","I should get one of these custom-made","If I could just rewire this a bit..."}},								
+		[_M.EVENT_ATTACK_MELEE] = 		{1,{"Subduing the enemy","Well that takes care of that","Ah, wetwork","That's quite enough","Do be quiet","I'm taking him out","Enemy engaged"}},					
 	--	[_M.EVENT_HIT_GUN] = 			nil,								
-	--	[_M.EVENT_HIT_GUN_KO] = 		{1,{"Night night","Bed time","Lights out","Sweet dreams"}},				
-	--	[_M.EVENT_HIT_MELEE] = 			{1,{"chump"}},						
+	--	[_M.EVENT_HIT_GUN_KO] = 		nil,				
+	--	[_M.EVENT_HIT_MELEE] = 			nil,					
 	--	[_M.EVENT_KILL_GUN] = 			nil,
 	--	[_M.EVENT_KILL_MELEE] = 		nil,
-	--	[_M.EVENT_MISS_GUN] = 			{1,{"Slippery sucker"}},			
+	--	[_M.EVENT_MISS_GUN] = 			nil,			
 	--	[_M.EVENT_IS_HIT] = 			nil,								
 	--	[_M.EVENT_HP_DOWN] = 			nil,
-		[_M.EVENT_DEATH] = 			{1,{"you.. have.. to.."}},			
-		[_M.EVENT_REVIVED] = 			{1,{"Ugh. Do I even get hazard pay?"}},					
-		[_M.EVENT_HIJACK] = 			{1,{"Uploading virus"}},			
-		[_M.EVENT_LOOT] = 			{1,{"Jackpot"}},					
-		[_M.EVENT_INTERRUPTED] = 		{1,{"Hold up"}},				
+		[_M.EVENT_DEATH] = 			{1,{"Well, that's...not good...","I blame... the  management...","Corporate... scum...","No, not after everything..."}},			
+		[_M.EVENT_REVIVED] = 			{1,{"Ugh. Do I even get hazard pay?","A second chance","Let's up the stakes","Back in the game","My thanks, friend"}},					
+		[_M.EVENT_HIJACK] = 			{1,{"Let's take a look at this baby","Time to get to work","Ths is what I'm here for","And now the real job begins","Subverting enemy mainframe","Ahhh, now this? This is more like it","Just look at this system - how quaint"}},			
+		[_M.EVENT_LOOT] = 			{1,{"Let's grab this and run","WMarvelous. Anything else we could lift?","Can't leave this lying around","Let's put this to use","I imagine they'd want to keep this. That's too bad.","Now that's what I call rewarding"}},					
+		[_M.EVENT_INTERRUPTED] = 		{1,{"Well, this is new","Ah, I see","One moment"}},			
 		[_M.EVENT_PEEK] = 			nil,								
-		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered"}},				
-		[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},
+		[_M.EVENT_OVERWATCH] = 			{1,{"This is really so uncivilized","Prepared to take action","Watching this area","Ready to fire","Preparing a nasty surprise"}},				
+		[_M.EVENT_PIN] = 			{1,{"Keeping him down","I've always aspired to be some hired muscle","Enemy pinned","Well this could get old rather fast"}},
+		[_M.EV_UNIT_INSTALL_AUGMENT] =		{1,{"Time to embrace the new age","Ah, the wonders of technology","Not a bad choice","I wasn't attached to that bit of tissue anyway"}},	
 	},
 	
 	
-	-- Draco -- STILL HAS DRACO PLACEHOLDER LINES - Data will help
+	-- Draco
 	[_M.draco] = {
 	--	speechData = 				nil,
 		[_M.EVENT_ATTACK_GUN] = 		{1,{"See you in hell","More prey","Add this to my tab","It is almost too easy","I wonder what you've got for me"}},  	
@@ -344,15 +355,15 @@ local DLC_STRINGS =
 	--	[_M.EVENT_MISS_GUN] = 			nil,			
 	--	[_M.EVENT_IS_HIT] = 			nil,								
 	--	[_M.EVENT_HP_DOWN] = 			nil,
-		[_M.EVENT_DEATH] = 			{1,{"Careless... of... me...","Not... again...","You'll never... take me alive..." "Just... marvelous...","Never hear the end of this..."}},			
+		[_M.EVENT_DEATH] = 			{1,{"Careless... of... me...","Not... again...","You'll never... take me alive..." "Just... marvelous...","Never hear the end... of this..."}},			
 		[_M.EVENT_REVIVED] = 			{1,{"No rest for the wicked","Someone will pay for that","He shall rise again","Takes more than that to keep me down","Frankly, I'm not great at dying"}},					
 		[_M.EVENT_HIJACK] = 			{1,{"Truly thrilling","Though boring it may be, it's part of the job"}},			
 		[_M.EVENT_LOOT] = 			{1,{"Finders keepers!","Well, hello there","Would be a shame to leave this here","No one will miss it, I am certain"}},					
 		[_M.EVENT_INTERRUPTED] = 		{1,{"There you are!","How am I just seeing this now?"}},				
 		[_M.EVENT_PEEK] = 			{1,{"Senses sharpened","A quick look is enough","Curiosity saved the cat","Just to be sure I don't fall prey to another","He was silent and careful, nothing gave him away"}},								
 		[_M.EVENT_OVERWATCH] = 			{1,{"The hunter awaits","Enemies beware","The element of surprise!","Muscles tense, his focus didn't waver, not for a moment","Trust me, I'm not afraid to use it"}},				
-		[_M.EVENT_PIN] = 			{1,{"Don't make me do anything you'll regret","I should have brought a book","If you're lucky I won't be anywhere near when you wake up","So... is the insurance good?"
-}},
+		[_M.EVENT_PIN] = 			{1,{"Don't make me do anything you'll regret","I should have brought a book","If you're lucky I won't be anywhere near when you wake up","So... is the insurance good?"}},
+		[_M.EV_UNIT_INSTALL_AUGMENT] =		nil, -- FOR NOW
 	},
 	
 	
@@ -360,25 +371,26 @@ local DLC_STRINGS =
 	-- Rush
 	[_M.rush] = {
 	--	speechData = 				nil,  
-		[_M.EVENT_ATTACK_GUN] = 		{1,{"Here we go","Taking aim"}},  	
-		[_M.EVENT_ATTACK_GUN_KO] = 		{1,{"Night night","Bed time","Lights out","Sweet dreams"}},  								
-		[_M.EVENT_ATTACK_MELEE] = 		{1,{"Dig fast!"}},					
+		[_M.EVENT_ATTACK_GUN] = 		{1,{"No more than they deserve.","I prefer a personal touch","Taking out the target","This is what you get"}},  	
+		[_M.EVENT_ATTACK_GUN_KO] = 		{1,{"He's down, but still in the game","Couches-toi","Dors bien","Taking him out"}},  								
+		[_M.EVENT_ATTACK_MELEE] = 		{1,{"Sucker.","Is that what they call armed force? Pathetic.","I expected better.","Next!","Not so tough now, are you?"}},					
 	--	[_M.EVENT_HIT_GUN] = 			nil,								
-	--	[_M.EVENT_HIT_GUN_KO] = 		{1,{"Night night","Bed time","Lights out","Sweet dreams"}},				
-	--	[_M.EVENT_HIT_MELEE] = 			{1,{"chump"}},						
+	--	[_M.EVENT_HIT_GUN_KO] = 		nil,				
+	--	[_M.EVENT_HIT_MELEE] = 			nil,					
 	--	[_M.EVENT_KILL_GUN] = 			nil,
 	--	[_M.EVENT_KILL_MELEE] = 		nil,
-	--	[_M.EVENT_MISS_GUN] = 			{1,{"Slippery sucker"}},			
+	--	[_M.EVENT_MISS_GUN] = 			nil,			
 	--	[_M.EVENT_IS_HIT] = 			nil,								
 	--	[_M.EVENT_HP_DOWN] = 			nil,
 		[_M.EVENT_DEATH] = 			{1,{"Like you could... stop me...","What? No...","I don't believe..."}},			
 		[_M.EVENT_REVIVED] = 			{1,{"Let me at them!","They'll have to try harder than that"}},					
-		[_M.EVENT_HIJACK] = 			{1,{"Uploading virus"}},			
-		[_M.EVENT_LOOT] = 			{1,{"Jackpot"}},					
+		[_M.EVENT_HIJACK] = 			nil,			
+		[_M.EVENT_LOOT] = 			{1,{"Bingo"}},					
 		[_M.EVENT_INTERRUPTED] = 		{1,{"What's the hold-up?"}},				
 		[_M.EVENT_PEEK] = 			nil,								
 		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered"}},				
-		[_M.EVENT_PIN] = 			{1,{"...How long do I have to do this?","I'm not a babysitter","Enemy pinned. If that helps"}},	
+		[_M.EVENT_PIN] = 			{1,{"...How long do I have to do this?","I'm not here to babysit","Enemy pinned. If that helps"}},	
+		[_M.EV_UNIT_INSTALL_AUGMENT] =		nil,	
 	},
 	
 		-- Monst3r
@@ -403,6 +415,7 @@ local DLC_STRINGS =
 		[_M.EVENT_PEEK] = 			nil,								
 		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered"}},				
 		[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},
+		[_M.EV_UNIT_INSTALL_AUGMENT] =		nil,	
 	},	
 
 	
@@ -422,7 +435,7 @@ local DLC_STRINGS =
 	--	[_M.EVENT_MISS_GUN] = 			{1,{"Slippery sucker"}},			
 	--	[_M.EVENT_IS_HIT] = 			nil,								
 	--	[_M.EVENT_HP_DOWN] = 			nil,
-		[_M.EVENT_DEATH] = 			{1,{"you.. have.. to.."}},			
+		[_M.EVENT_DEATH] = 			{1,{"No! We were... so close..."}},			
 		[_M.EVENT_REVIVED] = 			{1,{"Back into the field","I will not be held back by the likes of this"}},					
 		[_M.EVENT_HIJACK] = 			{1,{"Uploading virus"}},			
 		[_M.EVENT_LOOT] = 			{1,{"Jackpot"}},					
@@ -430,6 +443,7 @@ local DLC_STRINGS =
 		[_M.EVENT_PEEK] = 			nil,								
 		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered"}},				
 		[_M.EVENT_PIN] = 			{1,{"This one's pinned"}},
+		[_M.EV_UNIT_INSTALL_AUGMENT] =		nil,	
 	},
 
 ------------
@@ -439,7 +453,7 @@ local DLC_STRINGS =
 	--	[_M.EVENT_SELECTED] = 				{0.2,{"*Shall we proceed?*","*Do not waste my Time*"}}, 
 		[_M.EVENT_ATTACK_GUN] = 			{1,{"*Such dirty work*","*A necessary unpleasantry*"}},  
 		[_M.EVENT_ATTACK_GUN_KO] = 			nil,  								
-		[_M.EVENT_ATTACK_MELEE] = 			{0.5,{"*Enough with you!*","*Servo 3 is twitchy*"}},		
+		[_M.EVENT_ATTACK_MELEE] = 			{1,{"*Enough with you!*","*Servo 3 is twitchy*"}},		
 	--	[_M.EVENT_HIT_GUN] = 				nil,
 	--	[_M.EVENT_HIT_GUN_KO] = 			nil,
 	--	[_M.EVENT_HIT_MELEE] = 				nil,
@@ -455,7 +469,8 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 			{1,{"*I have complications*"}},				
 		[_M.EVENT_PEEK] = 				nil,							
 		[_M.EVENT_OVERWATCH] = 				{1,{"*This way is watched*"}},				
-		[_M.EVENT_PIN] = 				{1,{"*Such dirty work","A necessary unpleasantry*"}},			
+		[_M.EVENT_PIN] = 				{1,{"*Such dirty work","A necessary unpleasantry*"}},
+		[_M.EV_UNIT_INSTALL_AUGMENT] =			{1,{"*My power grows","*I am now... more*","*I have integrated it*","*I find this... satisfactory*"}},
 	},
 
 	mod_02_mist = {
@@ -471,7 +486,8 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 			nil,  				
 		[_M.EVENT_PEEK] = 				nil,							
 		[_M.EVENT_OVERWATCH] = 				nil,  				
-		[_M.EVENT_PIN] = 				nil,  				
+		[_M.EVENT_PIN] = 				nil, 
+		[_M.EV_UNIT_INSTALL_AUGMENT] =			nil,	
 	},
 
 	mod_03_ghuff = {
@@ -487,7 +503,8 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 			nil,  				
 		[_M.EVENT_PEEK] = 				nil,							
 		[_M.EVENT_OVERWATCH] = 				nil,  				
-		[_M.EVENT_PIN] = 				nil,  			
+		[_M.EVENT_PIN] = 				nil,  
+		[_M.EV_UNIT_INSTALL_AUGMENT] =		  	nil,
 	},
 
 	mod_04_n_umi = {
@@ -503,7 +520,8 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 			nil,  				
 		[_M.EVENT_PEEK] = 				nil,							
 		[_M.EVENT_OVERWATCH] = 				nil,  				
-		[_M.EVENT_PIN] = 				nil,  				
+		[_M.EVENT_PIN] = 				nil,
+		[_M.EV_UNIT_INSTALL_AUGMENT] =			nil,
 	},	
 
 ------------
