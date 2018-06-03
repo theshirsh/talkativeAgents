@@ -43,7 +43,7 @@ local alpha_voice =
 		sim:addEventTrigger( simdefs.EV_UNIT_OVERWATCH_MELEE, self )
 		sim:addEventTrigger( simdefs.EV_UNIT_STOP_WALKING, self )
 		sim:addEventTrigger( simdefs.EV_UNIT_START_PIN, self )		-- unused in game --Not anymore :)
-	--	sim:addEventTrigger( simdefs.EV_LOOT_ACQUIRED, self )		-- for installing augments
+		sim:addEventTrigger( simdefs.EV_UNIT_INSTALL_AUGMENT, self )		-- for installing augments
 
 	end,
         
@@ -64,7 +64,7 @@ local alpha_voice =
 		sim:removeEventTrigger( simdefs.EV_UNIT_OVERWATCH_MELEE, self )
 		sim:removeEventTrigger( simdefs.EV_UNIT_STOP_WALKING, self )
 		sim:removeEventTrigger( simdefs.EV_UNIT_START_PIN, self )	-- unused in game --Not anymore :)
-	--	sim:removeEventTrigger( simdefs.EV_LOOT_ACQUIRED, self )	-- for installing augments
+		sim:removeEventTrigger( simdefs.EV_UNIT_INSTALL_AUGMENT, self )	-- for installing augments
 
 	        self.abilityOwner = nil
 	end,
