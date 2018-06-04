@@ -176,7 +176,7 @@ local DLC_STRINGS =
 	--	[_M.EVENT_SELECTED] = 				{0.2,{"You're coming in clear","On the team"}},  
 		[_M.EVENT_ATTACK_GUN] = 			{1,{"I do not like this.","This is the only way","Count to three, pull the trigger...","Deep breath..."}},  
 		[_M.EVENT_ATTACK_GUN_KO] = 			{1,{"Delivering toxin","Clearing things up","Let's open the way"}}, 		
-		[_M.EVENT_ATTACK_MELEE] = 			nil,				
+		[_M.EVENT_ATTACK_MELEE] = 			{1,{"I wish we could solve this by talking, but we can't"}},				
 							
 	--	[_M.EVENT_MISS_GUN] = 				{1,{"Target is obscured!","Need a better angle"}},	
 		[_M.EVENT_DEATH] = 				{1,{"I can't feel my... "}},			
@@ -238,7 +238,7 @@ local DLC_STRINGS =
 	
 		[_M.EVENT_ATTACK_GUN] = 		{1,{"Let's get this over with","Taking him down","Time to pay, pig","Roll credits","Oh yeah. He's down",}},  	
 		[_M.EVENT_ATTACK_GUN_KO] = 		{1,{"He's one of the lucky ones","I guess that's one way to deal with them","Oh yeah. He's down","Time for your nap"}},  								
-		[_M.EVENT_ATTACK_MELEE] = 		{1,{"Corporate pig","This does make me feel better","How's that for a stunt?","Yeah, I don't think so"}},					
+		[_M.EVENT_ATTACK_MELEE] = 		{1,{"Guess what? That wasn't a prop","Corporate pig","This does make me feel better","How's that for a stunt?","Yeah, I don't think so"}},					
 		[_M.EVENT_DEATH] = 			{1,{"No! I won't...","Can't... be...","Nice shot, asshole."}},			
 		[_M.EVENT_REVIVED] = 			{1,{"They'll pay for that","Back in the floodlights","Think this could stop me? Watch.","Thanks, I guess"}},					
 		[_M.EVENT_HIJACK] = 			{1,{"Uploading program","Siphoning the PWR","This device is ours now"}},			
@@ -307,9 +307,9 @@ local DLC_STRINGS =
 		[_M.EVENT_PEEK] = 			{1,{"Senses sharpened","A quick look is enough","Curiosity saved the cat","Just to be sure I don't fall prey to another","He was silent and careful, nothing gave him away"}},								
 		[_M.EVENT_OVERWATCH] = 			{1,{"The hunter awaits","Prepared to strike","Enemies beware","The element of surprise!","Muscles tense, his focus didn't waver, not for a moment","Trust me, I'm not afraid to use it"}},				
 		[_M.EVENT_PIN] = 			{1,{"Don't make me do anything you'll regret","I should have brought a book","If you're lucky I won't be anywhere near when you wake up","So... is the insurance good?"}},
-		[_M.EV_UNIT_INSTALL_AUGMENT] =		nil, -- FOR NOW
+		[_M.EV_UNIT_INSTALL_AUGMENT] =		{1,{"Surprisingly refreshing","Evolve to survive","This just got more interesting","The craving has eased a little","They are not ready for what I am now"}},
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
-		[_M.EV_CLOAK_IN] =			{1,{"Into the shadows","With a light step","Unseen by all"}},
+		[_M.EV_CLOAK_IN] =			{1,{"Into the shadows","With a light step","Now you see me... now you don't","You saw nothing","Fading ino nothingness","They won't see me coming","Striking from the shadows"}},
 	},
 	
 	
@@ -328,7 +328,7 @@ local DLC_STRINGS =
 		[_M.EVENT_PEEK] = 			nil,								
 		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered"}},				
 		[_M.EVENT_PIN] = 			{1,{"...How long do I have to do this?","I'm not here to babysit","Enemy pinned. If that helps"}},	
-		[_M.EV_UNIT_INSTALL_AUGMENT] =		nil,	
+		[_M.EV_UNIT_INSTALL_AUGMENT] =		{1,{"I swore I was done with these","Ugh, if I have to.","Ow."}},	
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
 		[_M.EV_CLOAK_IN] =			nil,	
 	},
@@ -342,12 +342,12 @@ local DLC_STRINGS =
 		[_M.EVENT_DEATH] = 			{1,{"Didn't see that coming","Well that was unwise...","I seem to have made a...","That really... stings...","Gladstone, are you there? I..."}},	
 		[_M.EVENT_REVIVED] = 			{1,{"Good. I'd rather not have to take one for the team","Oh, splendid","Didn't think you'd be rid of me that easily, did you?","That one's bound to leave a mark","Oh, thank you. A refreshing bout of competence"}},					
 		[_M.EVENT_HIJACK] = 			{1,{"Almost makes me want to get back into software","No meowing. Thank goodness","At least that was easy"}},			
-		[_M.EVENT_LOOT] = 			{1,{"Oh good, we could use some new toys","I like you, so I won't take my usual percentage","I'll find a good home for this","This could be useful, I'm sure"}},					
+		[_M.EVENT_LOOT] = 			{1,{"Money. I'd know it anywhere","Oh good, we could use some new toys","I like you, so I won't take my usual percentage","I'll find a good home for this","This could be useful, I'm sure"}},					
 		[_M.EVENT_INTERRUPTED] = 		nil,				
 		[_M.EVENT_PEEK] = 			{1,{"Knowledge makes the man","Let's see what's ahead"}},															
 		[_M.EVENT_OVERWATCH] = 			nil,			
 		[_M.EVENT_PIN] = 			nil,
-		[_M.EV_UNIT_INSTALL_AUGMENT] =		{1,{"Ooh, I think this one's a limited edition!"}},
+		[_M.EV_UNIT_INSTALL_AUGMENT] =		{1,{"Ooh, I think this one's a limited edition!","Hmph, if I must"}},
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
 		[_M.EV_CLOAK_IN] =			{1,{"I do love these new toys","This is incredibly satisfying","This should give them the slip"}},
 	},	
@@ -358,8 +358,8 @@ local DLC_STRINGS =
 		-- Central
 	[_M.central_pc] = {
 	--	speechData = 				nil, 
-		[_M.EVENT_ATTACK_GUN] = 		{1,{"Eliminating the enemy","Taking the shot","I'm doing this for her","Doing what must be done","Let's keep the mess to a minimum","If I have to get my hands dirty, so be it"}},	
-		[_M.EVENT_ATTACK_GUN_KO] = 		{1,{"Eliminating the enemy","Taking the shot","An elegant, quiet solution","Let's not be here when he wakes up"}},								
+		[_M.EVENT_ATTACK_GUN] = 		{1,{"Obstacle eliminated","Taking the shot","I'm doing this for her","Doing what must be done","Let's keep the mess to a minimum","If I have to get my hands dirty, so be it"}},	
+		[_M.EVENT_ATTACK_GUN_KO] = 		{1,{"Temporarily neutralized""Done. Now let's not waste time","Taking the shot","An elegant, quiet solution","Let's not be here when he wakes up"}},								
 		[_M.EVENT_ATTACK_MELEE] = 		{1,{"Brutal, but effective","This one won't get in our way","The sooner this is over with, the better","Deep in the nit and grit of it","Let's make sure they don't stand in our way"}},					
 		[_M.EVENT_DEATH] = 			{1,{"No! We were... so close...","I have... to finish...","After all this time..."}},			
 		[_M.EVENT_REVIVED] = 			{1,{"Back into the field","I will not be held back by the likes of this","Good. We have work to do","You're earning your keep, agent"}},					
