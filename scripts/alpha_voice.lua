@@ -27,10 +27,10 @@ local alpha_voice =
 	
 	onSpawnAbility = function( self, sim, unit )
 	        self.abilityOwner = unit
-	--      sim:addTrigger( simdefs.TRG_OPEN_DOOR, self )
+	--      sim:addTrigger( simdefs.TRG_OPEN_DOOR, self )			-- left for a test/example purpose if needed
 		sim:addTrigger( simdefs.TRG_SAFE_LOOTED, self )
 
-	--	sim:addEventTrigger( simdefs.EV_UNIT_SPEAK, self )
+	--	sim:addEventTrigger( simdefs.EV_UNIT_SPEAK, self )		-- example
 		sim:addEventTrigger( simdefs.EV_UNIT_START_SHOOTING, self )
 		sim:addEventTrigger( simdefs.EV_UNIT_MELEE, self )
 		sim:addEventTrigger( simdefs.EV_UNIT_HIT, self )
@@ -44,6 +44,8 @@ local alpha_voice =
 		sim:addEventTrigger( simdefs.EV_UNIT_STOP_WALKING, self )
 		sim:addEventTrigger( simdefs.EV_UNIT_START_PIN, self )		-- unused in game --Not anymore :)
 		sim:addEventTrigger( simdefs.EV_UNIT_INSTALL_AUGMENT, self )		-- for installing augments
+		sim:addEventTrigger( simdefs.EV_CLOAK_IN, self)			-- for activating cloak
+		sim:addEventTrigger( simdefs.EV_UNIT_GOTO_STAND, self)		-- for Prism's disguise
 
 	end,
         
@@ -65,6 +67,8 @@ local alpha_voice =
 		sim:removeEventTrigger( simdefs.EV_UNIT_STOP_WALKING, self )
 		sim:removeEventTrigger( simdefs.EV_UNIT_START_PIN, self )	-- unused in game --Not anymore :)
 		sim:removeEventTrigger( simdefs.EV_UNIT_INSTALL_AUGMENT, self )	-- for installing augments
+		sim:removeEventTrigger( simdefs.EV_CLOAK_IN, self)			-- for activating cloak
+		sim:removeEventTrigger( simdefs.EV_UNIT_GOTO_STAND, self)		-- for Prism's disguise
 
 	        self.abilityOwner = nil
 	end,
@@ -79,14 +83,18 @@ local alpha_voice =
 			if not self.abilityOwner:isKO() then				
 				if agentDef.agentID ~= nil then 
 					local agent = agentDef.agentID	
+					if agent == 99 then					-- last mission's Monster to starting Monster 
+						agent = 100;
+					elseif agent == 107 then 				-- last mission's Central to starting Central 
+						agent = 108;
+					end
 					if STRINGS.alpha_voice[ agent] ~= nil then		
 						local speechData = STRINGS.alpha_voice[ agent][evType ]				
 						if speechData ~= nil then				
 							local p = speechData[1]
 							if sim:nextRand() <= p then
 						   		local choice = speechData[2]
-								local speech = choice[math.floor(sim:nextRand()*#choice)+1]
-								--local agentDef = self.abilityOwner:getUnitData()
+								local speech = choice[math.floor(sim:nextRand()*#choice)+1]								
 								local text =  {{							
 									text = speech,
 									anim = agentDef.profile_anim,
@@ -119,21 +127,25 @@ local alpha_voice =
 				if evType == simdefs.EV_UNIT_START_SHOOTING  then
 					  weaponUnit = simquery.getEquippedGun( self.abilityOwner )
 					  if weaponUnit:getTraits().canSleep then
-					        evType = 1008;					      
+					        evType = 1008;					-- custom number added for shooting Darts	      
 					  end
 				elseif evType == simdefs.EV_UNIT_WIRELESS_SCAN then
 					evType = 19;	
 				end
 				if agentDef.agentID ~= nil then 
 					local agent = agentDef.agentID	
+					if agent == 99 then					-- last mission's Monster to starting Monster 
+						agent = 100;
+					elseif agent == 107 then 				-- last mission's Central to starting Central 
+						agent = 108;
+					end
 					if STRINGS.alpha_voice[ agent] ~= nil then		
 						local speechData = STRINGS.alpha_voice[ agent][evType ]				
 						if speechData ~= nil then			
 							local p = speechData[1]
 							if sim:nextRand() <= p then
 						   		local choice = speechData[2]
-								local speech = choice[math.floor(sim:nextRand()*#choice)+1]
-								--local agentDef = self.abilityOwner:getUnitData()
+								local speech = choice[math.floor(sim:nextRand()*#choice)+1]								
 								local text =  {{							
 									text = speech,
 									anim = agentDef.profile_anim,
