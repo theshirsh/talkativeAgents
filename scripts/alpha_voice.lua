@@ -43,7 +43,7 @@ local alpha_voice =
 		sim:addEventTrigger( simdefs.EV_UNIT_OVERWATCH_MELEE, self )
 		sim:addEventTrigger( simdefs.EV_UNIT_STOP_WALKING, self )
 		sim:addEventTrigger( simdefs.EV_UNIT_START_PIN, self )		-- unused in game --Not anymore :)
-		sim:addEventTrigger( simdefs.EV_UNIT_INSTALL_AUGMENT, self )		-- for installing augments
+		sim:addEventTrigger( simdefs.EV_UNIT_INSTALL_AUGMENT, self )	-- for installing augments
 		sim:addEventTrigger( simdefs.EV_CLOAK_IN, self)			-- for activating cloak
 		sim:addEventTrigger( simdefs.EV_UNIT_GOTO_STAND, self)		-- for Prism's disguise
 
@@ -65,8 +65,8 @@ local alpha_voice =
 		sim:removeEventTrigger( simdefs.EV_UNIT_OVERWATCH, self )
 		sim:removeEventTrigger( simdefs.EV_UNIT_OVERWATCH_MELEE, self )
 		sim:removeEventTrigger( simdefs.EV_UNIT_STOP_WALKING, self )
-		sim:removeEventTrigger( simdefs.EV_UNIT_START_PIN, self )	-- unused in game --Not anymore :)
-		sim:removeEventTrigger( simdefs.EV_UNIT_INSTALL_AUGMENT, self )	-- for installing augments
+		sim:removeEventTrigger( simdefs.EV_UNIT_START_PIN, self )		-- unused in game --Not anymore :)
+		sim:removeEventTrigger( simdefs.EV_UNIT_INSTALL_AUGMENT, self )		-- for installing augments
 		sim:removeEventTrigger( simdefs.EV_CLOAK_IN, self)			-- for activating cloak
 		sim:removeEventTrigger( simdefs.EV_UNIT_GOTO_STAND, self)		-- for Prism's disguise
 
@@ -129,7 +129,7 @@ local alpha_voice =
 					  if weaponUnit:getTraits().canSleep then
 					        evType = 1008;					-- custom number added for shooting Darts	      
 					  end
-				elseif evType == simdefs.EV_UNIT_WIRELESS_SCAN then
+				elseif evType == simdefs.EV_UNIT_WIRELESS_SCAN then		-- redirects Int's wireless hijack
 					evType = 19;	
 				end
 				if agentDef.agentID ~= nil then 

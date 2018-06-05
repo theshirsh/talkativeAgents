@@ -123,7 +123,7 @@ local DLC_STRINGS =
 		[_M.EVENT_PIN] = 				{1,{"Enemy subdued","This one won't be going anywhere","Target pinned","I hope you're comfortable"}},  
 		[_M.EV_UNIT_INSTALL_AUGMENT] =			{1,{"I cannot wait to use this","This seems promising","I've always wanted to try that","Still more human than some people I could name","Efficiency improved"}},
 		[_M.EV_UNIT_GOTO_STAND] =			nil,
-		[_M.EV_CLOAK_IN] =				{1,{{"Too bad this won't last for long","That's some incredible tech","I could get used to this","The tricky part is not tripping over yourself","It's a shame I didn't have this years ago"}},	
+		[_M.EV_CLOAK_IN] =				{1,{"Too bad this won't last for long","That's some incredible tech","I could get used to this","The tricky part is not tripping over yourself","It's a shame I didn't have this years ago"}},	
 	},
 
 
@@ -299,8 +299,7 @@ local DLC_STRINGS =
 		[_M.EVENT_ATTACK_GUN] = 		{1,{"See you in hell","More prey","Add this to my tab","It is almost too easy","I wonder what you've got for me"}},  	
 		[_M.EVENT_ATTACK_GUN_KO] = 		{1,{"How dull","Inadequate","Won't stay down for long","This is your lucky day","You look tired, friend"}},  								
 		[_M.EVENT_ATTACK_MELEE] = 		{1,{"Bothersome","This is how it feels!","A shocking experience","For your own sake, stay down","...You were saying?"}},					
-		[_M.EVENT_DEATH]
- = 			{1,{"Careless... of... me...","Not... again...","You'll never... take me alive...","Never hear the end... of this..."}},			
+		[_M.EVENT_DEATH] = 			{1,{"Careless... of... me...","Not... again...","You'll never... take me alive...","Never hear the end... of this..."}},			
 		[_M.EVENT_REVIVED] = 			{1,{"No rest for the wicked","This chapter is still unfinished","Like a bat out of hell","Someone will pay for that","He shall rise again","Takes more than that to keep me down","Frankly I'm not great at dying"}},					
 		[_M.EVENT_HIJACK] = 			{1,{"Truly thrilling","Though boring it may be, it's part of the job"}},			
 		[_M.EVENT_LOOT] = 			{1,{"Finders keepers!","Well, hello there","Would be a shame to leave this here","No one will miss it, I am certain"}},					
@@ -360,7 +359,7 @@ local DLC_STRINGS =
 	[_M.central_pc] = {
 	--	speechData = 				nil, 
 		[_M.EVENT_ATTACK_GUN] = 		{1,{"Obstacle eliminated","Taking the shot","I'm doing this for her","Doing what must be done","Let's keep the mess to a minimum","If I have to get my hands dirty, so be it"}},	
-		[_M.EVENT_ATTACK_GUN_KO] = 		{1,{"Temporarily neutralized""Done. Now let's not waste time","Taking the shot","An elegant, quiet solution","Let's not be here when he wakes up"}},								
+		[_M.EVENT_ATTACK_GUN_KO] = 		{1,{"Temporarily neutralized", "Done. Now let's not waste time","Taking the shot","An elegant, quiet solution","Let's not be here when he wakes up"}},								
 		[_M.EVENT_ATTACK_MELEE] = 		{1,{"Brutal, but effective","This one won't get in our way","The sooner this is over with, the better","Deep in the nit and grit of it","Let's make sure they don't stand in our way"}},					
 		[_M.EVENT_DEATH] = 			{1,{"No! We were... so close...","I have... to finish...","After all this time..."}},			
 		[_M.EVENT_REVIVED] = 			{1,{"Back into the field","I will not be held back by the likes of this","Good. We have work to do","You're earning your keep, agent"}},					
@@ -451,8 +450,7 @@ local DLC_STRINGS =
 		[_M.EVENT_OVERWATCH] = 				nil,  				
 		[_M.EVENT_PIN] = 				nil,
 		[_M.EV_UNIT_INSTALL_AUGMENT] =			nil,
-		[_M.EV_UNIT_GOTO_STAND]
- =			nil,
+		[_M.EV_UNIT_GOTO_STAND] =			nil,
 		[_M.EV_CLOAK_IN] =				nil,	
 	},	
 
