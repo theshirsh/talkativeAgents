@@ -23,6 +23,7 @@ local _M =
 	EV_UNIT_INSTALL_AUGMENT = 62,	
 	EV_UNIT_GOTO_STAND = 129,	-- for Prism's disguise
 	EV_CLOAK_IN = 614,		-- for activating cloak
+	EV_HEALER = 1100,		-- for using medgel on a downed agent
 	
 -- next added for 'custom' events (sub-events?):
 
@@ -142,7 +143,7 @@ local DLC_STRINGS =
 	--	[_M.EVENT_SELECTED] = 				{0.2,{"And I thought VillaBank was a hard job.","Keep moving"}},
 		[_M.EVENT_ATTACK_GUN] = 			{0.3,{"Guns, I hate these things","Do we really have to do this?","Sometimes I miss the solo gigs"}},  	
 		[_M.EVENT_ATTACK_GUN_KO] = 			{1,{"I could get used to this","I'd leave ya an asprin if I had one","Believe me, buddy, I'm doing you a favor"}},							
-		[_M.EVENT_ATTACK_MELEE] = 			{1,{"Zappy would have been nice right now","Facing a lot of resistance right now","Down he goes!"}},					
+		[_M.EVENT_ATTACK_MELEE] = 			{1,{"Zappy would have been nice right now","Facing a lot of resistance right now","Down he goes!","Aaagh... everything's under control","Sparkly","How about you rest for a while?"}},					
 		[_M.EVENT_DEATH] = 				{1,{"I guess... I tried... one too many.","Doesn't... hurt... at all...","I guess I had... a good run"}},				
 	--	[_M.EVENT_MISS_GUN] = 				{1,{"Ok, ok, I'm learning","Dammit! Harder than it looks"}},	
 		[_M.EVENT_REVIVED] = 				{1,{"I owe you for that one.","Not a dream, then...","How many lives left?"}},					
@@ -163,7 +164,7 @@ local DLC_STRINGS =
 	--	[_M.EVENT_SELECTED] = 				{0.2,{"You're coming in clear","On the team"}},  
 		[_M.EVENT_ATTACK_GUN] = 			{1,{"I do not like this.","This is the only way","Count to three, pull the trigger...","Deep breath..."}},  
 		[_M.EVENT_ATTACK_GUN_KO] = 			{1,{"Delivering toxin","Clearing things up","Let's open the way"}}, 		
-		[_M.EVENT_ATTACK_MELEE] = 			{1,{"I wish we could solve this by talking, but we can't","Sorry, friend","This will probably sting"}},				
+		[_M.EVENT_ATTACK_MELEE] = 			{1,{"I wish we could solve this by talking, but we can't","Sorry, friend","This will probably sting","Libertad!","El enemigo está bajo control","Awaiting further instructions"}},				
 							
 	--	[_M.EVENT_MISS_GUN] = 				{1,{"Target is obscured!","Need a better angle"}},	
 		[_M.EVENT_DEATH] = 				{1,{"I can't feel my... "}},			
@@ -312,8 +313,8 @@ local DLC_STRINGS =
 		[_M.EVENT_HIJACK] = 			{1,{"There, tech, do your techy thing","Knowing how this works isn't my job","Why are we bothering with these, again?","System... you know, whatever"}},			
 		[_M.EVENT_LOOT] = 			{1,{"Bingo","Smash. Grab. Okay, less smashing than I'd like","Is this all? I thought these people were rich","Money? Well, I won't say no"}},					
 		[_M.EVENT_INTERRUPTED] = 		{1,{"What's the hold-up?"}},				
-		[_M.EVENT_PEEK] = 			nil,								
-		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered"}},				
+		[_M.EVENT_PEEK] = 			{1,{"Nothing I'd consider interesting"}},							
+		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered","All right, I'll wait"}},				
 		[_M.EVENT_PIN] = 			{1,{"...How long do I have to do this?","I'm not here to babysit","Enemy pinned. If that helps"}},	
 		[_M.EV_UNIT_INSTALL_AUGMENT] =		{1,{"I swore I was done with these","Ugh, if I have to.","Ow."}},	
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
@@ -386,57 +387,57 @@ local DLC_STRINGS =
 
 	mod_02_mist = {
 			
-		[_M.EVENT_ATTACK_GUN] = 			nil,  	
-		[_M.EVENT_ATTACK_GUN_KO] = 			nil,  								
-		[_M.EVENT_ATTACK_MELEE] = 			nil,  
+		[_M.EVENT_ATTACK_GUN] = 			{1,{"Don't think... don't feel... just do it","I work for Invisible now"}},  	
+		[_M.EVENT_ATTACK_GUN_KO] = 			{1,{"This will sting. Like a sea anemone","I wonder what toxin this uses"}}, 								
+		[_M.EVENT_ATTACK_MELEE] = 			{1,{"I feel your pain. Literally.","Looks like my training paid off","That was surprisingly easy","Okay. Now what?","Sometimes stealth isn’t the answer"}}, 
 	
-		[_M.EVENT_DEATH] = 				nil,  			
-		[_M.EVENT_REVIVED] = 				nil,  					
-		[_M.EVENT_HIJACK] = 				nil,  			
-		[_M.EVENT_LOOT] = 				nil,  				
-		[_M.EVENT_INTERRUPTED] = 			nil,  				
-		[_M.EVENT_PEEK] = 				nil,							
+		[_M.EVENT_DEATH] = 				{1,{"Experiment... failed","Looks like I'll never see Iceland again"}}, 			
+		[_M.EVENT_REVIVED] = 				{1,{"No... no... oh, it's you","I knew I couldn't die"}}, 					
+		[_M.EVENT_HIJACK] = 				{1,{"I can do things with this","Power... yes..."}},  			
+		[_M.EVENT_LOOT] = 				{1,{"I found something","How much can we buy with this?","Some day I'm going to have to ask someone to explain the financial system to me"}},				
+		[_M.EVENT_INTERRUPTED] = 			{1,{"What? What's going on?"}}, 				
+		[_M.EVENT_PEEK] = 				{1,{"See without being seen"}},							
 		[_M.EVENT_OVERWATCH] = 				nil,  				
-		[_M.EVENT_PIN] = 				nil, 
-		[_M.EV_UNIT_INSTALL_AUGMENT] =			nil,	
+		[_M.EVENT_PIN] = 				{1,{"I'm good at this part","On/off... awake/asleep...","I know how your augments feel","Is this what revenge feels like?"}}, 
+		[_M.EV_UNIT_INSTALL_AUGMENT] =			{1,{"I've always wanted one of these","So what percentage human am I now?"}},	
 		[_M.EV_UNIT_GOTO_STAND] =			nil,
-		[_M.EV_CLOAK_IN] =				nil,	
+		[_M.EV_CLOAK_IN] =				{1,{"I chose my new name for a reason","You can't see me"}},	
 	},
 
 	mod_03_ghuff = {
 		
-		[_M.EVENT_ATTACK_GUN] = 			nil,  	
-		[_M.EVENT_ATTACK_GUN_KO] = 			nil,  								
+		[_M.EVENT_ATTACK_GUN] = 			{1,{"Time to make some new enemies"}}, 	
+		[_M.EVENT_ATTACK_GUN_KO] = 			{1,{"You don't know how lucky you are"}}, 								
 		[_M.EVENT_ATTACK_MELEE] = 			nil,  
 	
 		[_M.EVENT_DEATH] = 				nil,  			
 		[_M.EVENT_REVIVED] = 				nil,  					
 		[_M.EVENT_HIJACK] = 				nil,  			
-		[_M.EVENT_LOOT] = 				nil,  				
+		[_M.EVENT_LOOT] = 				{1,{"Checking for hidden compartments","What have we got here?","Leave no stone unturned","There are people who'd kill for this much. Poor bastards."}}, 				
 		[_M.EVENT_INTERRUPTED] = 			nil,  				
-		[_M.EVENT_PEEK] = 				nil,							
-		[_M.EVENT_OVERWATCH] = 				nil,  				
+		[_M.EVENT_PEEK] = 				{1,{"Leave the scouting to me","My eyes see everything","God a real good view"}},							
+		[_M.EVENT_OVERWATCH] = 				{1,{"Nobody sneaks up on me"}},				
 		[_M.EVENT_PIN] = 				nil,  
-		[_M.EV_UNIT_INSTALL_AUGMENT] =		  	nil,
+		[_M.EV_UNIT_INSTALL_AUGMENT] =		  	{1,{"Hmm... feels good","Now we're in business","Better quality than what my old friends sold"}},
 		[_M.EV_UNIT_GOTO_STAND] =			nil,
 		[_M.EV_CLOAK_IN] =				nil,	
 	},
 
 	mod_04_n_umi = {
 		
-		[_M.EVENT_ATTACK_GUN] = 			nil,  	
-		[_M.EVENT_ATTACK_GUN_KO] = 			nil,  								
+		[_M.EVENT_ATTACK_GUN] = 			{1,{"Die.","I've chosen my side"}}, 	
+		[_M.EVENT_ATTACK_GUN_KO] = 			{1,{"Dream for a while"}}, 								
 		[_M.EVENT_ATTACK_MELEE] = 			nil,  
 	
-		[_M.EVENT_DEATH] = 				nil,  			
-		[_M.EVENT_REVIVED] = 				nil,  					
+		[_M.EVENT_DEATH] = 				{1,{"Remember... remember..."}},  			
+		[_M.EVENT_REVIVED] = 				{1,{"Is my drone okay too?"}},  					
 		[_M.EVENT_HIJACK] = 				nil,  			
 		[_M.EVENT_LOOT] = 				nil,  				
 		[_M.EVENT_INTERRUPTED] = 			nil,  				
 		[_M.EVENT_PEEK] = 				nil,							
 		[_M.EVENT_OVERWATCH] = 				nil,  				
-		[_M.EVENT_PIN] = 				nil,
-		[_M.EV_UNIT_INSTALL_AUGMENT] =			nil,
+		[_M.EVENT_PIN] = 				{1,{"Everything has a power-off switch, if you know where to look"}},
+		[_M.EV_UNIT_INSTALL_AUGMENT] =			{1,{"Why does this process seem vaguely familiar?","Not the absolute highest quality, but it'll do","I could improve this, but we don't have the time"}},
 		[_M.EV_UNIT_GOTO_STAND] =			nil,
 		[_M.EV_CLOAK_IN] =				nil,	
 	},	
