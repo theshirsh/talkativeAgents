@@ -122,6 +122,17 @@ local alpha_voice =
 			sim:dispatchEvent( simdefs.EV_UNIT_START_PIN, evData )
 		end
 		
+		if evType == simdefs.EV_UNIT_HEAL and evData.revive and not before then
+    			if evData.unit == self.abilityOwner then   
+				evType = 1100;			-- custom number added for using medgel on other agent
+				--is the necromancer
+  			elseif evData.target == self.abilityOwner then
+				evType = 102;			-- normal revived trigger
+        			--is the lazarus
+			end
+		end
+		
+		
 		if (evData.unit == self.abilityOwner or evData.unitID == self.abilityOwner:getID()) and not evData.cancel and before then 	
 			if not self.abilityOwner:isKO() then
 				if evType == simdefs.EV_UNIT_START_SHOOTING  then
