@@ -29,6 +29,7 @@ local _M =
 	EV_UNIT_INSTALL_AUGMENT = 62,	
 	EV_UNIT_GOTO_STAND = 129,	-- for Prism's disguise
 	EV_CLOAK_IN = 614,		-- for activating cloak
+	EV_HEALER = 1100,		-- for using medgel on a downed agent
 	
 
 	-- NPC events			-- Guard's speeches part unused here
