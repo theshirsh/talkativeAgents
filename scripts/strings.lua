@@ -3,18 +3,13 @@
 --
 local _M =
 {
---	name of speech event		-- Corresponding simdef EV or TRG
+--	name of speech event		-- Corresponding existing simdef EV or TRG
+--	= value of existed EV/TRG on the right
 
---	EVENT_SELECTED = 1,
+
 	EVENT_ATTACK_GUN = 8,		-- EV_UNIT_START_SHOOTING 
 	EVENT_ATTACK_MELEE = 30,	-- EV_UNIT_MELEE
---	EVENT_HIT_GUN = 4,
---	EVENT_HIT_MELEE = 5,
---	EVENT_KILL_GUN = 6,
---	EVENT_KILL_MELEE = 7,
---	EVENT_MISS_GUN = 8,
---	EVENT_IS_HIT = 9,
---	EVENT_HP_DOWN = 10,
+
 	EVENT_DEATH = 57,		-- EV_UNIT_HIT instead of death, should not trigger on Last Words
 	EVENT_REVIVED = 102,		-- EV_UNIT_HEAL
 	EVENT_HIJACK = 19,		-- EV_UNIT_USECOMP also EV_UNIT_WIRELESS_SCAN for Internationale 
@@ -23,28 +18,19 @@ local _M =
 	EVENT_OVERWATCH = 27,		-- EV_UNIT_OVERWATCH
 --	EVENT_OVERWATCH_TARGET = 18,
 	EVENT_PIN = 111,		-- EV_UNIT_START_PIN -- unused in game --Not anymore :)
-	EVENT_ATTACK_GUN_KO = 1008,	-- added 'custom' 
 --	EVENT_HIT_GUN_KO = 21,
 	EVENT_LOOT = 66,           	-- TRG_SAFE_LOOTED -- there's trigger used
 	EV_UNIT_INSTALL_AUGMENT = 62,	
 	EV_UNIT_GOTO_STAND = 129,	-- for Prism's disguise
-	EV_CLOAK_IN = 614,		-- for activating cloak
-	EV_HEALER = 1009,		-- for using medgel on a downed agent
+	EV_CLOAK_IN = 614,		-- for activating cloak	
 	
+-- next added for 'custom' events (sub-events?):
 
-	-- NPC events			-- Guard's speeches part unused here
---	ARRESTING = 100,
---	ENGAGED = 101,
---	ENGAGED_REVIVED = 102,
---	ENGAGED_WITNESS = 103,
---	ENGAGED_TARGET_LOST = 104,
---	HUNTING = 105,
---	INVESTIGATE_REVIVED = 110,
---	INVESTIGATE_NOISE = 111,
---	INVESTIGATE_SHARED = 112,
---	INVESTIGATE_DONE = 113,
---	INVESTIGATE_LOOKAROUND = 114,
---	ARRESTING_CORPSE = 115,
+	EVENT_ATTACK_GUN_KO = 1008,
+	EV_HEALER = 1009,		-- for using medgel on a downed agent
+
+
+-- agentIDs list:
 
 -- 	agentDef = agentID		-- just for convenience: agentID is a number, agentDef name is easier to use for filling strings
 --	stealth_1 = 0, -- tutorial	
