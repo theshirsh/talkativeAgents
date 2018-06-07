@@ -22,13 +22,12 @@ local _M =
 	EVENT_LOOT = 66,           	-- TRG_SAFE_LOOTED -- there's trigger used
 	EV_UNIT_INSTALL_AUGMENT = 62,	
 	EV_UNIT_GOTO_STAND = 129,	-- for Prism's disguise
-	EV_CLOAK_IN = 614,		-- for activating cloak
-	EV_HEALER = 1100,		-- for using medgel on a downed agent
+	EV_CLOAK_IN = 614,		-- for activating cloak	
 	
 -- next added for 'custom' events (sub-events?):
 
-	EVENT_ATTACK_GUN_KO = 1008,	 
---	EVENT_HEAL = 1009,		-- possible speech for reviving other 
+	EVENT_ATTACK_GUN_KO = 1008,
+	EV_HEALER = 1009,		-- for using medgel on a downed agent
 
 
 -- agentIDs list:
