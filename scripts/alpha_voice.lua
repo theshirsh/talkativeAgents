@@ -160,7 +160,7 @@ local alpha_voice =
 			end			
 		end
 	
-	-- Block for 'active' events(being executor of action of healing etc):	
+	-- Block for 'active' events(being executor of action or healing etc):	
 		
 		if (evData.unit == self.abilityOwner or evData.unitID == self.abilityOwner:getID()) and not evData.cancel and before then 	
 			if not self.abilityOwner:isKO() then
