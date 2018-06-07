@@ -91,6 +91,7 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_INSTALL_AUGMENT] =		{1,{"Still human.","Flood myself with metal","The future will drown us all","Another one? Starting to lose count"}},
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
 		[_M.EV_CLOAK_IN] =			{1,{"Running silent","In the old days, they'd have burned me as a witch","Right into thin air","Whoosh.","And gone","And for my next trick...","This thing's more useful than most of the people I work with"}},
+		[_M.EV_HEALER] =			{1,{"Typical, really"}},
 	},
 
 	-- Xu
@@ -111,6 +112,7 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_INSTALL_AUGMENT] =			{1,{"I cannot wait to use this","This seems promising","I've always wanted to try that","Still more human than some people I could name","Efficiency improved"}},
 		[_M.EV_UNIT_GOTO_STAND] =			nil,
 		[_M.EV_CLOAK_IN] =				{1,{"Too bad this won't last for long","That's some incredible tech","I could get used to this","The tricky part is not tripping over yourself","It's a shame I didn't have this years ago"}},	
+		[_M.EV_HEALER] =				{1,{"Good as new"}},
 	},
 
 
@@ -134,6 +136,7 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_INSTALL_AUGMENT] =			{1,{"So long as it's useful.","This better work","This better not slow me down","More metal or less, it doesn't change anything"}},
 		[_M.EV_UNIT_GOTO_STAND] =			nil,
 		[_M.EV_CLOAK_IN] =				{1,{"Hidden.","Seems a bit like cheating, doesn't it?"}},
+		[_M.EV_HEALER] =				{1,{"Try to stay on your feet this time"}},
 	},
 	
 	-- Banks
@@ -155,6 +158,7 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_INSTALL_AUGMENT] =			{1,{"Will this fix me?","Another one","I can hear it inside me","This will keep me company","we're all just automatons in the end"}},						
 		[_M.EV_UNIT_GOTO_STAND] =			nil,
 		[_M.EV_CLOAK_IN] =				{1,{"Invisible, intangible, I have become air.","Into nothing I return","Light as a feather","...Am I a ghost?","I can't see my- Oh. I forgot.","A puca now roams these halls"}},
+		[_M.EV_HEALER] =				{1,{"Shh. Just let them sew you up"}},
 	},
 
 	-- Internationale
@@ -177,6 +181,7 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_INSTALL_AUGMENT] =			{1,{"Whatever it takes to get the job done","More than the sum of my parts","I can use this","I hope this doesn't make me start drinking"}},								
 		[_M.EV_UNIT_GOTO_STAND] =			nil,
 		[_M.EV_CLOAK_IN] =				{1,{"Time for stealth","The subtle approach.","I can see why Decker likes this trick so much"}},
+		[_M.EV_HEALER] =				{1,{"Take it easy."}},
 	},
 
 	-- Nika
@@ -198,6 +203,7 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_INSTALL_AUGMENT] =			{1,{"Hmm.","Good.","...","Stronger now."}},								
 		[_M.EV_UNIT_GOTO_STAND] =			nil,
 		[_M.EV_CLOAK_IN] =				{1,{"...","I am cloaked.","Concealment active","Very well. If it is stealth you need."}},
+		[_M.EV_HEALER] =				{1,{"Get up."}},
 	},
  		
 	-- Sharp
@@ -218,6 +224,7 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_INSTALL_AUGMENT] =		{1,{"At last!","One step closer to perfection","Yes!","I am even more optimized","I think that one had a scratch on it","Acceptable.","Only the finest","This better not be some cheap knock-off","Who could bear to look upon such beauty?","Look at me. Do NOT touch."}},											
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
 		[_M.EV_CLOAK_IN] =			{1,{"Not sure I like this","...Still more attractive than anyone here.","I prefer my enemies to look me in the face before I obliterate them","Undetectable. Yet another on my long list of traits","This hardly seems necessary"}},
+		[_M.EV_HEALER] =			{1,{"Pathetic."}},
 	},
 	
 	-- Prism
@@ -237,6 +244,7 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_INSTALL_AUGMENT] =		{1,{"I should get some nice mileage out of this","Just what I've been looking for","Damn, that stings","Sweet, an upgrade"}},														
 		[_M.EV_UNIT_GOTO_STAND] =		{1,{"Time to become someone else","They won't know what hit them","Let's do some acting","Roll out the red carpet","First and final take"}},
 		[_M.EV_CLOAK_IN] =			{1,{"Out of sight, out of mind","Bit of a strange feeling, this","I do not need this to blend in","Putting the 'invisible' in... well, you know."}},	
+		[_M.EV_HEALER] =			{1,{"Let's get moving"}},
 	},
 	
 	
@@ -257,6 +265,7 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_INSTALL_AUGMENT] =		{1,{"I suppose that's useful enough","An augment is only as good as its host","I'll make do with this"}},														
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
 		[_M.EV_CLOAK_IN] =			nil,	
+		[_M.EV_HEALER] =			{1,{"Enough dilly-dallying"}},
 	},
 	
 	
@@ -277,6 +286,7 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_INSTALL_AUGMENT] =		{1,{"Time to embrace the new age","Ah, the wonders of technology","Not a bad choice","I wasn't attached to that bit of tissue anyway"}},	
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
 		[_M.EV_CLOAK_IN] =			nil,	
+		[_M.EV_HEALER] =			{1,{"You are quite fortunate to have modern medicine on your side"}},
 	},
 	
 	
@@ -297,6 +307,7 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_INSTALL_AUGMENT] =		{1,{"Surprisingly refreshing","Evolve to survive","This just got more interesting","The craving has eased a little","They are not ready for what I am now"}},
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
 		[_M.EV_CLOAK_IN] =			{1,{"Into the shadows","With a light step","Now you see me... now you don't","You saw nothing","Fading ino nothingness","They won't see me coming","Striking from the shadows"}},
+		[_M.EV_HEALER] =			{1,{"Rise and shine!"}},
 	},
 	
 	
@@ -318,6 +329,7 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_INSTALL_AUGMENT] =		{1,{"I swore I was done with these","Ugh, if I have to.","Ow."}},	
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
 		[_M.EV_CLOAK_IN] =			nil,	
+		[_M.EV_HEALER] =			{1,{"I don't have time to babysit"}},
 	},
 	
 		-- Monst3r
@@ -337,6 +349,7 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_INSTALL_AUGMENT] =		{1,{"Ooh, I think this one's a limited edition!","Hmph, if I must"}},
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
 		[_M.EV_CLOAK_IN] =			{1,{"I do love these new toys","This is incredibly satisfying","This should give them the slip"}},
+		[_M.EV_HEALER] =			{1,{"Do be more careful next time"}},
 	},	
 
 	
@@ -359,6 +372,7 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_INSTALL_AUGMENT] =		{1,{"This should prove useful","Our bodies are such a small price to pay","It's been installed seamlessly. Good.","Better this than being under-equipped","We need every edge we can get"}},	
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
 		[_M.EV_CLOAK_IN] =			{1,{"Such a rare and useful bit of tech","Cloak engaged"}},	
+		[_M.EV_HEALER] =			{1,{"Back on your feet, agent"}},
 	},
 
 ------------
