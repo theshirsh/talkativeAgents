@@ -104,6 +104,7 @@ local alpha_voice =
 									voice = nil,
 								}}					
 								script:queue( { script=text, type="newOperatorMessage", doNotQueue=true } ) 
+								
 								--script:queue( 3*cdefs.SECONDS )
 								--script:queue( { type="clearOperatorMessage" } ) -- it autoclears after "timing =3" I think
 							end
@@ -113,6 +114,9 @@ local alpha_voice =
 			end
 		end
 	end,
+
+
+
 
 	onEventTrigger = function( self, sim, evType, evData, before )	
 		local script = sim:getLevelScript()
@@ -124,7 +128,7 @@ local alpha_voice =
 			sim:dispatchEvent( simdefs.EV_UNIT_START_PIN, evData )
 		end
 
-	-- Block for 'passive' events(being target of healing), triggers after:
+	-- Block for 'passive' events(being target of healing), triggers after, message on the right:
 
 		if (evData.target == self.abilityOwner or evData.targetID == self.abilityOwner:getID()) and not before then 
 			if evType == simdefs.EV_UNIT_HEAL and evData.revive and not before then	    			
@@ -142,17 +146,19 @@ local alpha_voice =
 							if sim:nextRand() <= p then
 						   		local choice = speechData[2]
 								local speech = choice[math.floor(sim:nextRand()*#choice)+1]								
-								local text =  {{							
-									text = speech,
-									anim = agentDef.profile_anim,
-									build = agentDef.profile_build,
-									name = agentDef.name,
-									timing = 3,
-									voice = nil,
-								}}					
-								script:queue( { script=text, type="newOperatorMessage", doNotQueue=true } ) 
-								--script:queue( 3*cdefs.SECONDS )
-								--script:queue( { type="clearOperatorMessage" } ) -- it autoclears after "timing =3" I think
+								local anim = agentDef.profile_anim
+								local build = agentDef.profile_anim	-- if there no build then use default one from anim
+								if agentDef.profile_build then		
+									build = agentDef.profile_build	-- either way use build as a skin
+								end								
+								local name = agentDef.name
+															
+								script:queue( { body = speech, header= name, type="enemyMessage", 
+										profileAnim= anim,
+										profileBuild= build,									
+										} )
+								script:queue( 3*cdefs.SECONDS )			-- time before clear, 3 seconds, as timing
+								script:queue( { type="clearEnemyMessage" } )	-- no autoclear for those eh	
 							end
 						end
 					end
@@ -163,7 +169,7 @@ local alpha_voice =
 	-- Block for 'active' events(being executor of action or healing etc):	
 		
 		if (evData.unit == self.abilityOwner or evData.unitID == self.abilityOwner:getID()) and not evData.cancel and before then 	
-			if not self.abilityOwner:isKO() then
+			if not self.abilityOwner:isKO() then				
 				if evType == simdefs.EV_UNIT_START_SHOOTING  then
 					  weaponUnit = simquery.getEquippedGun( self.abilityOwner )
 					  if weaponUnit:getTraits().canSleep then
@@ -207,6 +213,7 @@ local alpha_voice =
 			end
 		end
 	end,
+	
 }
 
 return alpha_voice
