@@ -420,39 +420,39 @@ local DLC_STRINGS =
 	mod_03_ghuff = {
 		
 		[_M.EVENT_ATTACK_GUN] = 			{1,{"Time to make some new enemies"}}, 	
-		[_M.EVENT_ATTACK_GUN_KO] = 			{1,{"You don't know how lucky you are"}}, 								
-		[_M.EVENT_ATTACK_MELEE] = 			nil,  
+		[_M.EVENT_ATTACK_GUN_KO] = 			{1,{"You don't know how lucky you are","Yeah, let's get this guy out of the way"}}, 								
+		[_M.EVENT_ATTACK_MELEE] = 			{1,{"Gotcha.","These things are kind of fun","Zapped.","It's nothing personal"}},
 	
-		[_M.EVENT_DEATH] = 				nil,  			
+		[_M.EVENT_DEATH] = 				{1,{"You got lucky.","Too bad... things were just getting interesting..."}}, 			
 		[_M.EVENT_REVIVED] = 				nil,  					
-		[_M.EVENT_HIJACK] = 				nil,  			
+		[_M.EVENT_HIJACK] = 				{1,{"Anything to get ahead","Should I adjust the air conditioning while I'm here? This place is too damn cold"}},  			
 		[_M.EVENT_LOOT] = 				{1,{"Checking for hidden compartments","What have we got here?","Leave no stone unturned","There are people who'd kill for this much. Poor bastards."}}, 				
 		[_M.EVENT_INTERRUPTED] = 			nil,  				
-		[_M.EVENT_PEEK] = 				{1,{"Leave the scouting to me","My eyes see everything","God a real good view"}},							
+		[_M.EVENT_PEEK] = 				{1,{"Leave the scouting to me","My eyes see everything","Got a real good view"}},							
 		[_M.EVENT_OVERWATCH] = 				{1,{"Nobody sneaks up on me"}},				
 		[_M.EVENT_PIN] = 				nil,  
 		[_M.EV_UNIT_INSTALL_AUGMENT] =		  	{1,{"Hmm... feels good","Now we're in business","Better quality than what my old friends sold"}},
 		[_M.EV_UNIT_GOTO_STAND] =			nil,
-		[_M.EV_CLOAK_IN] =				nil,	
+		[_M.EV_CLOAK_IN] =				{1,{"Would you believe this is more illegal than anything else I've done?"}},	
 	},
 
 	mod_04_n_umi = {
 		
 		[_M.EVENT_ATTACK_GUN] = 			{1,{"Die.","I've chosen my side"}}, 	
 		[_M.EVENT_ATTACK_GUN_KO] = 			{1,{"Dream for a while"}}, 								
-		[_M.EVENT_ATTACK_MELEE] = 			nil,  
+		[_M.EVENT_ATTACK_MELEE] = 			{1,{"Electricity has many uses","If they could see me now.","If it's any consolation, your brain is more resistant to damage than delicate electronics"}},
 	
 		[_M.EVENT_DEATH] = 				{1,{"Remember... remember..."}},  			
 		[_M.EVENT_REVIVED] = 				{1,{"Is my drone okay too?"}},  					
-		[_M.EVENT_HIJACK] = 				nil,  			
-		[_M.EVENT_LOOT] = 				nil,  				
+		[_M.EVENT_HIJACK] = 				{1,{"Fuel for my drone army! ...Just kidding.","Power transferred.","Interesting... but unlike some people, I can prioritize"}}, 			
+		[_M.EVENT_LOOT] = 				{1,{"Like robots, credits are just a tool. It's what you use them for.","I've searched it","Empty now"}},				
 		[_M.EVENT_INTERRUPTED] = 			nil,  				
 		[_M.EVENT_PEEK] = 				nil,							
 		[_M.EVENT_OVERWATCH] = 				nil,  				
 		[_M.EVENT_PIN] = 				{1,{"Everything has a power-off switch, if you know where to look"}},
 		[_M.EV_UNIT_INSTALL_AUGMENT] =			{1,{"Why does this process seem vaguely familiar?","Not the absolute highest quality, but it'll do","I could improve this, but we don't have the time"}},
 		[_M.EV_UNIT_GOTO_STAND] =			nil,
-		[_M.EV_CLOAK_IN] =				nil,	
+		[_M.EV_CLOAK_IN] =				{1,{"I can't help but be awed by this tech"}},
 	},	
 
 ------------
