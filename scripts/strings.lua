@@ -136,7 +136,7 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_INSTALL_AUGMENT] =			{1,{"So long as it's useful.","This better work","This better not slow me down","More metal or less, it doesn't change anything"}},
 		[_M.EV_UNIT_GOTO_STAND] =			nil,
 		[_M.EV_CLOAK_IN] =				{1,{"Hidden.","Seems a bit like cheating, doesn't it?"}},
-		[_M.EV_HEALER] =				{1,{"Try to stay on your feet this time"}},
+		[_M.EV_HEALER] =				{1,{"Try to stay on your feet this time","Don't take it personally."}},
 	},
 	
 	-- Banks
@@ -221,7 +221,7 @@ local DLC_STRINGS =
 		[_M.EVENT_PEEK] = 			nil,							
 		[_M.EVENT_OVERWATCH] = 			{1,{"Armed and ready","They won't know what hit them","Prepared for perfection","Watch and learn","Time to make this look good"}},				
 		[_M.EVENT_PIN] = 			{1,{"Ugh, I think it's still alive","Stop twitching!","Why am I wasting my time here?","This is humiliating","Do I really have to be touching him? Can't I just... no?"}},
-		[_M.EV_UNIT_INSTALL_AUGMENT] =		{1,{"At last!","One step closer to perfection","Yes!","I am even more optimized","I think that one had a scratch on it","Acceptable.","Only the finest","This better not be some cheap knock-off","Who could bear to look upon such beauty?","Look at me. Do NOT touch."}},											
+		[_M.EV_UNIT_INSTALL_AUGMENT] =		{1,{"Perfection is difficult to improve... but I believe that did the trick.","At last!","One step closer to perfection","Yes!","I am even more optimized","I think that one had a scratch on it","Acceptable.","Only the finest","This better not be some cheap knock-off","Who could bear to look upon such beauty?","Look at me. Do NOT touch."}},											
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
 		[_M.EV_CLOAK_IN] =			{1,{"Not sure I like this","...Still more attractive than anyone here.","I prefer my enemies to look me in the face before I obliterate them","Undetectable. Yet another on my long list of traits","This hardly seems necessary"}},
 		[_M.EV_HEALER] =			{1,{"Pathetic."}},
@@ -272,7 +272,7 @@ local DLC_STRINGS =
 	-- Derek 
 	[_M.derek] = {
 	
-		[_M.EVENT_ATTACK_GUN] = 		{1,{"Time to get messy","Try not to splatter too much","Taking aim","Ugh, I suppose this is unavoidable..."}},	
+		[_M.EVENT_ATTACK_GUN] = 		{1,{"Well. That takes care of that","Time to get messy","Try not to splatter too much","Taking aim","Ugh, I suppose this is unavoidable..."}},	
 		[_M.EVENT_ATTACK_GUN_KO] = 		{1,{"Take a nap, my friend","Why don't you have a lie-down?","Well that takes care of that","I should get one of these custom-made","If I could just rewire this a bit..."}},								
 		[_M.EVENT_ATTACK_MELEE] = 		{1,{"Okay, acquiring this thing was worth it","I'm looking forward to the contents of your pockets","Subduing the enemy","Well that takes care of that","Ah, wetwork","That's quite enough","Do be quiet","I'm taking him out","Enemy engaged"}},						
 		[_M.EVENT_DEATH] = 			{1,{"Well, that's...not good...","I blame... the  management...","Corporate... scum...","No, not after everything..."}},			
@@ -325,31 +325,31 @@ local DLC_STRINGS =
 		[_M.EVENT_INTERRUPTED] = 		{1,{"What's the hold-up?"}},				
 		[_M.EVENT_PEEK] = 			{1,{"Nothing I'd consider interesting"}},							
 		[_M.EVENT_OVERWATCH] = 			{1,{"Got it covered","All right, I'll wait"}},				
-		[_M.EVENT_PIN] = 			{1,{"...How long do I have to do this?","I'm not here to babysit","Enemy pinned. If that helps"}},	
-		[_M.EV_UNIT_INSTALL_AUGMENT] =		{1,{"I swore I was done with these","Ugh, if I have to.","Ow."}},	
+		[_M.EVENT_PIN] = 			{1,{"And here I thought this job would be exciting","...How long do I have to do this?","I'm not here to babysit","Enemy pinned. If that helps"}},	
+		[_M.EV_UNIT_INSTALL_AUGMENT] =		{1,{"I swore I was done with these","Ugh, if I have to.","Ow.","I don't need that. I'm already the best."}},	
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
-		[_M.EV_CLOAK_IN] =			nil,	
-		[_M.EV_HEALER] =			{1,{"I don't have time to babysit"}},
+		[_M.EV_CLOAK_IN] =			{1,{"So, uh... what now?","Cloak and dagger isn't really my style","Can I do something useful for a change?","Cloak active. For whatever that's worth'}},	
+		[_M.EV_HEALER] =			{1,{"Next time, I just leave you behind.","I don't have time to babysit","Hurts, huh? Suck it up and let's go","You up? Good. Get a move on","This? This is slowing me down.","Clock's ticking","You're less of a dead weight now"}},
 	},
 	
 		-- Monst3r
 	[_M.monst3r_pc] = {
 	--
-		[_M.EVENT_ATTACK_GUN] = 		{1,{"Inelegant, but this isn't a civilized age"}}, 	
-		[_M.EVENT_ATTACK_GUN_KO] = 		{1,{"Guess what? You get to test my new prototype"}},  								
-		[_M.EVENT_ATTACK_MELEE] = 		{1,{"Some things you don't forget. Like riding a bike","Not my preferred weapon, but it works"}},					
+		[_M.EVENT_ATTACK_GUN] = 		{1,{"Inelegant, but this isn't a civilized age","Call me squeamish, but this isn't really my preferred M.O.","Enemy snuffed. Enough of a euphemism for you?","All that work tinkering with that gun, and I still have to do... this."}}, 	
+		[_M.EVENT_ATTACK_GUN_KO] = 		{1,{"Guess what? You get to test my new prototype","And here I thought I'd put these days behind me","Now this is more like it"}},  								
+		[_M.EVENT_ATTACK_MELEE] = 		{1,{"Well that takes care of that.","Some things you don't forget. Like riding a bike","Not my preferred weapon, but it works","A little trip down memory lane"}},					
 		[_M.EVENT_DEATH] = 			{1,{"Didn't see that coming","Well that was unwise...","I seem to have made a...","That really... stings...","Gladstone, are you there? I..."}},	
 		[_M.EVENT_REVIVED] = 			{1,{"Good. I'd rather not have to take one for the team","Oh, splendid","Didn't think you'd be rid of me that easily, did you?","That one's bound to leave a mark","Oh, thank you. A refreshing bout of competence"}},					
-		[_M.EVENT_HIJACK] = 			{1,{"Almost makes me want to get back into software","No meowing. Thank goodness","At least that was easy"}},			
-		[_M.EVENT_LOOT] = 			{1,{"Money. I'd know it anywhere","Oh good, we could use some new toys","I like you, so I won't take my usual percentage","I'll find a good home for this","This could be useful, I'm sure"}},					
+		[_M.EVENT_HIJACK] = 			{1,{"Finally, back to my comfort bubble","Do try to avoid bringing down any heat while I'm busy","Almost makes me want to get back into software","No meowing. Thank goodness","At least that was easy"}},			
+		[_M.EVENT_LOOT] = 			{1,{"Would be a terrible shame to leave this lying around...","Money. I'd know it anywhere","Oh good, we could use some new toys","I like you, so I won't take my usual percentage","I'll find a good home for this","This could be useful, I'm sure"}},					
 		[_M.EVENT_INTERRUPTED] = 		nil,				
 		[_M.EVENT_PEEK] = 			{1,{"Knowledge makes the man","Let's see what's ahead"}},															
-		[_M.EVENT_OVERWATCH] = 			nil,			
-		[_M.EVENT_PIN] = 			nil,
+		[_M.EVENT_OVERWATCH] = 			{1,{"They won't be passing through here, I assure you","I'll keep an eye out","		
+		[_M.EVENT_PIN] = 			{1,{"Undignified for both of us, isn't it?","What do you take me for - some kind of thug?","I have the enemy pinned, if that helps","I'd much rather be doing something else with my time"}},
 		[_M.EV_UNIT_INSTALL_AUGMENT] =		{1,{"Ooh, I think this one's a limited edition!","Hmph, if I must"}},
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
 		[_M.EV_CLOAK_IN] =			{1,{"I do love these new toys","This is incredibly satisfying","This should give them the slip"}},
-		[_M.EV_HEALER] =			{1,{"Do be more careful next time"}},
+		[_M.EV_HEALER] =			{1,{"Oh, good. I wasn't looking forward to having to drag you around.","Do be more careful next time","You're welcome. I'll be sending you the reimbursement bill later"}},
 	},	
 
 	
