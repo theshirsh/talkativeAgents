@@ -328,7 +328,7 @@ local DLC_STRINGS =
 		[_M.EVENT_PIN] = 			{1,{"And here I thought this job would be exciting","...How long do I have to do this?","I'm not here to babysit","Enemy pinned. If that helps"}},	
 		[_M.EV_UNIT_INSTALL_AUGMENT] =		{1,{"I swore I was done with these","Ugh, if I have to.","Ow.","I don't need that. I'm already the best."}},	
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
-		[_M.EV_CLOAK_IN] =			{1,{"So, uh... what now?","Cloak and dagger isn't really my style","Can I do something useful for a change?","Cloak active. For whatever that's worth'}},	
+		[_M.EV_CLOAK_IN] =			{1,{"So, uh... what now?","Cloak and dagger isn't really my style","Can I do something useful for a change?","Cloak active. For whatever that's worth'"}},	
 		[_M.EV_HEALER] =			{1,{"Next time, I just leave you behind.","I don't have time to babysit","Hurts, huh? Suck it up and let's go","You up? Good. Get a move on","This? This is slowing me down.","Clock's ticking","You're less of a dead weight now"}},
 	},
 	
@@ -344,7 +344,7 @@ local DLC_STRINGS =
 		[_M.EVENT_LOOT] = 			{1,{"Would be a terrible shame to leave this lying around...","Money. I'd know it anywhere","Oh good, we could use some new toys","I like you, so I won't take my usual percentage","I'll find a good home for this","This could be useful, I'm sure"}},					
 		[_M.EVENT_INTERRUPTED] = 		nil,				
 		[_M.EVENT_PEEK] = 			{1,{"Knowledge makes the man","Let's see what's ahead"}},															
-		[_M.EVENT_OVERWATCH] = 			{1,{"They won't be passing through here, I assure you","I'll keep an eye out","		
+		[_M.EVENT_OVERWATCH] = 			{1,{"They won't be passing through here, I assure you","I'll keep an eye out"}},	
 		[_M.EVENT_PIN] = 			{1,{"Undignified for both of us, isn't it?","What do you take me for - some kind of thug?","I have the enemy pinned, if that helps","I'd much rather be doing something else with my time"}},
 		[_M.EV_UNIT_INSTALL_AUGMENT] =		{1,{"Ooh, I think this one's a limited edition!","Hmph, if I must"}},
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
