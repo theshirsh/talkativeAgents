@@ -8,6 +8,11 @@ local abilityutil = include( "sim/abilities/abilityutil" )
 
 local speechdefs = include( "sim/speechdefs" )
 
+local EV_ATTACK_GUN_KO = 1008
+local EV_HEALER = 1009
+local EV_SHOOT_CAMERA = 1010
+local EV_SHOOT_DRONE = 1011 
+
 local alpha_voice =
 {
 	canUseAbility = function( self, sim, abilityOwner, abilityUser )
@@ -171,14 +176,21 @@ local alpha_voice =
 		if (evData.unit == self.abilityOwner or evData.unitID == self.abilityOwner:getID()) and not evData.cancel and before then 	
 			if not self.abilityOwner:isKO() then				
 				if evType == simdefs.EV_UNIT_START_SHOOTING  then
-					  weaponUnit = simquery.getEquippedGun( self.abilityOwner )
-					  if weaponUnit:getTraits().canSleep then
-					        evType = 1008;					-- custom number added for shooting Darts	      
-					  end
+					local weaponUnit = simquery.getEquippedGun( self.abilityOwner )
+					local targetunit = sim:getUnit(evData.targetUnitID)
+					if weaponUnit:getTraits().canSleep then
+						evType = EV_ATTACK_GUN_KO;					-- custom number added for shooting Darts	      
+					elseif targetunit:getTraits().mainframe_camera then
+						evType = EV_SHOOT_CAMERA;					-- custom for shooting cameras
+					elseif targetunit:getTraits().isDrone then
+						evType = EV_SHOOT_DRONE						-- custom for shooting drones
+					elseif targetunit:getTraits().isGuard then
+						evType = EV_UNIT_START_SHOOTING
+					end
 				elseif evType == simdefs.EV_UNIT_WIRELESS_SCAN then		-- redirects Int's wireless hijack
 					evType = 19;	
 				elseif evType == simdefs.EV_UNIT_HEAL and evData.revive then
-					evType = 1009;						-- custom number added for using medgel on other agent
+					evType = EV_HEALER;					-- custom number added for using medgel on other agent
 					--is the necromancer
 				end
 				if agentDef.agentID ~= nil then 
