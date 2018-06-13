@@ -26,11 +26,17 @@ local _M =
 	
 -- next added for 'custom' events (sub-events?):
 
-	EVENT_ATTACK_GUN_KO = 1008,
+	EVENT_ATTACK_GUN_KO = 1008,	-- for dartguns
 	EV_HEALER = 1009,		-- for using medgel on a downed agent
 	EV_SHOOT_CAMERA = 1010,
 	EV_SHOOT_DRONE = 1011, 
-	EV_PARALYZER = 1012,
+
+	EV_PARALYZER = 1012,		-- Banks have test line		
+	EV_STIM_SELF = 1013,		-- Rush have test line		-- I just put some placeholders to test. Shirsh
+	EV_STIM_OTHER = 1014,		-- Shalem have test line
+	EV_SELF_STIMMED = 1015,		-- Rush have test line
+	EV_STIMMED_BY = 1016,		-- Rush have test line
+
 
 
 -- agentIDs list:
@@ -39,8 +45,8 @@ local _M =
 --	stealth_1 = 0, -- tutorial	
 
 	stealth_1 = 1,	-- Decker
-	engineer_1 = 2,	-- Xu
-	sharpshooter_1 = 3,	--Shalem
+	engineer_1 = 3,	-- Xu
+	sharpshooter_1 = 2,	--Shalem
 	stealth_2 = 4,	-- Banks
 	engineer_2 = 5,	-- Internationale
 	sharpshooter_2 = 6,	-- Nika
@@ -97,7 +103,12 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
 		[_M.EV_CLOAK_IN] =			{1,{"Running silent","In the old days, they'd have burned me as a witch","Right into thin air","Whoosh.","And gone","And for my next trick...","This thing's more useful than most of the people I work with"}},
 		[_M.EV_HEALER] =			{1,{"Typical, really"}},
+		
 		[_M.EV_PARALYZER] =			nil,
+		[_M.EV_STIM_SELF] =			nil,
+		[_M.EV_STIM_OTHER] =			nil,
+		[_M.EV_SELF_STIMMED] =			nil,
+		[_M.EV_STIMMED_BY] =			nil,
 	},
 
 	-- Xu
@@ -121,7 +132,12 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
 		[_M.EV_CLOAK_IN] =			{1,{"Too bad this won't last for long","That's some incredible tech","I could get used to this","The tricky part is not tripping over yourself","It's a shame I didn't have this years ago"}},	
 		[_M.EV_HEALER] =			{1,{"Good as new"}},
+		
 		[_M.EV_PARALYZER] =			nil,
+		[_M.EV_STIM_SELF] =			nil,
+		[_M.EV_STIM_OTHER] =			nil,
+		[_M.EV_SELF_STIMMED] =			nil,
+		[_M.EV_STIMMED_BY] =			nil,
 	},
 
 
@@ -148,7 +164,12 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
 		[_M.EV_CLOAK_IN] =			{1,{"Hidden.","Seems a bit like cheating, doesn't it?"}},
 		[_M.EV_HEALER] =			{1,{"Try to stay on your feet this time","Don't take it personally."}},
+		
 		[_M.EV_PARALYZER] =			nil,
+		[_M.EV_STIM_SELF] =			nil,
+		[_M.EV_STIM_OTHER] =			{1,{"Try this."}}, -- sorry had no better ideas
+		[_M.EV_SELF_STIMMED] =			nil,
+		[_M.EV_STIMMED_BY] =			nil,
 	},
 	
 	-- Banks
@@ -174,7 +195,12 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
 		[_M.EV_CLOAK_IN] =			{1,{"Invisible, intangible, I have become air.","Into nothing I return","Light as a feather","...Am I a ghost?","I can't see my- Oh. I forgot.","A puca now roams these halls"}},
 		[_M.EV_HEALER] =			{1,{"Shh. Just let them sew you up"}},
+		
 		[_M.EV_PARALYZER] =			{1,{"Sleep well"}},
+		[_M.EV_STIM_SELF] =			nil,
+		[_M.EV_STIM_OTHER] =			nil,
+		[_M.EV_SELF_STIMMED] =			nil,
+		[_M.EV_STIMMED_BY] =			nil,
 	},
 
 	-- Internationale
@@ -200,7 +226,12 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
 		[_M.EV_CLOAK_IN] =			{1,{"Time for stealth","The subtle approach.","I can see why Decker likes this trick so much"}},
 		[_M.EV_HEALER] =			{1,{"Take it easy."}},
+		
 		[_M.EV_PARALYZER] =			nil,
+		[_M.EV_STIM_SELF] =			nil,
+		[_M.EV_STIM_OTHER] =			nil,
+		[_M.EV_SELF_STIMMED] =			nil,
+		[_M.EV_STIMMED_BY] =			nil,
 	},
 
 	-- Nika
@@ -226,7 +257,12 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
 		[_M.EV_CLOAK_IN] =			{1,{"...","I am cloaked.","Concealment active","Very well. If it is stealth you need."}},
 		[_M.EV_HEALER] =			{1,{"Get up."}},
+	
 		[_M.EV_PARALYZER] =			nil,
+		[_M.EV_STIM_SELF] =			nil,
+		[_M.EV_STIM_OTHER] =			nil,
+		[_M.EV_SELF_STIMMED] =			nil,
+		[_M.EV_STIMMED_BY] =			nil,
 	},
  		
 	-- Sharp
@@ -250,7 +286,12 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
 		[_M.EV_CLOAK_IN] =			{1,{"Not sure I like this","...Still more attractive than anyone here.","I prefer my enemies to look me in the face before I obliterate them","Undetectable. Yet another on my long list of traits","This hardly seems necessary"}},
 		[_M.EV_HEALER] =			{1,{"Pathetic."}},
+
 		[_M.EV_PARALYZER] =			nil,
+		[_M.EV_STIM_SELF] =			nil,
+		[_M.EV_STIM_OTHER] =			nil,
+		[_M.EV_SELF_STIMMED] =			nil,
+		[_M.EV_STIMMED_BY] =			nil,
 	},
 	
 	-- Prism
@@ -274,7 +315,12 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_GOTO_STAND] =		{1,{"Time to become someone else","They won't know what hit them","Let's do some acting","Roll out the red carpet","First and final take"}},
 		[_M.EV_CLOAK_IN] =			{1,{"Out of sight, out of mind","Bit of a strange feeling, this","I do not need this to blend in","Putting the 'invisible' in... well, you know."}},	
 		[_M.EV_HEALER] =			{1,{"Let's get moving"}},
+
 		[_M.EV_PARALYZER] =			nil,
+		[_M.EV_STIM_SELF] =			nil,
+		[_M.EV_STIM_OTHER] =			nil,
+		[_M.EV_SELF_STIMMED] =			nil,
+		[_M.EV_STIMMED_BY] =			nil,
 	},
 	
 	
@@ -299,7 +345,12 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
 		[_M.EV_CLOAK_IN] =			nil,	
 		[_M.EV_HEALER] =			{1,{"Enough dilly-dallying"}},
+
 		[_M.EV_PARALYZER] =			nil,
+		[_M.EV_STIM_SELF] =			nil,
+		[_M.EV_STIM_OTHER] =			nil,
+		[_M.EV_SELF_STIMMED] =			nil,
+		[_M.EV_STIMMED_BY] =			nil,
 	},
 	
 	
@@ -324,7 +375,12 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
 		[_M.EV_CLOAK_IN] =			nil,	
 		[_M.EV_HEALER] =			{1,{"You are quite fortunate to have modern medicine on your side"}},
+
 		[_M.EV_PARALYZER] =			nil,
+		[_M.EV_STIM_SELF] =			nil,
+		[_M.EV_STIM_OTHER] =			nil,
+		[_M.EV_SELF_STIMMED] =			nil,
+		[_M.EV_STIMMED_BY] =			nil,
 	},
 	
 	
@@ -349,7 +405,12 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
 		[_M.EV_CLOAK_IN] =			{1,{"Into the shadows","With a light step","Now you see me... now you don't","You saw nothing","Fading ino nothingness","They won't see me coming","Striking from the shadows"}},
 		[_M.EV_HEALER] =			{1,{"Rise and shine!"}},
+
 		[_M.EV_PARALYZER] =			nil,
+		[_M.EV_STIM_SELF] =			nil,
+		[_M.EV_STIM_OTHER] =			nil,
+		[_M.EV_SELF_STIMMED] =			nil,
+		[_M.EV_STIMMED_BY] =			nil,
 	},
 	
 	
@@ -375,7 +436,12 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
 		[_M.EV_CLOAK_IN] =			{1,{"So, uh... what now?","Cloak and dagger isn't really my style","Can I do something useful for a change?","Cloak active. For whatever that's worth'"}},	
 		[_M.EV_HEALER] =			{1,{"Next time, I just leave you behind.","I don't have time to babysit","Hurts, huh? Suck it up and let's go","You up? Good. Get a move on","This? This is slowing me down.","Clock's ticking","You're less of a dead weight now"}},
+		
 		[_M.EV_PARALYZER] =			nil,
+		[_M.EV_STIM_SELF] =			{1,{"A little overclock won't do harm"}}, -- sorry had no better ideas, test
+		[_M.EV_STIM_OTHER] =			{1,{"Try this"}}, -- sorry had no better ideas
+		[_M.EV_SELF_STIMMED] = 			{1,{"Refreshing!"}}, -- sorry had no better ideas, test
+		[_M.EV_STIMMED_BY] = 			{1,{"Much appreciated!"}}, -- same
 	},
 	
 		-- Monst3r
@@ -399,7 +465,12 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
 		[_M.EV_CLOAK_IN] =			{1,{"I do love these new toys","This is incredibly satisfying","This should give them the slip"}},
 		[_M.EV_HEALER] =			{1,{"Oh, good. I wasn't looking forward to having to drag you around.","Do be more careful next time","You're welcome. I'll be sending you the reimbursement bill later"}},
+		
 		[_M.EV_PARALYZER] =			nil,
+		[_M.EV_STIM_SELF] =			nil,
+		[_M.EV_STIM_OTHER] =			nil,
+		[_M.EV_SELF_STIMMED] =			nil,
+		[_M.EV_STIMMED_BY] =			nil,
 	},	
 
 	
@@ -426,7 +497,12 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
 		[_M.EV_CLOAK_IN] =			{1,{"Such a rare and useful bit of tech","Cloak engaged"}},	
 		[_M.EV_HEALER] =			{1,{"Back on your feet, agent"}},
+
 		[_M.EV_PARALYZER] =			nil,
+		[_M.EV_STIM_SELF] =			nil,
+		[_M.EV_STIM_OTHER] =			nil,
+		[_M.EV_SELF_STIMMED] =			nil,
+		[_M.EV_STIMMED_BY] =			nil,
 	},
 
 ------------
@@ -453,7 +529,12 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
 		[_M.EV_CLOAK_IN] =			nil,	
 		[_M.EV_HEALER] =			nil,
+
 		[_M.EV_PARALYZER] =			nil,
+		[_M.EV_STIM_SELF] =			nil,
+		[_M.EV_STIM_OTHER] =			nil,
+		[_M.EV_SELF_STIMMED] =			nil,
+		[_M.EV_STIMMED_BY] =			nil,
 	},
 
 	mod_02_mist = {
@@ -476,7 +557,12 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
 		[_M.EV_CLOAK_IN] =			{1,{"I chose my new name for a reason","You can't see me"}},	
 		[_M.EV_HEALER] =			nil,
+
 		[_M.EV_PARALYZER] =			nil,
+		[_M.EV_STIM_SELF] =			nil,
+		[_M.EV_STIM_OTHER] =			nil,
+		[_M.EV_SELF_STIMMED] =			nil,
+		[_M.EV_STIMMED_BY] =			nil,
 	},
 
 	mod_03_ghuff = {
@@ -499,7 +585,12 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
 		[_M.EV_CLOAK_IN] =			{1,{"Would you believe this is more illegal than anything else I've done?"}},	
 		[_M.EV_HEALER] =			nil,
+
 		[_M.EV_PARALYZER] =			nil,
+		[_M.EV_STIM_SELF] =			nil,
+		[_M.EV_STIM_OTHER] =			nil,
+		[_M.EV_SELF_STIMMED] =			nil,
+		[_M.EV_STIMMED_BY] =			nil,
 	},
 
 	mod_04_n_umi = {
@@ -522,7 +613,12 @@ local DLC_STRINGS =
 		[_M.EV_UNIT_GOTO_STAND] =		nil,
 		[_M.EV_CLOAK_IN] =			{1,{"I can't help but be awed by this tech"}},
 		[_M.EV_HEALER] =			nil,
+
 		[_M.EV_PARALYZER] =			nil,
+		[_M.EV_STIM_SELF] =			nil,
+		[_M.EV_STIM_OTHER] =			nil,
+		[_M.EV_SELF_STIMMED] =			nil,
+		[_M.EV_STIMMED_BY] =			nil,
 	},	
 
 ------------

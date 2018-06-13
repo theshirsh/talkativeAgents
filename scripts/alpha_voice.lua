@@ -12,7 +12,13 @@ local EV_ATTACK_GUN_KO = 1008
 local EV_HEALER = 1009
 local EV_SHOOT_CAMERA = 1010
 local EV_SHOOT_DRONE = 1011 
+
 local EV_PARALYZER = 1012
+local EV_STIM_SELF = 1013
+local EV_STIM_OTHER = 1014
+local EV_SELF_STIMMED = 1015
+local EV_STIMMED_BY = 1016
+
 
 local alpha_voice =
 {
@@ -104,7 +110,7 @@ local alpha_voice =
 					elseif targetunit:getTraits().isDrone then
 						evType = EV_SHOOT_DRONE						-- custom for shooting drones
 					elseif targetunit:getTraits().isGuard then
-						evType = EV_UNIT_START_SHOOTING
+						evType = simdefs.EV_UNIT_START_SHOOTING
 					end
 				elseif evType == simdefs.EV_UNIT_WIRELESS_SCAN then		-- redirects Int's wireless hijack
 					evType = 19;	
@@ -112,7 +118,11 @@ local alpha_voice =
 					if evData.revive then
 						evType = EV_HEALER			-- custom number added for using medgel on other agent									
 					elseif evData.target:getTraits().isGuard then
-						evType = EV_PARALYZER			-- custom number for palaryzers			
+						evType = EV_PARALYZER			-- custom number for palaryzers	
+					elseif evData.target == evData.unit then
+						evType = EV_STIM_SELF	
+					else 
+						evType = EV_STIM_OTHER
 					end
 				end
 				if agentDef.agentID ~= nil then 
@@ -151,7 +161,13 @@ local alpha_voice =
 	-- Block for 'passive' events(being target of healing), triggers after, message on the right:
 
 		if (evData.target == self.abilityOwner or evData.targetID == self.abilityOwner:getID()) and not before then 
-			if evType == simdefs.EV_UNIT_HEAL and evData.revive and not before then	    			
+			if evType == simdefs.EV_UNIT_HEAL and not before then
+				if not evData.revive then			-- if it's Stim or Defib
+					if evData.target ~= evData.unit then
+						evType = EV_STIMMED_BY		-- by other agent
+					else 	evType = EV_SELF_STIMMED	-- by self
+					end					
+				end			
 				if agentDef.agentID ~= nil then 
 					local agent = agentDef.agentID	
 					if agent == 99 then					-- last mission's Monster to starting Monster 
@@ -164,7 +180,7 @@ local alpha_voice =
 						if speechData ~= nil then			
 							local p = speechData[1]
 							if sim:nextRand() <= p then
-						   		local choice = speechData[2]
+								local choice = speechData[2]
 								local speech = choice[math.floor(sim:nextRand()*#choice)+1]								
 								local anim = agentDef.profile_anim
 								local build = agentDef.profile_anim	-- if there no build then use default one from anim
@@ -172,13 +188,25 @@ local alpha_voice =
 									build = agentDef.profile_build	-- either way use build as a skin
 								end								
 								local name = agentDef.name
-															
-								script:queue( { body = speech, header= name, type="enemyMessage", 
-										profileAnim= anim,
-										profileBuild= build,									
-										} )
-								script:queue( 3*cdefs.SECONDS )			-- time before clear, 3 seconds, as timing
-								script:queue( { type="clearEnemyMessage" } )	-- no autoclear for those eh	
+								if evType == EV_SELF_STIMMED then	-- to have speech pop-up on the left
+									local text =  {{								
+									text = speech,
+									anim = anim,
+									build = build,
+									name = name,
+									timing = 3,
+									voice = nil,
+									}}		
+									script:queue( 0.5*cdefs.SECONDS )			
+									script:queue( { script=text, type="newOperatorMessage", doNotQueue=true } ) 
+								else					-- speech pop-up on the right						
+									script:queue( { body = speech, header= name, type="enemyMessage", 
+											profileAnim= anim,
+											profileBuild= build,									
+											} )
+									script:queue( 3*cdefs.SECONDS )			-- time before clear, 3 seconds, as timing
+									script:queue( { type="clearEnemyMessage" } )	-- no autoclear for those eh	
+								end
 							end
 						end
 					end
