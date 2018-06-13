@@ -36,8 +36,11 @@ local _M =
 	EV_STIM_OTHER = 1014,		-- Shalem have test line
 	EV_SELF_STIMMED = 1015,		-- Rush have test line
 	EV_STIMMED_BY = 1016,		-- Rush have test line
-	EV_WAKE = 1017,
+	EV_WAKE = 1017,			-- Rush have test line
 	EV_AWAKENED = 1018,		-- Shalem have test line
+
+	EV_EXEC_TERMINAL = 1019,	-- optional for Exec Terminals 	
+	EV_DEVICE_LOOTED = 1020,	-- optional for looting FTM devices with tech (scanner and router)
 
 
 

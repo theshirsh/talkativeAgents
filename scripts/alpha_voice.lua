@@ -8,6 +8,8 @@ local abilityutil = include( "sim/abilities/abilityutil" )
 
 local speechdefs = include( "sim/speechdefs" )
 
+local EVENT_HIJACK = 19
+
 local EV_ATTACK_GUN_KO = 1008
 local EV_HEALER = 1009
 local EV_SHOOT_CAMERA = 1010
@@ -20,6 +22,10 @@ local EV_SELF_STIMMED = 1015
 local EV_STIMMED_BY = 1016
 local EV_WAKE = 1017
 local EV_AWAKENED = 1018
+
+local EV_EXEC_TERMINAL = 1019
+local EV_DEVICE_LOOTED = 1020
+
 
 
 local alpha_voice =
@@ -58,7 +64,7 @@ local alpha_voice =
 		sim:addEventTrigger( simdefs.EV_UNIT_STOP_WALKING, self )
 		sim:addEventTrigger( simdefs.EV_UNIT_START_PIN, self )		-- unused in game --Not anymore :)
 		sim:addEventTrigger( simdefs.EV_UNIT_INSTALL_AUGMENT, self )	-- for installing augments
-		sim:addEventTrigger( simdefs.EV_CLOAK_IN, self )			-- for activating cloak
+		sim:addEventTrigger( simdefs.EV_CLOAK_IN, self )		-- for activating cloak
 		sim:addEventTrigger( simdefs.EV_UNIT_GOTO_STAND, self )		-- for Prism's disguise	
 
 	end,
@@ -104,24 +110,33 @@ local alpha_voice =
 			if not self.abilityOwner:isKO() then				
 				if evType == simdefs.EV_UNIT_START_SHOOTING  then
 					local weaponUnit = simquery.getEquippedGun( self.abilityOwner )
-					local targetunit = sim:getUnit(evData.targetUnitID)
+					local targetUnit = sim:getUnit(evData.targetUnitID)
 					if weaponUnit:getTraits().canSleep then
-						evType = EV_ATTACK_GUN_KO;					-- custom number added for shooting Darts	      
-					elseif targetunit:getTraits().mainframe_camera then
-						evType = EV_SHOOT_CAMERA;					-- custom for shooting cameras
-					elseif targetunit:getTraits().isDrone then
-						evType = EV_SHOOT_DRONE						-- custom for shooting drones
-					elseif targetunit:getTraits().isGuard then
+						evType = EV_ATTACK_GUN_KO;				-- custom number added for shooting Darts	      
+					elseif targetUnit:getTraits().mainframe_camera then
+						evType = EV_SHOOT_CAMERA;				-- custom for shooting cameras
+					elseif targetUnit:getTraits().isDrone then
+						evType = EV_SHOOT_DRONE					-- custom for shooting drones
+					elseif targetUnit:getTraits().isGuard then
 						evType = simdefs.EV_UNIT_START_SHOOTING
 					end
-				elseif evType == simdefs.EV_UNIT_WIRELESS_SCAN then		-- redirects Int's wireless hijack
-					evType = 19;	
+				elseif evType == simdefs.EV_UNIT_WIRELESS_SCAN then	-- redirects Int's wireless hijack
+					evType = EVENT_HIJACK
+				elseif evType == simdefs.EV_UNIT_USECOMP then
+					if evData.targetID ~= nil then
+						local targetUnit = sim:getUnit(evData.targetID)
+						if targetUnit:getTraits().mainframe_console and targetUnit:getTraits().cpus > 0 then
+							evType = EVENT_HIJACK		-- use console						
+						else evType = 0
+						end					
+					else evType = 0
+					end	
 				elseif evType == simdefs.EV_UNIT_HEAL then		-- injection event
 					if evData.revive then
 						if not evData.target:isDead() then	
 							evType = EV_WAKE		-- raise other from KO				
 						else 
-							evType = EV_HEALER		-- custom number added for using medgel on other agent	
+							evType = EV_HEALER		-- revive fallen agent	
 						end								
 					elseif evData.target:getTraits().isGuard then
 						evType = EV_PARALYZER			-- custom number for palaryzers	
@@ -155,7 +170,7 @@ local alpha_voice =
 								}}					
 								script:queue( { script=text, type="newOperatorMessage", doNotQueue=true } ) 
 								--script:queue( 3*cdefs.SECONDS )
-								--script:queue( { type="clearOperatorMessage" } ) -- it autoclears after "timing =3" I think
+								--script:queue( { type="clearOperatorMessage" } ) -- it autoclears after "timing =3"
 							end
 						end
 					end
@@ -207,7 +222,7 @@ local alpha_voice =
 									}}		
 									script:queue( 0.5*cdefs.SECONDS )			
 									script:queue( { script=text, type="newOperatorMessage", doNotQueue=true } ) 
-								else					-- speech pop-up on the right						
+								else					-- to have speech pop-up on the right						
 									script:queue( { body = speech, header= name, type="enemyMessage", 
 											profileAnim= anim,
 											profileBuild= build,									
@@ -231,7 +246,17 @@ local alpha_voice =
 		local script = sim:getLevelScript()
 		local agentDef = self.abilityOwner:getUnitData()
 		if (evData.unit == self.abilityOwner or evData.unitID == self.abilityOwner:getID()) and not evData.cancel then 	
-			if not self.abilityOwner:isKO() then				
+			if not self.abilityOwner:isKO() then
+				if evType == simdefs.TRG_SAFE_LOOTED then 
+					if evData.targetUnit:getTraits().safeUnit then
+						evType = TRG_SAFE_LOOTED
+					elseif evData.targetUnit:getTraits().public_term then
+						evType = EV_EXEC_TERMINAL		-- 
+					elseif evData.targetUnit:getTraits().scanner or evData.targetUnit:getTraits().router then
+						evType = EV_DEVICE_LOOTED
+					else evType = 0
+					end					
+				end				
 				if agentDef.agentID ~= nil then 
 					local agent = agentDef.agentID	
 					if agent == 99 then					-- last mission's Monster to starting Monster 
@@ -254,10 +279,9 @@ local alpha_voice =
 									timing = 3,
 									voice = nil,
 								}}					
-								script:queue( { script=text, type="newOperatorMessage", doNotQueue=true } ) 
-								
+								script:queue( { script=text, type="newOperatorMessage", doNotQueue=true } ) 								
 								--script:queue( 3*cdefs.SECONDS )
-								--script:queue( { type="clearOperatorMessage" } ) -- it autoclears after "timing =3" I think
+								--script:queue( { type="clearOperatorMessage" } ) -- it autoclears after "timing =3"
 							end
 						end
 					end
