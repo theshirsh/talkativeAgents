@@ -18,6 +18,8 @@ local EV_STIM_SELF = 1013
 local EV_STIM_OTHER = 1014
 local EV_SELF_STIMMED = 1015
 local EV_STIMMED_BY = 1016
+local EV_WAKE = 1017
+local EV_AWAKENED = 1018
 
 
 local alpha_voice =
@@ -116,7 +118,11 @@ local alpha_voice =
 					evType = 19;	
 				elseif evType == simdefs.EV_UNIT_HEAL then		-- injection event
 					if evData.revive then
-						evType = EV_HEALER			-- custom number added for using medgel on other agent									
+						if not evData.target:isDead() then	
+							evType = EV_WAKE		-- raise other from KO				
+						else 
+							evType = EV_HEALER		-- custom number added for using medgel on other agent	
+						end								
 					elseif evData.target:getTraits().isGuard then
 						evType = EV_PARALYZER			-- custom number for palaryzers	
 					elseif evData.target == evData.unit then
@@ -165,8 +171,10 @@ local alpha_voice =
 				if not evData.revive then			-- if it's Stim or Defib
 					if evData.target ~= evData.unit then
 						evType = EV_STIMMED_BY		-- by other agent
-					else 	evType = EV_SELF_STIMMED	-- by self
-					end					
+					else 	evType = EV_SELF_STIMMED	-- by self						
+					end
+				elseif not evData.target:isDead() then	
+					evType = EV_AWAKENED			-- raised from KO				
 				end			
 				if agentDef.agentID ~= nil then 
 					local agent = agentDef.agentID	
