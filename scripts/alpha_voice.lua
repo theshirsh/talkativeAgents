@@ -109,10 +109,10 @@ local alpha_voice =
 				elseif evType == simdefs.EV_UNIT_WIRELESS_SCAN then		-- redirects Int's wireless hijack
 					evType = 19;	
 				elseif evType == simdefs.EV_UNIT_HEAL then		-- injection event
-					if not evData.revive then
-						evType = EV_PARALYZER			-- custom number for palaryzers						
-					else
-						evType = EV_HEALER			-- custom number added for using medgel on other agent
+					if evData.revive then
+						evType = EV_HEALER			-- custom number added for using medgel on other agent									
+					elseif evData.target:getTraits().isGuard then
+						evType = EV_PARALYZER			-- custom number for palaryzers			
 					end
 				end
 				if agentDef.agentID ~= nil then 
