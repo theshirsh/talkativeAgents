@@ -9,6 +9,7 @@ local abilityutil = include( "sim/abilities/abilityutil" )
 local speechdefs = include( "sim/speechdefs" )
 
 local EVENT_HIJACK = 19
+local TRG_SAFE_LOOTED = 66
 
 local EV_ATTACK_GUN_KO = 1008
 local EV_HEALER = 1009
