@@ -121,7 +121,7 @@ local alpha_voice =
 					elseif targetUnit:getTraits().isGuard then
 						evType = simdefs.EV_UNIT_START_SHOOTING
 					end
-				elseif evType == simdefs.EV_UNIT_WIRELESS_SCAN then	-- redirects Int's wireless hijack
+				elseif evType == simdefs.EV_UNIT_WIRELESS_SCAN and not evData.scan then	-- redirects Int's wireless hijack
 					evType = EVENT_HIJACK
 				elseif evType == simdefs.EV_UNIT_USECOMP then
 					if evData.targetID ~= nil then

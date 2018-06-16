@@ -23,6 +23,8 @@ local _M =
 	INSTALL_AUGMENT = 62,	
 	DISGUISE_IN = 129,		-- for Prism's disguise
 	CLOAK_IN = 614,			-- for activating cloak	
+
+	WIRELESS_SCAN = 100,		-- solely for Wireless Emitter Nerf mod, won't trigger normally
 	
 -- next added for 'custom' events (sub-events?):
 
@@ -46,11 +48,11 @@ local _M =
 
 -- agentIDs list:
 
--- 	NAME = agentID	-- just for convenience: agentID is a number, name is easier to use for filling strings
---	DECKER = 0, -- tutorial	
+-- 	NAME = agentID	-- just for convenience: agentID is a number or string, name is easier to use
+--	DECK = 0, -- tutorial	
 
 	DECKER = 1,		-- Decker
-	SHALEM = 2,		--Shalem
+	SHALEM = 2,		-- Shalem
 	TONY = 3,		-- Xu	
 	BANKS = 4,		-- Banks
 	INTERNATIONALE = 5,	-- Internationale
@@ -252,6 +254,7 @@ local DLC_STRINGS =
 		[_M.GOT_HIT] = 			{1,{"I can't feel my... "}},			
 		[_M.REVIVED] = 			{1,{"That really cleared things up.","Thank you. I mean it.","Back in the fray","That was too close","For a moment there, I thought..."}},			
 		[_M.HIJACK] = 			{1,{"I'm on it","Installing virus","Let's see what their security is like","No obstacles encountered","Accessing their system"}},		
+		[_M.WIRELESS_SCAN] = 		{1,{"Scanning area",}}, -- rather test	
 		[_M.SAFE_LOOTED] = 		{1,{"Busted open","Secrets revealed","Time to redistribute","New assets acquired"}},				
 		[_M.EXEC_TERMINAL_LOOTED] =	nil,	
 		[_M.THREAT_DEVICE_LOOTED] =	nil,
