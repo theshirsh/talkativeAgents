@@ -83,6 +83,7 @@ local _M =
 
 local p_gun = 1
 local p_gunko = 1
+local p_melee = 1
 local p_ow = 1
 local p_gothit = 1
 local p_revived = 1
@@ -576,7 +577,7 @@ local DLC_STRINGS =
 		[_M.INTERRUPTED] = 		nil,				
 		[_M.PEEK] = 			{p_peek,{"Knowledge makes the man","Let's see what's ahead"}},															
 			
-		[_M.PIN] = 			{p_pin,{"Undignified for both of us, isn't it?","What do you take me for - some kind of thug?","I have the enemy pinned, if that helps","I'd much rather be doing something else with my time","A monkey could do this. Yet you hire me?","I have him pinned","}},
+		[_M.PIN] = 			{p_pin,{"Undignified for both of us, isn't it?","What do you take me for - some kind of thug?","I have the enemy pinned, if that helps","I'd much rather be doing something else with my time","A monkey could do this. Yet you hire me?","I have him pinned"}},
 		[_M.INSTALL_AUGMENT] =		{p_augm,{"Ooh, I think this one's a limited edition!","Hmph, if I must","Not too shabby","Not inadequate, but I do miss my old suppliers"}},
 		[_M.DISGUISE_IN] =		nil,
 		[_M.CLOAK_IN] =			{p_cloak,{"I do love these new toys","This is incredibly satisfying","This should give them the slip","It is time to... disappear","Whoosh. Ahem, that ought to do it.","More my style."}},
