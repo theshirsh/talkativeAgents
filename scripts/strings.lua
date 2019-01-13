@@ -81,20 +81,20 @@ local _M =
 -- Can be edited here centrally to change the chance that line will fire for a specific trigger, for all agents.
 -- If need be, agent-specific chances can still be tweaked by directly using a number there.
 
-local p_gun = 1
-local p_gunko = 1
-local p_melee = 1
-local p_ow = 1
+local p_gun = 0.7
+local p_gunko = 0.7
+local p_melee = 0.5
+local p_ow = 0.4
 local p_gothit = 1
-local p_revived = 1
-local p_hj = 1
-local p_loot = 1
-local p_inter = 1
-local p_peek = 1
-local p_pin = 1
+local p_revived = 0.8
+local p_hj = 0.5
+local p_loot = 0.5
+local p_inter = 0.5
+local p_peek = 0.1
+local p_pin = 0.7
 local p_augm = 1
-local p_cloak = 1
-local p_medgel = 1
+local p_cloak = 0.8
+local p_medgel = 0.8
 
 
 local DLC_STRINGS =
@@ -169,12 +169,12 @@ local DLC_STRINGS =
 		[_M.PIN] = 			{p_pin,{"Enemy subdued","This one won't be going anywhere","Target pinned","I hope you're comfortable","I have it under control"}},  
 		[_M.INSTALL_AUGMENT] =		{p_augm,{"I cannot wait to use this","This seems promising","I've always wanted to try that","Still more human than some people I could name","Efficiency improved","I'll tinker around with it later"}},
 		[_M.DISGUISE_IN] =		nil,
-		[_M.CLOAK_IN] =			{p_cloak,{"Too bad this won't last for long","That's some incredible tech","I could get used to this","The tricky part is not tripping over yourself","It's a shame I didn't have this years ago"}},	
-		[_M.MEDGEL] =			{p_medgel,{"Good as new","Are you alright?","Quiet! We're still in the field"}},
+		[_M.CLOAK_IN] =			{p_cloak,{"Too bad this won't last for long","That's some incredible tech","I could get used to this","The tricky part is not tripping over yourself","It's a shame I didn't have this years ago","You know, Clark's third law says that... alright, maybe now is not the time"}},	
+		[_M.MEDGEL] =			{p_medgel,{"Good as new","Are you alright?","Quiet! We're still in the field","Welcome back"}},
 		[_M.WAKE_OTHER] =		nil,
 		
 		[_M.PARALYZER] =		nil,
-		[_M.STIM_SELF] =		nil,
+		[_M.STIM_SELF] =		{0.5,{"This better not become a habit","Whatever gives us the edge on them"}},
 		[_M.STIM_OTHER] =		nil,
 		[_M.SELF_STIMMED] =		nil,
 		[_M.STIMMED_BY] =		nil,
@@ -191,11 +191,11 @@ local DLC_STRINGS =
 		[_M.SHOOT_CAMERA] =		nil,
 		[_M.ATTACK_GUN_KO] = 		{p_gunko,{"That was a half-measure","He's out. For now","That won't keep him down forever","Not as permanent as I'd like","Hmpf."}}, 								
 		[_M.ATTACK_MELEE] = 		{p_melee,{"Boring conversation anyway","That's one less","I think he sprained something","He'll be fine. The floor broke his fall"}},		
-		[_M.OVERWATCH] = 		{p_ow,{"Setting up","Doing what I do","Let them come"}},				
+		[_M.OVERWATCH] = 		{p_ow,{"Setting up","Doing what I do","Let them come","Here we go","I'm ready"}},				
 		[_M.OVERWATCH_MELEE] =		nil,
 	
 	--	[_M.EVENT_MISS_GUN] = 		{0.5,{"Guess that was a warning shot?","I.. uh.. missed."}},	
-		[_M.GOT_HIT] = 			{p_gothit,{"I'm coming... Rita...","About... time..."}},			
+		[_M.GOT_HIT] = 			{p_gothit,{"I'm coming... Rita...","About... time...","Not gonna just..."}},			
 		[_M.REVIVED] = 			{p_revived,{"Just in time","Hmpf. It was only a scratch"}},					
 		[_M.HIJACK] = 			{p_hj,{"Uploading virus","You're wasting me on this?","A monkey could do this","The device is ours now","Finally. What I've always trained for.","Give me a trigger, not a button"}},
 		[_M.SAFE_LOOTED] = 		{p_loot,{"All boys need toys","Not bad","I get a cut of this, right?"}},	
@@ -203,12 +203,12 @@ local DLC_STRINGS =
 		[_M.THREAT_DEVICE_LOOTED] =	nil,
 			
 		[_M.INTERRUPTED] = 		{p_inter,{"Target ahead","Target sighted"}},			
-		[_M.PEEK] = 			{p_peek,{"No surprises","Searching for hostiles","Scouting ahead"}},
+		[_M.PEEK] = 			{p_peek,{"No surprises","Searching for hostiles","Scouting ahead","Active recon"}},
 		
-		[_M.PIN] = 			{p_pin,{"Shouldn't I just... shoot him?","Taking prisoners isn't really my bag","...So how's your pension plan?","This could get dull","Target subdued"}},
+		[_M.PIN] = 			{p_pin,{"Shouldn't I just... shoot him?","Taking prisoners isn't really my bag","...So how's your pension plan?","This could get dull","Target subdued","I've got him pinned"}},
 		[_M.INSTALL_AUGMENT] =		{p_augm,{"So long as it's useful.","This better work","This better not slow me down","More metal or less, it doesn't change anything","Whatever it takes to win"}},
 		[_M.DISGUISE_IN] =		nil,
-		[_M.CLOAK_IN] =			{p_cloak,{"Hidden.","Seems a bit like cheating, doesn't it?","Cloaked"}},
+		[_M.CLOAK_IN] =			{p_cloak,{"Hidden.","Seems a bit like cheating, doesn't it?","Cloaked","Better not get too used to this"}},
 		[_M.MEDGEL] =			{p_medgel,{"Try to stay on your feet this time","Eyes sharp now","We're not done here yet","By all means, take your time...","Don't take it personally.","Get up. We need to move"}},
 		[_M.WAKE_OTHER] =			nil,
 		
@@ -227,31 +227,31 @@ local DLC_STRINGS =
 		[_M.ATTACK_GUN] = 		{0.3,{"Guns, I hate these things","Do we really have to do this?","Sometimes I miss the solo gigs"}},  	
 		[_M.SHOOT_DRONE] =		nil,
 		[_M.SHOOT_CAMERA] =		nil,
-		[_M.ATTACK_GUN_KO] = 		{p_gunko,{"I could get used to this","I'd leave ya an asprin if I had one","Believe me, buddy, I'm doing you a favor"}},							
-		[_M.ATTACK_MELEE] = 		{p_melee,{"Zappy would have been nice right now","Facing a lot of resistance right now","Down he goes!","Aaagh... everything's under control","Sparkly","How about you rest for a while?","Take a little break, okay?"}},					
-		[_M.OVERWATCH] = 		{p_ow,{"Holding here","Watching the way"}},				
+		[_M.ATTACK_GUN_KO] = 		{p_gunko,{"I could get used to this","I'd leave ya an asprin if I had one","Believe me, buddy, I'm doing you a favor","He's down","I've got him","He's tranquilized","He's still awake? Oof. No, there we go","Yup. He's gonna have a headache"}},							
+		[_M.ATTACK_MELEE] = 		{p_melee,{"Zappy would have been nice right now","Facing a lot of resistance right now","Down he goes!","Aaagh... everything's under control","Sparkly","How about you rest for a while?","Take a little break, okay?","Shhhhhh."}},					
+		[_M.OVERWATCH] = 		{p_ow,{"Holding here","Watching the way","I'm on it","I'm ready, I'm ready.","Okay..."}},				
 		[_M.OVERWATCH_MELEE] =		nil,
 	
-		[_M.GOT_HIT] = 			{p_gothit,{"I guess... I tried... one too many.","Doesn't... hurt... at all...","Had... a good run"}},				
+		[_M.GOT_HIT] = 			{p_gothit,{"I guess... I tried... one too many.","Doesn't... hurt... at all...","Had... a good run","It'll... be okay..."}},				
 	--	[_M.EVENT_MISS_GUN] = 		{1,{"Ok, ok, I'm learning","Dammit! Harder than it looks"}},	
-		[_M.REVIVED] = 			{p_revived,{"I owe you for that one.","Not a dream, then...","How many lives left?"}},					
-		[_M.HIJACK] = 			{p_hj,{"Just gotta bypass the... Done!","Easy peasy","I wrote this code in Haiku","CPU, I own you","This console reeks of coffee","Knock knock little machine"}},		
-		[_M.SAFE_LOOTED] = 		{p_loot,{"Who wants stuff?","Come to mamma","Do I really have to share this?","I love this part"}},	
+		[_M.REVIVED] = 			{p_revived,{"I owe you for that one.","Not a dream, then...","How many lives left?","Owww.","Mm, guava. Nice."}},					
+		[_M.HIJACK] = 			{p_hj,{"Just gotta bypass the... Done!","Easy peasy","I wrote this code in Haiku","CPU, I own you","This console reeks of coffee","Knock knock little machine","Ooh, this still has Minesweeper"}},		
+		[_M.SAFE_LOOTED] = 		{p_loot,{"Who wants stuff?","Come to mamma","Do I really have to share this?","I love this part","Nice!","Oh yeah, here we go","Sweet.","Got the booty!","Not too shabby"}},	
 		[_M.EXEC_TERMINAL_LOOTED] =	nil,	
 		[_M.THREAT_DEVICE_LOOTED] =	nil,
 				
 		[_M.INTERRUPTED] = 		{p_inter,{"Uh oh","Hold your horses","Wait a second"}},					
-		[_M.PEEK] = 			{p_peek,{"I see them, but they don't see me","Swift and silent","I know what lies in wait","I see the way ahead"}},								
+		[_M.PEEK] = 			{p_peek,{"I see them, but they don't see me","Swift and silent","I know what lies in wait","I see the way ahead","Crap, they saw me- Ok nevermind, I'm good"}},								
 		
 		[_M.PIN] = 			{p_pin,{"Just stay there, buddy","It will go better for you if you don't move","I could sing you a lullaby while we're here","Feel free to stay down"}},
-		[_M.INSTALL_AUGMENT] =		{p_augm,{"Will this fix me?","Another one","I can hear it inside me","This will keep me company","we're all just automatons in the end","Two lefts can make a wrong"}},						
+		[_M.INSTALL_AUGMENT] =		{p_augm,{"Will this fix me?","Another one","I can hear it inside me","This will keep me company","We're all just automatons in the end","Two lefts can make a wrong"}},						
 		[_M.DISGUISE_IN] =		nil,
-		[_M.CLOAK_IN] =			{p_cloak,{"Invisible, intangible, I have become air.","Into nothing I return","Light as a feather","...Am I a ghost?","I can't see my- Oh. I forgot.","A puca now roams these halls"}},
-		[_M.MEDGEL] =			{p_medgel,{"Shh. Just let them sew you up","Easy there, buddy","You okay?","Wow, that's a lot of blood.","I'm sure you'll be fine!","You'd do the same for me, right?","Don't worry, I've got you."}},
+		[_M.CLOAK_IN] =			{p_cloak,{"Invisible, intangible, I have become air.","Into nothing I return","Light as a feather","...Am I a ghost?","I can't see my- Oh. I forgot.","A puca now roams these halls","I vanish"}},
+		[_M.MEDGEL] =			{p_medgel,{"Shh. Just let them sew you up","Easy there, buddy","You okay?","Wow, that's a lot of blood.","I'm sure you'll be fine!","You'd do the same for me, right?","Don't worry, I've got you.","Does that hurt?"}},
 		[_M.WAKE_OTHER] =				nil,
 		
-		[_M.PARALYZER] =		{1,{"Sleep well","Shhhh.","Don't worry, you'll miss all the bad parts","You won't remember any of this","No one has to get hurt"}},
-		[_M.STIM_SELF] =		nil,
+		[_M.PARALYZER] =		{1,{"Sleep well","Shhhh.","Don't worry, you'll miss all the bad parts","You won't remember any of this","No one has to get hurt","Safest place for you to be is nowhere"}},
+		[_M.STIM_SELF] =		{0.5,{"This should help.","Already feeling things clear up...","Wow, I can focus! That's great!","Is this what being normal feels like?","It's like the fog in my head just... poofed","Ok, ok, so what do I do next?"}},
 		[_M.STIM_OTHER] =		nil,
 		[_M.SELF_STIMMED] =		nil,
 		[_M.STIMMED_BY] =		nil,
@@ -267,7 +267,7 @@ local DLC_STRINGS =
 		[_M.SHOOT_CAMERA] =		nil,
 		[_M.ATTACK_GUN_KO] = 		{p_gunko,{"Delivering toxin","Clearing things up","Let's open the way","Taking him down"}}, 		
 		[_M.ATTACK_MELEE] = 		{p_melee,{"Too bad we can't talk this out","Sorry, friend","This will probably sting","Libertad!","El enemigo está bajo control","Awaiting further instructions"}},				
-		[_M.OVERWATCH] = 		{p_ow,{"Ok, focused in","I will take care of it","I've got it","Everything's under control"}},			
+		[_M.OVERWATCH] = 		{p_ow,{"Ok, focused in","I will take care of it","I've got it","Everything's under control","Keeping a look out"}},			
 		[_M.OVERWATCH_MELEE] =		nil,
 							
 	--	[_M.EVENT_MISS_GUN] = 		{1,{"Target is obscured!","Need a better angle"}},	
@@ -275,18 +275,18 @@ local DLC_STRINGS =
 		[_M.REVIVED] = 			{p_revived,{"That really cleared things up.","Thank you. I mean it.","Back in the fray","That was too close","For a moment there, I thought...","I knew I could count on you"}},			
 		[_M.HIJACK] = 			{p_hj,{"I'm on it","Installing virus","Let's see what their security is like","No obstacles encountered","Accessing their system"}},		
 		[_M.WIRELESS_SCAN] = 		{1,{"Scanning area","Pinging the mainframe","Homing in on the signal","A lot of noise around us.","I see them!"}}, -- rather test	
-		[_M.SAFE_LOOTED] = 		{p_loot,{"Busted open","Secrets revealed","Time to redistribute","New assets acquired"}},				
+		[_M.SAFE_LOOTED] = 		{p_loot,{"Busted open","Secrets revealed","Time to redistribute","New assets acquired","New capital under our control"}},				
 		[_M.EXEC_TERMINAL_LOOTED] =	nil,	
 		[_M.THREAT_DEVICE_LOOTED] =	nil,
 
 		[_M.INTERRUPTED] = 		{p_inter,{"I've spotted something","There's something here"}},					
 		[_M.PEEK] = 			{p_peek,{"Scouting ahead","I know what's coming","Area sighted","I have eyes on this"}},					
 		
-		[_M.PIN] = 			{p_pin,{"I shouldn't sit here long","I suppose this is more merciful","Too bad you're unconscious. There are things I could tell you about your rights as a worker"}},
+		[_M.PIN] = 			{p_pin,{"I shouldn't sit here long","I suppose this is more merciful","Too bad you're unconscious. There are things I could tell you about your rights as a worker","I'm just gonna leave this leaflet in your pocket, okay?"}},
 		[_M.INSTALL_AUGMENT] =		{p_augm,{"Whatever it takes to get the job done","More than the sum of my parts","I can use this","I hope this doesn't make me start drinking"}},								
 		[_M.DISGUISE_IN] =		nil,
-		[_M.CLOAK_IN] =			{p_cloak,{"Time for stealth","The subtle approach.","I can see why Decker likes this trick so much"}},
-		[_M.MEDGEL] =			{p_medgel,{"Take it easy.","Easy now.","Next time, be careful.","All good?","It'll be okay.","Let's get you out of here","We don't have time. Can you walk?","We're not safe yet. Focus.","Don't worry, they'll pay for this"}},
+		[_M.CLOAK_IN] =			{p_cloak,{"Time for stealth","The subtle approach.","I can see why Brian likes this trick so much","Cloaked and ready","Cloak active"}},
+		[_M.MEDGEL] =			{p_medgel,{"Take it easy.","Easy now.","Next time, be careful.","All good?","It'll be okay.","Let's get you out of here","We don't have time. Can you walk?","We're not safe yet. Focus.","Don't worry, they'll pay for this","You okay? You just need to make it to the exit"}},
 		[_M.WAKE_OTHER] =		nil,
 		
 		[_M.PARALYZER] =		nil,
@@ -301,19 +301,19 @@ local DLC_STRINGS =
 	[_M.NIKA] = {
 		
 	--	[_M.EVENT_SELECTED] = 		{0.2,{"Vil get it done.","zey vont get avay vit dis"}},  
-		[_M.ATTACK_GUN] = 		{p_gun,{"With lethal force","Terminating","Taking action","...\nHe's down."}},  	
+		[_M.ATTACK_GUN] = 		{p_gun,{"With lethal force","Terminating","Taking action","...\nHe's down.","Enemy down","Target down","Threat eliminated","Neutralized.","...","Hm.","......"}},  	
 		[_M.SHOOT_DRONE] =		nil,
 		[_M.SHOOT_CAMERA] =		nil,
-		[_M.ATTACK_GUN_KO] = 		{p_gunko,{"Tranquing","Knocking out the target","..."}},  
-		[_M.ATTACK_MELEE] = 		{p_melee,{"...","These guards are not good enough","He is down","Ready for the next target.","Hah!","Who's next?"}},	
+		[_M.ATTACK_GUN_KO] = 		{p_gunko,{"Tranquing","Knocking out the target","...","...","Neutralizing target"}},  
+		[_M.ATTACK_MELEE] = 		{p_melee,{"...","These guards are not good enough","He is down","Ready for the next target.","Hah!","Who's next?","Hm. Gets the blood flowing"}},	
 		[_M.OVERWATCH] = 		{p_ow,{"Covering this zone","Will get it done","Standing guard","Ready to intercept"}},				
 		[_M.OVERWATCH_MELEE] =		nil,											
 	
 	--	[_M.EVENT_MISS_GUN] = 		{1,{"Zey have cover"}},		
-		[_M.GOT_HIT] = 			{p_gothit,{"Do svidanya...","Ne... ne mogu...","I'll..."}},				
-		[_M.REVIVED] = 			{p_revived,{"Spasibo","They cannot stop me","Thank you.",}},				
-		[_M.HIJACK] = 			{p_hj,{"Virus installed","Device hacked"}},			
-		[_M.SAFE_LOOTED] = 		{p_loot,{"I have captured something","Supplies."}},	
+		[_M.GOT_HIT] = 			{p_gothit,{"Do svidanya...","Ne... ne mogu...","I'll...","Nghk...","Operator, make sure the team is..."}},				
+		[_M.REVIVED] = 			{p_revived,{"Spasibo","They cannot stop me","Thank you.","... \nI'm up."}},				
+		[_M.HIJACK] = 			{p_hj,{"Virus installed","Device hacked","...","...\n I have the device."}},			
+		[_M.SAFE_LOOTED] = 		{p_loot,{"I have captured something","Supplies.","..."}},	
 		[_M.EXEC_TERMINAL_LOOTED] =	nil,	
 		[_M.THREAT_DEVICE_LOOTED] =	nil,		
 			
@@ -324,7 +324,7 @@ local DLC_STRINGS =
 		[_M.INSTALL_AUGMENT] =		{p_augm,{"Hmm.","Good.","...","Stronger now."}},								
 		[_M.DISGUISE_IN] =		nil,
 		[_M.CLOAK_IN] =			{p_cloak,{"...","I am cloaked.","Concealment active","Very well. If it is stealth you need."}},
-		[_M.MEDGEL] =			{p_medgel,{"Get up.","Ne zha shto.","...","...Good?","Move.","You're awake. Good.","Stay behind me."}},
+		[_M.MEDGEL] =			{p_medgel,{"Get up.","Ne zha shto.","...","...Good?","Move.","You're awake. Good.","Stay behind me.","...\nStay close to me if you cannot handle yourself.","We have work to do. Don't slow me down again","You need to be better."}},
 		[_M.WAKE_OTHER] =		nil,
 	
 		[_M.PARALYZER] =		nil,
@@ -341,15 +341,15 @@ local DLC_STRINGS =
 		[_M.ATTACK_GUN] = 		{p_gun,{"Nowhere to run, meatbag","This takes me back","Perfect execution","You should thank me","They always drop too quickly","Perish."}},  	
 		[_M.SHOOT_DRONE] =		nil,
 		[_M.SHOOT_CAMERA] =		nil,
-		[_M.ATTACK_GUN_KO] = 		{p_gunko,{"Pathetic.","Exploiting systemic vulnerabilities...","Foiled by a chemical","That was too easy"}},  								
-		[_M.ATTACK_MELEE] = 		{p_melee,{"Hardly an opponent","It didn't stand a chance","No match for me","Frail excuse for an organic","Obsolete piece of meat","Heh."}},					
+		[_M.ATTACK_GUN_KO] = 		{p_gunko,{"Pathetic.","Exploiting systemic vulnerabilities...","Foiled by a chemical","That was too easy","See, and that's why organic blood is a bad idea"}},  								
+		[_M.ATTACK_MELEE] = 		{p_melee,{"Hardly an opponent","It didn't stand a chance","No match for me","Frail excuse for an organic","Obsolete piece of meat","Heh.","Are you watching, Operator?","This is how it's done"}},					
 		[_M.OVERWATCH] = 		{p_ow,{"Armed and ready","They won't know what hit them","Prepared for perfection","Watch and learn","Time to make this look good"}},				
 		[_M.OVERWATCH_MELEE] =		nil,
 	
-		[_M.GOT_HIT] = 			{p_gothit,{"I... refuse...!","I am NOT... this... fragile...","Missed... me..."}},			
-		[_M.REVIVED] = 			{p_revived,{"I didn't need your help","I was just resting","Ugh. Don't look at me.","Don't touch me."}},					
-		[_M.HIJACK] = 			{p_hj,{"Uploading virus","Even their digital systems fall short against me","Interfacing with a vastly superior being","Finally, some better company"}},			
-		[_M.SAFE_LOOTED] = 		{p_loot,{"I have the goods","Accessing data"}},
+		[_M.GOT_HIT] = 			{p_gothit,{"I... refuse...!","I am NOT... this... fragile...","Missed... me...","No, NO! I'm not...","Like that's gona... stop me..."}},			
+		[_M.REVIVED] = 			{p_revived,{"I didn't need your help","I was just resting","Ugh. Don't look at me.","Don't touch me.","Hands off, I'm fine!","..."}},					
+		[_M.HIJACK] = 			{p_hj,{"Uploading virus","Even their digital systems fall short against me","Interfacing with a vastly superior being","Finally, some better company","Accessing data"}},			
+		[_M.SAFE_LOOTED] = 		{p_loot,{"I have the goods","Looting the container","This should buy me an upgrade or two"}},
 		[_M.EXEC_TERMINAL_LOOTED] =	nil,	
 		[_M.THREAT_DEVICE_LOOTED] =	nil,
 					
@@ -357,10 +357,10 @@ local DLC_STRINGS =
 		[_M.PEEK] = 			nil,							
 		
 		[_M.PIN] = 			{p_pin,{"Ugh, I think it's still alive","Stop twitching!","Why am I wasting my time here?","This is humiliating","Do I really have to be touching him? Can't I just... no?","Do you know how easy it would be to snap his neck?"}},
-		[_M.INSTALL_AUGMENT] =		{p_augm,{"Perfection is hard to improve, but I believe that did the trick.","At last!","One step closer to perfection","Yes!","I am even more optimized","I think that one had a scratch on it","Acceptable.","Only the finest","This better not be some cheap knock-off","Who could bear to look upon such beauty?","Look at me. Do NOT touch."}},											
+		[_M.INSTALL_AUGMENT] =		{p_augm,{"Perfection is hard to improve, but I believe that did the trick.","At last!","One step closer to perfection","Yes!","I am even more optimized","I think that one had a scratch on it","Acceptable.","Only the finest","This better not be some cheap knock-off","Who could bear to look upon such beauty?","Look at me. Do NOT touch.","Are you sure that was the best we had?","Working with a pile of meatsacks is worth it, for this"}},											
 		[_M.DISGUISE_IN] =		nil,
 		[_M.CLOAK_IN] =			{p_cloak,{"Not certain if I like this","...Still more attractive than anyone here.","I prefer my enemies to look me in the face before I obliterate them","Undetectable. Yet another on my long list of traits","This hardly seems necessary"}},
-		[_M.MEDGEL] =			{p_medgel,{"Pathetic.","Don't get your juices on me, meatbag.","That only delayed the inevitable, you know."}},
+		[_M.MEDGEL] =			{p_medgel,{"Pathetic.","Don't get your juices on me, meatbag.","That only delayed the inevitable, you know.","You're up? Good, because I refuse to drag you","See? That was me, being a good teammate","I just saved your life, you worthless sack of juice.","There. Try not to fall over yourself with gratitude","You can thank me later. Cash is best"}},
 		[_M.WAKE_OTHER] =		nil,
 
 		[_M.PARALYZER] =		nil,
@@ -392,10 +392,10 @@ local DLC_STRINGS =
 		[_M.INTERRUPTED] = 		{p_inter,{"Hold it","What was that?"}},				
 		[_M.PEEK] = 			{p_peek,{"Path scouted","I see all","Nothing shall slip me by"}},								
 		
-		[_M.PIN] = 			{p_pin,{"If you're smart, you won't wake up","I've got him under control","Got it. Enemy pinned","What now?","Already bored"}},
-		[_M.INSTALL_AUGMENT] =		{p_augm,{"I should get some nice mileage out of this","Just what I've been looking for","Damn, that stings","Sweet, an upgrade"}},														
-		[_M.DISGUISE_IN] =		{1,{"Time to become someone else","They won't know what hit them","Let's do some acting","Roll out the red carpet","First and final take","Just like the good old days","This takes me back"}},
-		[_M.CLOAK_IN] =			{p_cloak,{"Out of sight, out of mind","Bit of a strange feeling, this","I do not need this to blend in","Putting the 'invisible' in... well, you know."}},	
+		[_M.PIN] = 			{p_pin,{"If you're smart, you won't wake up","I've got him under control","Got it. Enemy pinned","What now?","Already bored","This could get old, real fast"}},
+		[_M.INSTALL_AUGMENT] =		{p_augm,{"I should get some nice mileage out of this","Just what I've been looking for","Damn, that stings","Sweet, an upgrade","I better not turn into one of those chrome nuts"}},														
+		[_M.DISGUISE_IN] =		{1,{"Time to become someone else","They won't know what hit them","Let's do some acting","Roll out the red carpet","First and final take","Just like the good old days","This takes me back","Ahem. Just an ordinary guard...","Hey there, fellow security..."}},
+		[_M.CLOAK_IN] =			{p_cloak,{"Out of sight, out of mind","Bit of a strange feeling, this","I do not need this to blend in","Putting the 'invisible' in... well, you know.","Just like magic, but better"}},	
 		[_M.MEDGEL] =			{p_medgel,{"Let's get moving","You good? Okay, let's go.","Can't laze around forever, you know.","We ain't got all day","Try not to collapse till we're in the clear.","Oh good, you're still alive.","You're welcome.","You wanna get out of here or what?","Let's not stick around"}},
 		[_M.WAKE_OTHER] =		nil,
 
@@ -419,8 +419,8 @@ local DLC_STRINGS =
 		[_M.OVERWATCH] = 		{p_ow,{"I'll keep a watchful eye","Readying my sights","I'll show these boys a thing or two"}},				
 		[_M.OVERWATCH_MELEE] =		nil,
 		
-		[_M.GOT_HIT] = 			{p_gothit,{"No! They mustn't...","You... bastard...","No... I still need to...","Damn you..."}},			
-		[_M.REVIVED] = 			{p_revived,{"Good. I'm not done with them yet","I'm... still alive? I suppose they've never had the best aim...","Only a minor setback","You have my thanks, agent","I've weathered worse than that"}},										
+		[_M.GOT_HIT] = 			{p_gothit,{"No! They mustn't...","You... bastard...","No... I still need to...","Damn you...","You can't... take me alive..."}},			
+		[_M.REVIVED] = 			{p_revived,{"Good. I'm not done with them yet","I'm still alive? I suppose they've never had the best aim...","Only a minor setback","You have my thanks, agent","I've weathered worse than that"}},										
 		[_M.HIJACK] = 			{p_hj,{"Uploading the worm","Subverting enemy tech","Another asset gained","Virus installed"}},			
 		[_M.SAFE_LOOTED] = 		{p_loot,{"Well this should prove useful"}},					
 		[_M.EXEC_TERMINAL_LOOTED] =	nil,	
@@ -456,7 +456,7 @@ local DLC_STRINGS =
 		[_M.OVERWATCH] = 		{p_ow,{"This is really so uncivilized","Prepared to take action","Watching this area","Ready to fire","Preparing a nasty surprise"}},				
 		[_M.OVERWATCH_MELEE] =		nil,
 		
-		[_M.GOT_HIT] = 			{p_gothit,{"Well, that's...not good...","I blame... the  management...","Corporate... scum...","No, not after everything..."}},			
+		[_M.GOT_HIT] = 			{p_gothit,{"Well, that's...not good...","I blame... the  management...","Corporate... scum...","No, not after everything...","Not... like this...","I can't be..."}},			
 		[_M.REVIVED] = 			{p_revived,{"Ugh. Do I even get hazard pay?","A second chance","Let's up the stakes","Back in the game","My thanks, friend","Remind me to thank you later"}},					
 		[_M.HIJACK] = 			{p_hj,{"Money is power, but so is data","Let's take a look at this darling","Time to get to work","Ths is what I'm here for","And now the real job begins","Subverting enemy mainframe","Ahhh, now this? This is more like it","Just look at this system - how quaint"}},			
 		[_M.SAFE_LOOTED] = 		{p_loot,{"A penny stolen is a penny earned","Let's wipe this place clean","This is pocket change to them. But it's our pocket change now","Let's grab this and run","Marvelous. Anything else we could lift?","Can't leave this lying around","Let's put this to use","I imagine they'd want to keep this. That's too bad.","Now that's what I call rewarding","This day just got better"}},					
@@ -466,7 +466,7 @@ local DLC_STRINGS =
 		[_M.INTERRUPTED] = 		{p_inter,{"Well, this is new","Ah, I see","One moment"}},			
 		[_M.PEEK] = 			nil,								
 		
-		[_M.PIN] = 			{p_pin,{"Keeping him down","I've always aspired to be some hired muscle","Enemy pinned","Well this could get old rather fast","He's not going anywhere"}},
+		[_M.PIN] = 			{p_pin,{"Keeping him down","I've always aspired to be someone's hired muscle","Enemy pinned","Well this could get old rather fast","He's not going anywhere"}},
 		[_M.INSTALL_AUGMENT] =		{p_augm,{"Time to embrace the new age","Ah, the wonders of technology","Not a bad choice","I wasn't attached to that bit of tissue anyway"}},	
 		[_M.DISGUISE_IN] =		nil,
 		[_M.CLOAK_IN] =			{p_cloak,{"This is more my style","I'm sure I could tweak this to work longer","Now that's some toy","I like this"}},	
@@ -494,7 +494,7 @@ local DLC_STRINGS =
 		[_M.OVERWATCH_MELEE] =		nil,
 		
 		[_M.GOT_HIT] = 			{p_gothit,{"Careless... of me...","Not... again...","You'll never... take me alive...","Never hear the end... of this..."}},			
-		[_M.REVIVED] = 			{p_revived,{"No rest for the wicked","This chapter is still unfinished","Like a bat out of hell","Someone will pay for that","He shall rise again","Takes more than that to keep me down","Frankly I'm not great at dying","I live!"}},					
+		[_M.REVIVED] = 			{p_revived,{"No rest for the wicked","This chapter is still unfinished","Like a bat out of hell","Someone will pay for that","He shall rise again","Takes more than that to keep me down","Frankly I'm not great at dying","I live!","I am in your debt"}},					
 		[_M.HIJACK] = 			{p_hj,{"Truly thrilling","Though boring it may be, it's part of the job"}},			
 		[_M.SAFE_LOOTED] = 		{p_loot,{"Finders keepers!","Well, hello there","Would be a shame to leave this here","No one will miss it, I am certain","Ours for the taking","A treasure trove"}},					
 		[_M.EXEC_TERMINAL_LOOTED] =	nil,	
@@ -526,12 +526,12 @@ local DLC_STRINGS =
 		[_M.ATTACK_GUN] = 		{p_gun,{"I like it when we don't hold back","Unpleasant, but at least it's not boring","No more than they deserve.","I prefer a personal touch","Taking out the target","This is what you get"}},  	
 		[_M.SHOOT_DRONE] =		nil,
 		[_M.SHOOT_CAMERA] =		nil,
-		[_M.ATTACK_GUN_KO] = 		{p_gunko,{"See? I can do bloodless","I would have rocked the biathlon, if I'd bothered","Perfect aim. As always","He's down, but still in the game","Couches-toi","Taking him out"}},  								
-		[_M.ATTACK_MELEE] = 		{p_melee,{"I'm so good at this.","This is so much faster than stealth","That was subtle, for me","Sucker.","Is that what they call armed force? Pathetic.","I expected better.","Next!","Not so tough now, are you?"}},					
-		[_M.OVERWATCH] = 		{p_ow,{"Got it covered","All right, I'll wait"}},				
+		[_M.ATTACK_GUN_KO] = 		{p_gunko,{"See? I can do bloodless","I would have rocked the biathlon, if I'd bothered","Perfect aim. As always","He's down, but still in the game","Couche-toi","Taking him out"}},  								
+		[_M.ATTACK_MELEE] = 		{p_melee,{"I'm so good at this.","This is so much faster than stealth","That was subtle, for me","Sucker.","Is that what they call armed force? Pathetic.","I expected better.","Next!","Not so tough now, are you?","You better hope I didn't break a nail, buddy"}},					
+		[_M.OVERWATCH] = 		{p_ow,{"Got it covered","All right, I'll wait","Fine, I'll do it","Lying in wait","Prepared to ambush","I'm watching this area"}},				
 		[_M.OVERWATCH_MELEE] =		nil,
 		
-		[_M.GOT_HIT] = 			{p_gothit,{"Like you could... stop me...","What? No...","I don't believe...","Worth it...","Damn... you...","Bastard..."}},			
+		[_M.GOT_HIT] = 			{p_gothit,{"Like you could... stop me...","What? No...","I don't believe...","Worth it...","Damn... you...","Casse-toi..."}},			
 		[_M.REVIVED] = 			{p_revived,{"Let me at them!","They'll have to try harder than that","Ugh, fine, I'll buy you a drink later"}},					
 		[_M.HIJACK] = 			{p_hj,{"There, tech, do your techy thing","Knowing how this works isn't my job","Why are we bothering with these, again?","System... you know, whatever","Uh, open sesame?"}},			
 		[_M.SAFE_LOOTED] = 		{p_loot,{"Bingo","Smash. Grab. Okay, less smashing than I'd like","Is this all? I thought these people were rich","Money? Well, I won't say no","Hm. Underwhelming."}},					
@@ -542,17 +542,17 @@ local DLC_STRINGS =
 		[_M.PEEK] = 			{p_peek,{"Nothing I'd consider interesting"}},							
 		
 		[_M.PIN] = 			{p_pin,{"And here I thought this job would be exciting","...How long do I have to do this?","I'm not here to babysit","Enemy pinned. If that helps"}},	
-		[_M.INSTALL_AUGMENT] =		{p_augm,{"I swore I was done with these","Ugh, if I have to.","Ow.","I don't need that. I'm already the best."}},	
+		[_M.INSTALL_AUGMENT] =		{p_augm,{"I swore I was done with these","Ugh, if I have to.","Ow.","I don't need that. I'm already the best.","You want to turn me into some sort of cybersoldier? Fine, whatever"}},	
 		[_M.DISGUISE_IN] =		nil,
 		[_M.CLOAK_IN] =			{p_cloak,{"So, uh... what now?","Cloak and dagger isn't really my style","Can I do something useful for a change?","Cloak active. For whatever that's worth","Whoo! Pretty fun."}},	
 		[_M.MEDGEL] =			{p_medgel,{"Next time, I just leave you behind.","See? I can do teamwork!","I don't have time to babysit","Hurts, huh? Suck it up and let's go","You up? Good. Get a move on","This? This is slowing me down.","Clock's ticking","You're less of a dead weight now","Walk it off."}},
 		[_M.WAKE_OTHER] =			{1,{"Stand up"}}, -- sorry had no better ideas
 		
 		[_M.PARALYZER] =		nil,
-		[_M.STIM_SELF] =		{1,{"A little overclock can't hurt","Zing. Where to?","GAME ON.","Not as much of a rush as it used to be.","Whoo! Yeah! Let's do this!","READY SET GO."}},
+		[_M.STIM_SELF] =		{1,{"A little overclock can't hurt","Zing. Where to?","GAME ON.","Not as much of a rush as it used to be.","Whoo! Yeah! Let's do this!","READY SET GO.","So much for trying to shake that habit"}},
 		[_M.STIM_OTHER] =		{1,{"Try this"}}, -- sorry had no better ideas
 		[_M.SELF_STIMMED] = 		{1,{"Refreshing!"}}, -- sorry had no better ideas, test
-		[_M.STIMMED_BY] = 		{1,{"Much appreciated!"}}, -- same
+		[_M.STIMMED_BY] = 		{1,{"Thanks, pal."}}, -- same
 		[_M.AWAKENED_BY] =		nil,
 	},
 	
@@ -567,9 +567,9 @@ local DLC_STRINGS =
 		[_M.OVERWATCH] = 		{p_ow,{"They won't be passing through here, I assure you","I'll keep an eye out","Ambush prepared"}},
 		[_M.OVERWATCH_MELEE] =		nil,
 		
-		[_M.GOT_HIT] = 			{p_gothit,{"Didn't see that coming","Well that was unwise...","I seem to have made a...","That really... stings...","Gladstone, are you there? I...","No, that's not how it's supposed..."}},	
+		[_M.GOT_HIT] = 			{p_gothit,{"Didn't see that coming","Well that was unwise...","I seem to have made a...","That really... stings...","Gladstone, are you there? I...","No, that's not how it's supposed to...","You... corporate... fiend..."}},	
 		[_M.REVIVED] = 			{p_revived,{"Good. I'd rather not have to take one for the team","Oh, splendid","Didn't think you'd be rid of me that easily, did you?","That one's bound to leave a mark","Oh, thank you. A refreshing bout of competence","Ngh. Much appreciated.","I've missed this. Having someone who has my back, I mean.","Urghh. Thank you, I shall be fine now.","Still stings, but this should keep me on my feet until we're out, at least."}},					
-		[_M.HIJACK] = 			{p_hj,{"Finally, back to my comfort bubble","Do try to avoid bringing down any heat while I'm busy","Almost makes me want to get back into software","No meowing. Thank goodness","At least that was easy","Now what do we have here?","Hmmmmm... interesting","Ah! I recognise this. I can work with this, yes."}},			
+		[_M.HIJACK] = 			{p_hj,{"Finally, back to my comfort bubble","Do try to avoid bringing down any heat while I'm busy","Almost makes me want to get back into software","No meowing. Thank goodness","At least that was easy","Now what do we have here?","Hmmmmm... interesting","Ah! I recognise this.","I can work with this, yes."}},			
 		[_M.SAFE_LOOTED] = 		{p_loot,{"Would be a terrible shame to leave this lying around...","Money. I'd know it anywhere","Oh good, we could use some new toys","I like you, so I won't take my usual percentage","I'll find a good home for this","This could be useful, I'm sure"}},					
 		[_M.EXEC_TERMINAL_LOOTED] =	nil,	
 		[_M.THREAT_DEVICE_LOOTED] =	nil,
@@ -577,11 +577,11 @@ local DLC_STRINGS =
 		[_M.INTERRUPTED] = 		nil,				
 		[_M.PEEK] = 			{p_peek,{"Knowledge makes the man","Let's see what's ahead"}},															
 			
-		[_M.PIN] = 			{p_pin,{"Undignified for both of us, isn't it?","What do you take me for - some kind of thug?","I have the enemy pinned, if that helps","I'd much rather be doing something else with my time","A monkey could do this. Yet you hire me?","I have him pinned"}},
+		[_M.PIN] = 			{p_pin,{"Undignified for both of us, isn't it?","What do you take me for - some kind of thug?","I have the enemy pinned, if that helps","I'd much rather be doing something else with my time","My usual job involves a tad more sophistication.","I have him pinned"}},
 		[_M.INSTALL_AUGMENT] =		{p_augm,{"Ooh, I think this one's a limited edition!","Hmph, if I must","Not too shabby","Not inadequate, but I do miss my old suppliers"}},
 		[_M.DISGUISE_IN] =		nil,
 		[_M.CLOAK_IN] =			{p_cloak,{"I do love these new toys","This is incredibly satisfying","This should give them the slip","It is time to... disappear","Whoosh. Ahem, that ought to do it.","More my style."}},
-		[_M.MEDGEL] =			{p_medgel,{"Oh, good. I wasn't looking forward to having to drag you around.","Do be more careful next time","You're welcome. I'll be sending you the reimbursement bill later","Someone has to pull their weight around here. Might as well be me","Gladstone's always excelled at risking her live assets. You're spared that fate, for now","Don't thank me yet. If you get captured, you're going to wish I'd let you bleed out"}},
+		[_M.MEDGEL] =			{p_medgel,{"Oh, good. I wasn't looking forward to having to drag you around.","Do be more careful next time","You're welcome. I'll be sending you the reimbursement bill later","Someone has to pull their weight around here. Might as well be me","Gladstone's always excelled at risking her live assets. You're spared that fate, for now","You know she still considers you expendable, right?"}},
 		[_M.WAKE_OTHER] =		nil,
 		
 		[_M.PARALYZER] =		nil,
@@ -606,7 +606,7 @@ local DLC_STRINGS =
 		[_M.OVERWATCH] = 		{p_ow,{"I have my eyes peeled","Preparing the ambush","Ready for hostiles","Ready to engage","Overwatch ready"}},		
 		[_M.OVERWATCH_MELEE] =		nil,
 		
-		[_M.GOT_HIT] = 			{p_gothit,{"No! We were... so close...","I have... to finish...","After all this time..."}},			
+		[_M.GOT_HIT] = 			{p_gothit,{"No! We were... so close...","I have... to finish...","After all this time...","This won't be how... we lose...","Incognita? You must..."}},			
 		[_M.REVIVED] = 			{p_revived,{"Back into the field","I will not be held back by the likes of this","Good. We have work to do","You're earning your keep, agent","Good. Let's continue.","You're only doing your duty, but don't think I don't appreciate that."}},					
 		[_M.HIJACK] = 			{p_hj,{"Subverting the system","She now has access to this","Power. There's no need to comment on the irony","A little something extra for her to work with"}},			
 		[_M.SAFE_LOOTED] = 		{p_loot,{"I never thought we'd get this desperate","This should prove useful","Let's pick their bones clean","Time to play the common thief"}},					
@@ -620,7 +620,7 @@ local DLC_STRINGS =
 		[_M.INSTALL_AUGMENT] =		{p_augm,{"This should prove useful","Our bodies are such a small price to pay","It's been installed seamlessly. Good.","Better this than being under-equipped","We need every edge we can get"}},	
 		[_M.DISGUISE_IN] =		nil,
 		[_M.CLOAK_IN] =			{p_cloak,{"Such a rare and useful bit of tech","Cloak engaged"}},	
-		[_M.MEDGEL] =			{p_medgel,{"Back on your feet, agent","I need you on your feet. There we go","Pay more attention next time","Keep your head down. I'll get you out of here, I promise."}},
+		[_M.MEDGEL] =			{p_medgel,{"Back on your feet, agent","I need you on your feet. There we go","Pay more attention next time","Keep your head down. I'll get you out of here, I promise.","Don't thank me yet. If you get captured, you're going to wish I'd let you bleed out"}},
 		[_M.WAKE_OTHER] =		nil,
 
 		[_M.PARALYZER] =		nil,
