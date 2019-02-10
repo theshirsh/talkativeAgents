@@ -27,6 +27,7 @@ local EV_AWAKENED = 1018
 local EV_EXEC_TERMINAL = 1019
 local EV_DEVICE_LOOTED = 1020
 
+local EV_RESCUED_OTHER = 1021
 
 
 local alpha_voice =
@@ -50,7 +51,6 @@ local alpha_voice =
 	        self.abilityOwner = unit
 	--      sim:addTrigger( simdefs.TRG_OPEN_DOOR, self )			-- left for a test/example purpose if needed
 		sim:addTrigger( simdefs.TRG_SAFE_LOOTED, self )
-
 	--	sim:addEventTrigger( simdefs.EV_UNIT_SPEAK, self )		-- example
 		sim:addEventTrigger( simdefs.EV_UNIT_START_SHOOTING, self )
 		sim:addEventTrigger( simdefs.EV_UNIT_MELEE, self )
@@ -67,13 +67,13 @@ local alpha_voice =
 		sim:addEventTrigger( simdefs.EV_UNIT_INSTALL_AUGMENT, self )	-- for installing augments
 		sim:addEventTrigger( simdefs.EV_CLOAK_IN, self )		-- for activating cloak
 		sim:addEventTrigger( simdefs.EV_UNIT_GOTO_STAND, self )		-- for Prism's disguise	
+		sim:addEventTrigger( simdefs.EV_UNIT_RESCUED, self ) -- for rescuing other agent from detention cell
 
 	end,
         
 	onDespawnAbility = function( self, sim, unit )
 	--      sim:removeTrigger( simdefs.TRG_OPEN_DOOR, self )
 		sim:removeTrigger( simdefs.TRG_SAFE_LOOTED, self )
-
 	--	sim:removeEventTrigger( simdefs.EV_UNIT_SPEAK, self )
 		sim:removeEventTrigger( simdefs.EV_UNIT_START_SHOOTING, self )
 		sim:removeEventTrigger( simdefs.EV_UNIT_MELEE, self )
@@ -90,7 +90,7 @@ local alpha_voice =
 		sim:removeEventTrigger( simdefs.EV_UNIT_INSTALL_AUGMENT, self )		-- for installing augments
 		sim:removeEventTrigger( simdefs.EV_CLOAK_IN, self )			-- for activating cloak
 		sim:removeEventTrigger( simdefs.EV_UNIT_GOTO_STAND, self )		-- for Prism's disguise
-		
+		sim:removeEventTrigger( simdefs.EV_UNIT_RESCUED, self )
 	        self.abilityOwner = nil
 	end,
 
@@ -121,13 +121,18 @@ local alpha_voice =
 					elseif targetUnit:getTraits().isGuard then
 						evType = simdefs.EV_UNIT_START_SHOOTING
 					end
-				elseif evType == simdefs.EV_UNIT_WIRELESS_SCAN and not evData.scan then	-- redirects Int's wireless hijack
+				elseif evType == simdefs.EV_UNIT_WIRELESS_SCAN then	-- redirects Int's wireless hijack
 					evType = EVENT_HIJACK
 				elseif evType == simdefs.EV_UNIT_USECOMP then
 					if evData.targetID ~= nil then
 						local targetUnit = sim:getUnit(evData.targetID)
-						if targetUnit:getTraits().mainframe_console and targetUnit:getTraits().cpus > 0 then
-							evType = EVENT_HIJACK		-- use console						
+						if targetUnit:hasTag("detention_processor") then	
+							if agentDef.agentID ~= nil then
+								sim.rescuer = agentDef -- use for EV_UNIT_RESCUED
+							end
+						end
+						if targetUnit:getTraits().mainframe_console and targetUnit:getTraits().cpus > 0 and not targetUnit:hasTag("detention_processor") then
+							evType = EVENT_HIJACK		-- use console
 						else evType = 0
 						end					
 					else evType = 0
@@ -146,6 +151,8 @@ local alpha_voice =
 					else 
 						evType = EV_STIM_OTHER
 					end
+				elseif evType == simdefs.EV_UNIT_RESCUED and evData.unit:getUnitData().agentID and sim.rescuer then -- make sure it's an agent rescuing an agent and not prisoner, etc.
+					evType = EV_RESCUED_OTHER
 				end
 				if agentDef.agentID ~= nil then 
 					local agent = agentDef.agentID	
@@ -154,13 +161,25 @@ local alpha_voice =
 					elseif agent == 107 then 				-- last mission's Central to starting Central 
 						agent = 108;
 					end
+					if evType == EV_RESCUED_OTHER then -- opening detention cell
+						agentDef = sim.rescuer
+						agent = sim.rescuer.agentID -- if rescue, we want the agent who opened the doors to speak, not (just) the rescuee
+					end
 					if STRINGS.alpha_voice[ agent] ~= nil then		
 						local speechData = STRINGS.alpha_voice[ agent][evType ]				
 						if speechData ~= nil then			
 							local p = speechData[1]
 							if sim:nextRand() <= p then
 						   		local choice = speechData[2]
-								local speech = choice[math.floor(sim:nextRand()*#choice)+1]								
+								local speech = choice[math.floor(sim:nextRand()*#choice)+1]	
+								
+								-- some logwrites for now, don't mind me - Hek
+								log:write("LOG: oneliner")
+								log:write(util.stringize(agentDef.name,2))
+								log:write(util.stringize(speech,2))
+								log:write(util.stringize(evType,2))
+								
+								
 								local text =  {{							
 									text = speech,
 									anim = agentDef.profile_anim,
@@ -256,7 +275,7 @@ local alpha_voice =
 					elseif evData.targetUnit:getTraits().scanner or evData.targetUnit:getTraits().router then
 						evType = EV_DEVICE_LOOTED
 					else evType = 0
-					end					
+					end	
 				end				
 				if agentDef.agentID ~= nil then 
 					local agent = agentDef.agentID	
