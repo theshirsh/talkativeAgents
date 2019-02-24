@@ -28,7 +28,21 @@ local EV_EXEC_TERMINAL = 1019
 local EV_DEVICE_LOOTED = 1020
 
 local EV_RESCUED_OTHER = 1021
+local EV_MISSION_BAD = 1022
+local EV_MISSION_GOOD = 1023
+local EV_MISSION_BLOODY = 1024
+local EV_ABANDONED_AGENT = 1025
 
+
+local function isKO( unit )
+    return unit:isKO()
+end
+
+local function isNotKO( unit )
+    return not unit:isKO()
+end
+
+local objectives = {["TERMINAL"] = true, ["CEO"] = true, ["RUN"] = true, ["escaped"] = true, ["VAULT-LOOTOUTER"] = true, ["BOUGHT"] = true, ["NANOFAB"] = true, ["TOPGEAR"] = true, ["USE_TERMINAL"] = true}
 
 local alpha_voice =
 {
@@ -68,6 +82,7 @@ local alpha_voice =
 		sim:addEventTrigger( simdefs.EV_CLOAK_IN, self )		-- for activating cloak
 		sim:addEventTrigger( simdefs.EV_UNIT_GOTO_STAND, self )		-- for Prism's disguise	
 		sim:addEventTrigger( simdefs.EV_UNIT_RESCUED, self ) -- for rescuing other agent from detention cell
+		sim:addTrigger( simdefs.TRG_MAP_EVENT, self ) -- for exiting mission
 
 	end,
         
@@ -91,7 +106,8 @@ local alpha_voice =
 		sim:removeEventTrigger( simdefs.EV_CLOAK_IN, self )			-- for activating cloak
 		sim:removeEventTrigger( simdefs.EV_UNIT_GOTO_STAND, self )		-- for Prism's disguise
 		sim:removeEventTrigger( simdefs.EV_UNIT_RESCUED, self )
-	        self.abilityOwner = nil
+		sim:removeTrigger( simdefs.TRG_MAP_EVENT, self )
+	    self.abilityOwner = nil
 	end,
 
 
@@ -104,11 +120,13 @@ local alpha_voice =
 		if evType == simdefs.EV_UNIT_STOP_WALKING and (evData.unit == self.abilityOwner or evData.unitID == self.abilityOwner:getID()) and simquery.isUnitPinning( sim, evData.unit ) and not before then
 			sim:dispatchEvent( simdefs.EV_UNIT_START_PIN, evData )
 		end
-
+	
 	-- Block for 'active' events(being executor of action or healing etc):	
 
 	if (evData.unit == self.abilityOwner or evData.unitID == self.abilityOwner:getID()) and not evData.cancel and before then 	
-			if not self.abilityOwner:isKO() then				
+			if not self.abilityOwner:isKO() then	
+				log:write("EVTYPE: ".. tostring(evType))
+				log:write("LOG: active event block")
 				if evType == simdefs.EV_UNIT_START_SHOOTING  then
 					local weaponUnit = simquery.getEquippedGun( self.abilityOwner )
 					local targetUnit = sim:getUnit(evData.targetUnitID)
@@ -121,7 +139,7 @@ local alpha_voice =
 					elseif targetUnit:getTraits().isGuard then
 						evType = simdefs.EV_UNIT_START_SHOOTING
 					end
-				elseif evType == simdefs.EV_UNIT_WIRELESS_SCAN and not evData.scan then	-- redirects Int's wireless hijack
+				elseif evType == simdefs.EV_UNIT_WIRELESS_SCAN then	-- redirects Int's wireless hijack
 					evType = EVENT_HIJACK
 				elseif evType == simdefs.EV_UNIT_USECOMP then
 					if evData.targetID ~= nil then
@@ -152,7 +170,7 @@ local alpha_voice =
 						evType = EV_STIM_OTHER
 					end
 				elseif evType == simdefs.EV_UNIT_RESCUED and evData.unit:getUnitData().agentID and sim.rescuer then -- make sure it's an agent rescuing an agent and not prisoner, etc.
-					evType = EV_RESCUED_OTHER
+					evType = EV_RESCUED_OTHER	
 				end
 				if agentDef.agentID ~= nil then 
 					local agent = agentDef.agentID	
@@ -165,6 +183,7 @@ local alpha_voice =
 						agentDef = sim.rescuer
 						agent = sim.rescuer.agentID -- if rescue, we want the agent who opened the doors to speak, not (just) the rescuee
 					end
+					
 					if STRINGS.alpha_voice[ agent] ~= nil then		
 						local speechData = STRINGS.alpha_voice[ agent][evType ]				
 						if speechData ~= nil then			
@@ -218,6 +237,7 @@ local alpha_voice =
 					elseif agent == 107 then 				-- last mission's Central to starting Central 
 						agent = 108;
 					end
+
 					if STRINGS.alpha_voice[ agent] ~= nil then		
 						local speechData = STRINGS.alpha_voice[ agent][evType ]				
 						if speechData ~= nil then			
@@ -265,6 +285,122 @@ local alpha_voice =
 	onTrigger = function( self, sim, evType, evData  )	
 		local script = sim:getLevelScript()
 		local agentDef = self.abilityOwner:getUnitData()
+		
+		-- Block for exit teleportation oneliners
+		if evType == simdefs.TRG_MAP_EVENT and evData.event == simdefs.MAP_EVENTS.TELEPORT then
+
+			evType = 0
+			local fieldUnits, escapingUnits = simquery.countFieldAgents( sim )
+			if escapingUnits and #escapingUnits > 0 then
+				local agent = nil
+				local speaker = escapingUnits[ sim:nextRand(1, #escapingUnits ) ]
+				if speaker:isKO() then
+					repeat
+						speaker = escapingUnits[ sim:nextRand(1, #escapingUnits ) ] -- this should be returned eventually since there had to be someone to activate the escape ability... right? ^^;;
+					until speaker:isNotKO()
+				end
+				if speaker:getUnitData().agentID then
+					agent = speaker:getUnitData().agentID
+				end
+				
+				if agent and not sim.alreadySpoken then -- every agent has this ability  but it should only trigger once per escape
+					if agent == 99 then					-- last mission's Monster to starting Monster 
+						agent = 100;
+					elseif agent == 107 then 				-- last mission's Central to starting Central 
+						agent = 108;
+					end
+				
+				-- check how well the mission went!
+				
+				local casualties = nil
+				local finalescape = nil
+				local bloodymission = nil
+				local success = true
+				-- log:write("LOG2")
+				-- log:write(util.stringize(sim:getLevelScript().hooks,3))
+				
+				local missionhooks = script.hooks
+				for i, hook in pairs(missionhooks) do
+					if objectives[hook.name] then
+						success = false
+					end
+					
+					-- if hook.name == "TERMINAL" or hook.name == "CEO" or hook.name == "RUN" or hook.name == "escaped" or hook.name == "VAULT-LOOTOUTER" or hook.name == "BOUGHT" or hook.name == "NANOFAB" or hook.name == "TOPGEAR" or hook.name == "USE_TERMINAL" then
+						-- success = false -- super ugly check for uncompleted main objectives
+					-- end
+				end
+				
+				local isPartialEscape = array.findIf( fieldUnits, isNotKO) ~= nil
+				local abandonedUnit = array.findIf( fieldUnits, isKO ) -- wounded agents still in the field
+				if not isPartialEscape then
+					finalescape = true
+				end
+				local injuredUnit = array.findIf( escapingUnits, isKO )
+				-- check for "dead" agents who are also in the elevator
+				
+				if injuredUnit then 
+					casualties = true 
+				end
+				
+				if sim.permadeathkilled then --permadeath mod compatibility
+					casualties = true
+				end
+				
+				if sim:getCleaningKills() > 2 then
+					bloodymission = true
+				end
+				
+				-- actually decide what type of reaction to show
+				if finalescape then
+					if not success or casualties then 
+						evType = EV_MISSION_BAD
+					end
+
+					if success and not casualties then 
+						evType = EV_MISSION_GOOD
+					end
+					
+					if bloodymission and sim:nextRand() <= 0.7 then 
+						evType = EV_MISSION_BLOODY
+					end
+				end
+				
+				if abandonedUnit then
+					evType = EV_ABANDONED_AGENT --takes precedence
+				end
+
+				if STRINGS.alpha_voice[ agent] ~= nil then		
+						local speechData = STRINGS.alpha_voice[ agent][evType ]	
+						local agentDef = speaker:getUnitData()
+						if speechData ~= nil then				
+							local p = speechData[1]
+							if sim:nextRand() <= p then
+						   		local choice = speechData[2]
+								local speech = choice[math.floor(sim:nextRand()*#choice)+1]								
+								local text =  {{							
+									text = speech,
+									anim = agentDef.profile_anim,
+									build = agentDef.profile_build,
+									name = agentDef.name,
+									timing = 3,
+									voice = nil,
+								}}					
+								script:queue( { script=text, type="newOperatorMessage", doNotQueue=true } )
+								sim.alreadySpoken = true
+								log:write("LOG: oneliner")
+								log:write(util.stringize(agent,1))
+								log:write(util.stringize(text,1))
+							end
+						end
+					end	
+					
+				end
+				
+			end
+		
+		end
+
+		-- normal trigger stuff
 		if (evData.unit == self.abilityOwner or evData.unitID == self.abilityOwner:getID()) and not evData.cancel then 	
 			if not self.abilityOwner:isKO() then
 				if evType == simdefs.TRG_SAFE_LOOTED then 
@@ -284,6 +420,7 @@ local alpha_voice =
 					elseif agent == 107 then 				-- last mission's Central to starting Central 
 						agent = 108;
 					end
+									
 					if STRINGS.alpha_voice[ agent] ~= nil then		
 						local speechData = STRINGS.alpha_voice[ agent][evType ]				
 						if speechData ~= nil then				
@@ -299,7 +436,9 @@ local alpha_voice =
 									timing = 3,
 									voice = nil,
 								}}					
-								script:queue( { script=text, type="newOperatorMessage", doNotQueue=true } ) 								
+								script:queue( { script=text, type="newOperatorMessage", doNotQueue=true } ) log:write("LOG: oneliner")
+								log:write(util.stringize(agent,1))
+								log:write(util.stringize(text,1))
 								--script:queue( 3*cdefs.SECONDS )
 								--script:queue( { type="clearOperatorMessage" } ) -- it autoclears after "timing =3"
 							end
