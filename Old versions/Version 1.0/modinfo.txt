@@ -1,0 +1,5 @@
+name = Talkative Agents
+
+author = Mobbstar
+
+version = 1.0
